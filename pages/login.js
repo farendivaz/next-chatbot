@@ -38,8 +38,24 @@ export default function Login() {
   
   return (
     <div className="poppins" >
-      <main className='flex flex-col my-3' style={{marginTop:'80px'}}>
-        <h4 className='fw-bold text-center text-primary'>EyeScreening</h4>
+      <nav
+        style={{position:'fixed'}}
+        className='bg-blue-50 flex justify-center m-0 py-1 px-0 top-0 shadow-sm space-x-3 text-dark w-100 z-10'
+      >
+        {[
+          ['Home', '/',1],
+          ['Login','/login',2],
+          ['Register', '/register',3],
+          ['Dashboard', 'https://react-eyechatbot.vercel.app',4],
+        ].map(([title, url, id]) => (
+          <Link href={url} key={id}>
+            <a className="font-bold hover:bg-blue-100 no-underline roboto rounded-lg my-0 px-3 py-2 text-gray-700 hover:text-gray-900">
+              {title}
+            </a>
+          </Link>
+        ))}
+      </nav>
+      <main className='flex flex-col poppins' style={{marginTop:'70px'}}>
         <div className='row justify-content-center'>
           <div className='col-md-4'>
             <div className='card border-5px rounded shadow-sm'>

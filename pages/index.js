@@ -2,17 +2,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Head from 'next/head';
 import Footer from '../components/Footer';
+import Link from 'next/link'
 import Navigation from './headless';
 import InferenceMachine from '../components/InferenceMachine';
 import '../styles/Home.module.css';
 
 export default function Home() {
-  const route = [
-    ['Home', '/',1],
-    ['Login','/login',2],
-    ['Register', '/register',3],
-    ['Dashboard', 'https://react-eyechatbot.vercel.app',4],
-  ];
   const article = [
     ['Bahaya Penyakit Mata',"https://nextjs.org/docs",1],
     ['Penanganan Penyakit Mata?',"https://nextjs.org/learn",2],
@@ -31,12 +26,17 @@ export default function Home() {
         style={{position:'fixed'}}
         className='bg-blue-50 flex justify-center m-0 py-1 px-0 top-0 shadow-sm space-x-3 text-dark w-100 z-10'
       >
-          {route.map(([title, url,id]) => (
-          <a href={url} key={id}
-            className="font-bold hover:bg-blue-100 no-underline roboto rounded-lg px-3 py-2 text-gray-700 hover:text-gray-900"
-          >
-            {title}
-          </a>
+        {[
+          ['Home', '/',1],
+          ['Login','/login',2],
+          ['Register', '/register',3],
+          ['Dashboard', 'https://react-eyechatbot.vercel.app',4],
+        ].map(([title, url, id]) => (
+          <Link href={url} key={id}>
+            <a className="font-bold hover:bg-blue-100 no-underline roboto rounded-lg my-0 px-3 py-2 text-gray-700 hover:text-gray-900">
+              {title}
+            </a>
+          </Link>
         ))}
       </nav>
 

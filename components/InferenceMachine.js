@@ -636,9 +636,9 @@ export default function InferenceMachineCopy () {
   
   // opening chat message will be appear when browser reload
   useEffect(() => {
-    AddChatWhenBrowserReload('Mengetik...','Halo, ini adalah bot EyeScreening');
+    AddChatWhenBrowserReload('Halo, ini adalah bot EyeScreening');
     setTimeout(() => {
-      AddChatWhenBrowserReload(`Mengetik...`,`Untuk memulai skrining penyakit mata ketikan atau tekan tombol <strong>mulai</strong>.`);
+      AddChatWhenBrowserReload(`Untuk memulai skrining penyakit mata ketikan atau tekan tombol <strong>mulai</strong>.`);
     },1000);
   },[])
 

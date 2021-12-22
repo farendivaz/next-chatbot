@@ -50,7 +50,7 @@ export default function ChatbotInterfaceCopy({
             type='submit' 
             value='Submit' 
             onClick={handleSubmit}
-            className='bg-blue-600 hover:bg-blue-700 mx-1 py-2 rounded-full w-1/5'
+            className='bg-blue-600 hover:bg-blue-800 mx-1 py-2 rounded-full w-1/5'
           >
             <span className="mx-auto text-white text-lg"><SendIcon/></span>
           </button>
@@ -62,7 +62,7 @@ export default function ChatbotInterfaceCopy({
             type='submit' 
             value='Submit' 
             onClick={handleMulai} 
-            className='bg-blue-600 hover:bg-blue-700 py-2 rounded-full text-white'
+            className='bg-blue-600 hover:bg-blue-800 py-2 rounded-full text-white'
           >
             skrining
           </button>
@@ -72,7 +72,7 @@ export default function ChatbotInterfaceCopy({
             type='submit' 
             value='Submit' 
             onClick={handleYa} 
-            className='bg-blue-600 hover:bg-blue-700 py-2 rounded-full text-white'
+            className='bg-blue-600 hover:bg-blue-800 py-2 rounded-full text-white'
           >
             ya
           </button>
@@ -82,7 +82,7 @@ export default function ChatbotInterfaceCopy({
             type='submit' 
             value='Submit' 
             onClick={handleTidak} 
-            className='bg-blue-600 hover:bg-blue-700 py-2 rounded-full text-white'
+            className='bg-blue-600 hover:bg-blue-800 py-2 rounded-full text-white'
           >
             tidak
           </button>
