@@ -38,19 +38,6 @@ function Register() {
 
   return (
     <div className="poppins" >
-      <nav className="flex py-2 justify-center space-x-4 shadow-sm w-full">
-        {[
-          ['Home', '/'],
-          ['Login','/login'],
-          ['Register', '/register'],
-          ['Dashboard', 'https://react-eyechatbot.vercel.app'],
-        ].map(([title, url]) => (
-          <a href={url} className="rounded-lg px-3 py-2 text-gray-700 font-medium hover:bg-gray-100 hover:text-gray-900">
-            {title}
-          </a>
-          ))
-        }
-      </nav>
       <main className='flex flex-col my-3' style={{marginTop:'80px'}}>
         <h4 className='fw-bold text-center text-primary'>EyeScreening</h4>
         <div className="row justify-content-center">

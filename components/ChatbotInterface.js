@@ -26,7 +26,7 @@ export default function ChatbotInterfaceCopy({
   return (
     <div className='border-2 mx-auto mb-2 max-w-3xl overflow-hidden p-0 rounded-xl hover:border-blue-500 shadow-lg w-full'>
       <div className='mx-0 mb-0 w-100 rounded shadow-hover-primary'>
-        <h4 className='bg-primary mb-0 p-1 w-100 quicksand rounded-top text-center text-light text-xl'>
+        <h4 className='bg-primary mb-0 p-1 w-100 opensans rounded-top text-center text-light text-xl'>
           Chat Bot Sistem Pakar
         </h4>
         <div 
@@ -45,8 +45,6 @@ export default function ChatbotInterfaceCopy({
             placeholder='Ketik respon kamu ...'
             onChange={handleChange}
             onKeyPress={handleEnter}
-            autocomplete='off'
-            autofocus='true'
           />
           <button 
             type='submit' 

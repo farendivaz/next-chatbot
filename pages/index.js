@@ -1,21 +1,23 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Head from 'next/head';
+import Footer from '../components/Footer';
 import Navigation from './headless';
 import InferenceMachine from '../components/InferenceMachine';
+import '../styles/Home.module.css';
 
 export default function Home() {
   const route = [
-    ['Home', '/'],
-    ['Login','/login'],
-    ['Register', '/register'],
-    ['Dashboard', 'https://react-eyechatbot.vercel.app'],
+    ['Home', '/',1],
+    ['Login','/login',2],
+    ['Register', '/register',3],
+    ['Dashboard', 'https://react-eyechatbot.vercel.app',4],
   ];
   const article = [
-    ['Bahaya Penyakit Mata',"https://nextjs.org/docs"],
-    ['Penanganan Penyakit Mata?',"https://nextjs.org/learn"],
-    ['Dokter Spesialis Penyakit Mata',"https://github.com/vercel/next.js/tree/master/examples"],
-    ['Rumah Sakit Penyakit Mata',"https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"],
+    ['Bahaya Penyakit Mata',"https://nextjs.org/docs",1],
+    ['Penanganan Penyakit Mata?',"https://nextjs.org/learn",2],
+    ['Dokter Spesialis Penyakit Mata',"https://github.com/vercel/next.js/tree/master/examples",3],
+    ['Rumah Sakit Penyakit Mata',"https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app",4],
   ];
   return (
     <div className='bg-white'>
@@ -27,31 +29,33 @@ export default function Home() {
       
       <nav
         style={{position:'fixed'}}
-        className='bg-slate-100 fixed flex justify-center m-0 py-1 px-0 top-0 shadow-sm space-x-3 text-dark w-100 z-10'
+        className='bg-blue-50 flex justify-center m-0 py-1 px-0 top-0 shadow-sm space-x-3 text-dark w-100 z-10'
       >
-          {route.map(([title, url]) => (
-          <a href={url}
-            className="font-medium rounded-lg px-3 py-2 text-gray-700 hover:bg-slate-200 hover:shadow hover:text-gray-900"
+          {route.map(([title, url,id]) => (
+          <a href={url} key={id}
+            className="font-bold hover:bg-blue-100 no-underline roboto rounded-lg px-3 py-2 text-gray-700 hover:text-gray-900"
           >
             {title}
           </a>
         ))}
       </nav>
-      <main className='container flex flex-col' style={{marginTop:'70px'}}>
+
+      <main className='flex flex-col poppins' style={{marginTop:'70px'}}>
         <InferenceMachine/>
         <Navigation/>
         <h1 className='font-bold mx-auto my-2 text-2xl'>
           Artikel mengenai<span className='text-blue-500'> penyakit mata</span>
         </h1>
-        <div className='grid grid-cols-4 gap-4 mx-3 my-2 mw-w-md'>
-          {article.map(([title, url]) => (
-            <a href={url} 
-              className='border-2 hover:border-blue-400 mx-2 px-3 py-1 rounded-lg text-left'
+        <div className='grid grid-cols-4 gap-4 mx-3 mt-2 mb-4 mw-w-md'>
+          {article.map(([title, url, id]) => (
+            <a href={url} key={id}
+              className='border-2 hover:border-blue-400 mx-2 px-3 py-1 rounded-lg text-left margin-up-hover hover:-mt-1 hover:mb-1 hover:shadow-xl duration-300 ease-in-out'
             >
-              <h2 className='text-black text-xl'>{title} &rarr;</h2>
+              <h2 className='text-black text-center text-xl'>{title} &rarr;</h2>
             </a>
           ))}
         </div>
+        <Footer/>
       </main>
     </div>
   )

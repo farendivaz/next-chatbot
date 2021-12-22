@@ -3,7 +3,7 @@ export default function AddChat(input, reply) {
   // create element for user reply
   const userDiv = document.createElement('div')
         userDiv.id = ''
-        userDiv.className = 'bg-blue-500 border-2 border-white my-1 ml-auto px-3 py-2 max-w-7xl rounded-l-3xl rounded-br-2xl text-light w-min'
+        userDiv.className = 'bg-blue-600 border-2 border-white my-1 ml-auto px-3 py-2 max-w-7xl rounded-l-3xl rounded-br-2xl text-light w-min'
         userDiv.innerHTML = `Mengirim`
   // add userDiv to messagesContainer
   messagesContainer.appendChild(userDiv)
