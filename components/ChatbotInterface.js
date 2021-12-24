@@ -2,13 +2,14 @@ import React, {useEffect, useRef} from 'react';
 import SendIcon from '@mui/icons-material/Send';
 
 export default function ChatbotInterfaceCopy({
-    input,
+    input,i,j,
     handleChange,
     handleEnter,
     handleSubmit,
     handleMulai,
     handleYa,
     handleTidak,
+    lastValue,ruleBaseLength,ruleBaseILength,totalGejala
   }) {
 
   // create a ref 
@@ -40,7 +41,7 @@ export default function ChatbotInterfaceCopy({
           <input 
             id='input' 
             type='text'
-            className='border-2 border-blue-100 hover:border-blue-600 ml-auto px-3 py-2 rounded-full w-4/5'
+            className='border-2 border-sky-500 hover:border-blue-600 ml-auto px-3 py-2 rounded-full w-4/5'
             value={input}
             placeholder='Ketik respon kamu ...'
             onChange={handleChange}
@@ -88,6 +89,13 @@ export default function ChatbotInterfaceCopy({
           </button>
         </div>
       </div>
+      {/*
+      <div className='my-1 mx-2'>[ i ][ j ] : [{i}][{j}]</div>
+      <div className='my-1 mx-2'>ruleBase[ i ].Length : {ruleBaseILength}</div>
+      <div className='my-1 mx-2'>ruleBase.length : {ruleBaseLength}</div>
+      <div className='my-1 mx-2'>lastValue : {lastValue}</div>
+      <div className='my-1 mx-2'>totalGejala : {totalGejala}</div>
+      */}
     </div>
   )
 }
