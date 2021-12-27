@@ -21,7 +21,7 @@ export default function AddChat(input, reply) {
         botDiv.appendChild(botImg)   
   // create text element
   const botText = document.createElement('p')
-        botText.className = 'inline-block bg-slate-100 border-2 border-blue-700 ml-1 px-2 py-1 rounded-r-3xl rounded-tl-2xl text-dark w-max max-w-md'
+        botText.className = 'inline-block bg-slate-100 border-2 border-blue-700 ml-1 px-2 py-1 rounded-r-3xl rounded-tl-2xl text-dark w-4/5'
         botText.innerHTML = `Mengetik...`
         botDiv.appendChild(botText)
   // add botDiv to messagesContainer
