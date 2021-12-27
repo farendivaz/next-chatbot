@@ -418,7 +418,10 @@ export default function InferenceMachineCopy () {
                 }
                 else if (j === 2) { 
                     // check if the two value before is same
-                    if (ruleBase[i][j-1] === ruleBase[i+1][j-1] && ruleBase[i][j-2] === ruleBase[i+1][j-2]) {
+                    if (
+                      ruleBase[i][j-1] === ruleBase[i+1][j-1] && 
+                      ruleBase[i][j-2] === ruleBase[i+1][j-2]
+                    ) {
                       let arr = [''];
                       // push all value in the same j index
                       for (let x = 0; x < ruleBase.length ; x++) {
@@ -455,12 +458,8 @@ export default function InferenceMachineCopy () {
                       }
                     }
                     // if the one value before was same but two value before is not same, case gejala[9]
-                    else if (ruleBase[i][j-1] === ruleBase[i+1][j-1] && ruleBase[i][j-2] !== ruleBase[i+1][j-2]) {
-                      reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. Hasil skrining menunjukkan kamu mengalami <strong>${allYesReply.length} gejala</strong> dari total <strong>${totalGejala[totalGejala.length-1]} gejala</strong> penyakit mata bernama <strong>${lastValue[lastValue.length-1]}</strong>. Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
-                      setDiagnoseResult(reply);
-                    }
-                    // if the two value before is not same, case gejala[9]
-                    else if (ruleBase[i][j-1] !== ruleBase[i+1][j-1] && ruleBase[i][j-2] !== ruleBase[i+1][j-2]) {
+                    // if the two value before was not same
+                    else {
                       reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. Hasil skrining menunjukkan kamu mengalami <strong>${allYesReply.length} gejala</strong> dari total <strong>${totalGejala[totalGejala.length-1]} gejala</strong> penyakit mata bernama <strong>${lastValue[lastValue.length-1]}</strong>. Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                       setDiagnoseResult(reply);
                     }
