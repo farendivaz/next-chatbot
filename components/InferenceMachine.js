@@ -187,31 +187,37 @@ const ruleBase = [
   [gejala[14],gejala[1],gejala[18],gejala[21],'Keratokonus'],
   [gejala[14],gejala[2],gejala[5],gejala[27],gejala[35],gejala[43],gejala[44],'Glaukoma'],
   [gejala[14],gejala[6],gejala[18],gejala[27],gejala[52],gejala[53],gejala[54],'Pterygium'],
+  // ruleBase[46 - 50]
   [gejala[14],gejala[13],gejala[15],gejala[27],'Hordeolum (Stye)'],
   [gejala[14],gejala[25],gejala[27],gejala[40],gejala[41],'Dakriosistitis'],
   [gejala[14],gejala[55],gejala[56],gejala[57],gejala[58],'Skleritis'],
   [gejala[15],gejala[13],gejala[14],gejala[27],'Hordeolum (Stye)'],
   [gejala[16],gejala[5],gejala[17],'Trakoma'],
+  // ruleBase[51 - 55]
   [gejala[17],gejala[5],gejala[16],'Trakoma'],
   [gejala[18],gejala[1],gejala[2],gejala[14],gejala[27],gejala[28],gejala[29],'Keratitis Pungtata Superfisialis'],
   [gejala[18],gejala[1],gejala[14],gejala[21],'Keratokonus'], // have been checked and worked
   [gejala[18],gejala[1],gejala[23],'Retinopati Debiritikum'],
   [gejala[18],gejala[5],gejala[27],gejala[33],gejala[50],'Oftalmia Neonatorum'],
+  // ruleBase[56 - 60]
   [gejala[18],gejala[6],gejala[14],gejala[27],gejala[52],gejala[53],gejala[54],'Pterygium'],
   [gejala[18],gejala[19],gejala[20],'Abalso Retina'], // have been checked and worked
   [gejala[18],gejala[19],'Retinopati Diabetikum'], // have been checked and worked
   [gejala[19],gejala[18],gejala[20],'Abalso Retina'],
   [gejala[19],gejala[18],'Retinopati Diabetikum'],
-  [gejala[21],gejala[1],gejala[2],gejala[21],'Katarak'],
+  // ruleBase[61 - 65]
+  [gejala[21],gejala[1],gejala[2],gejala[22],'Katarak'],
   [gejala[21],gejala[1],gejala[14],gejala[18],'Keratokonus'],
   [gejala[21],gejala[5],'Retinitis Pigmentosa'],
-  [gejala[22],gejala[1],gejala[2],gejala[22],'Katarak'],
+  [gejala[22],gejala[1],gejala[2],gejala[21],'Katarak'],
   [gejala[22],gejala[45],gejala[46],'Xerophtalmania'],
+  // ruleBase[66 - 70]
   [gejala[23],gejala[1],gejala[18],'Retinopati Debiritikum'],
   [gejala[24],gejala[1],gejala[2],gejala[34],'Endoflamitis'], // have been checked and worked
   [gejala[24],'Eksoftalmus'],
   [gejala[25],gejala[2],gejala[5],gejala[26],'Selulitis Orbitalitas'],
   [gejala[25],gejala[14],gejala[27],gejala[40],gejala[41],'Dakriosistitis'],
+  // ruleBase[71 - 75]
   [gejala[25],gejala[35],gejala[36],gejala[37],'Trombosis Sinus Kavernosus'],
   [gejala[26],gejala[2],gejala[5],gejala[25],'Selulitis Orbitalitas'],
   [gejala[27],gejala[1],gejala[2],gejala[14],gejala[18],gejala[28],gejala[29],'Keratitis Pungtata Superfisialis'],
