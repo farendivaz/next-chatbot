@@ -133,47 +133,55 @@ const gejala  = [
 
 const ruleBase = [
   [''],
-  // ruleBase start from [1][0]
+  // ruleBase[1 - 5]
   [gejala[1],gejala[2],gejala[3],gejala[4],gejala[5],gejala[6],gejala[7],gejala[8],'Ulkus Kornea'],
   [gejala[1],gejala[2],gejala[12],gejala[14],gejala[28],'Konjungtivitis'],
   [gejala[1],gejala[2],gejala[14],gejala[18],gejala[27],gejala[28],gejala[29],'Keratitis Pungtata Superfisialis'],
   [gejala[1],gejala[2],gejala[21],gejala[22],'Katarak'],
   [gejala[1],gejala[2],gejala[24],gejala[34],'Endoflamitis'],
+  // ruleBase[6 - 10]
   [gejala[1],gejala[5],gejala[9],gejala[10],gejala[11],gejala[12],gejala[27],gejala[28],'Blefaritis'],
   [gejala[1],gejala[14],gejala[18],gejala[21],'Keratokonus'],
   [gejala[1],gejala[18],gejala[23],'Retinopati Debiritikum'],
   [gejala[2],gejala[1],gejala[3],gejala[4],gejala[5],gejala[6],gejala[7],gejala[8],'Ulkus Kornea'],
   [gejala[2],gejala[1],gejala[12],gejala[14],gejala[28],'Konjungtivitis'],
+  // ruleBase[11 - 15]
   [gejala[2],gejala[1],gejala[14],gejala[18],gejala[27],gejala[28],gejala[29],'Keratitis Pungtata Superfisialis'],  
   [gejala[2],gejala[1],gejala[21],gejala[22],'Katarak'],
   [gejala[2],gejala[1],gejala[24],gejala[34],'Endoflamitis'],
   [gejala[2],gejala[5],gejala[14],gejala[27],gejala[35],gejala[43],gejala[44],'Glaukoma'],
   [gejala[2],gejala[5],gejala[25],gejala[26],'Selulitis Orbitalitas'],
+  // rulaBase[16 - 20]
   [gejala[2],gejala[29],gejala[35],gejala[51],'Miopi'],
   [gejala[3],gejala[1],gejala[2],gejala[4],gejala[5],gejala[6],gejala[7],gejala[8],'Ulkus Kornea'],
   [gejala[4],gejala[1],gejala[2],gejala[3],gejala[5],gejala[6],gejala[7],gejala[8],'Ulkus Kornea'],
   [gejala[5],gejala[1],gejala[2],gejala[3],gejala[4],gejala[6],gejala[7],gejala[8],'Ulkus Kornea'],
   [gejala[5],gejala[1],gejala[9],gejala[10],gejala[11],gejala[12],gejala[27],gejala[28],'Blefaritis'],
+  // ruleBase[21 - 25]
   [gejala[5],gejala[2],gejala[14],gejala[27],gejala[35],gejala[43],gejala[44],'Glaukoma'],
   [gejala[5],gejala[2],gejala[25],gejala[26],'Selulitis Orbitalitas'],
   [gejala[5],gejala[6],gejala[7],gejala[8],'Kalazion'],
   [gejala[5],gejala[16],gejala[17],'Trakoma'],
   [gejala[5],gejala[18],gejala[27],gejala[33],gejala[50],'Oftalmia Neonatorum'],
+  // ruleBase[26 - 30]
   [gejala[5],gejala[21],'Retinitis Pigmentosa'],
   [gejala[6],gejala[1],gejala[2],gejala[3],gejala[4],gejala[5],gejala[7],gejala[8],'Ulkus Kornea'],
   [gejala[6],gejala[5],gejala[7],gejala[8],'Kalazion'],
   [gejala[6],gejala[14],gejala[18],gejala[27],gejala[52],gejala[53],gejala[54],'Pterygium'],
   [gejala[7],gejala[1],gejala[2],gejala[3],gejala[4],gejala[5],gejala[6],gejala[8],'Ulkus Kornea'],
+  // ruleBase[31 - 35]
   [gejala[7],gejala[5],gejala[6],gejala[8],'Kalazion'],
   [gejala[8],gejala[1],gejala[2],gejala[3],gejala[4],gejala[5],gejala[6],gejala[7],'Ulkus Kornea'],
   [gejala[8],gejala[5],gejala[6],gejala[7],'Kalazion'],
-  [gejala[9],gejala[1],gejala[5],gejala[10],gejala[11],gejala[12],gejala[27],gejala[28],'Blefaritis'], // must be checked
+  [gejala[9],gejala[1],gejala[5],gejala[10],gejala[11],gejala[12],gejala[27],gejala[28],'Blefaritis'],
   [gejala[10],gejala[1],gejala[5],gejala[9],gejala[11],gejala[12],gejala[27],gejala[28],'Blefaritis'],
-  [gejala[11],gejala[1],gejala[5],gejala[10],gejala[10],gejala[12],gejala[27],gejala[28],'Blefaritis'],
+  // ruleBase[36 - 40]
+  [gejala[11],gejala[1],gejala[5],gejala[9],gejala[10],gejala[12],gejala[27],gejala[28],'Blefaritis'],
   [gejala[12],gejala[1],gejala[2],gejala[14],gejala[28],'Konjungtivitis'],
-  [gejala[12],gejala[1],gejala[5],gejala[10],gejala[10],gejala[11],gejala[27],gejala[28],'Blefaritis'],
+  [gejala[12],gejala[1],gejala[5],gejala[9],gejala[10],gejala[11],gejala[27],gejala[28],'Blefaritis'],
   [gejala[12],gejala[28],gejala[30],gejala[31],'Alergi Mata Merah'],
   [gejala[13],gejala[14],gejala[15],gejala[27],'Hordeolum (Stye)'],
+  // ruleBase[41 - 45]
   [gejala[14],gejala[1],gejala[2],gejala[12],gejala[28],'Konjungtivitis'],
   [gejala[14],gejala[1],gejala[2],gejala[18],gejala[27],gejala[28],gejala[29],'Keratitis Pungtata Superfisialis'],
   [gejala[14],gejala[1],gejala[18],gejala[21],'Keratokonus'],
