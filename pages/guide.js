@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import {Accordion} from 'react-bootstrap';
-import Footer from '../components/Footer';
 import Link from 'next/link';
 
 const AccordionBootstrap = ({eventKey,Title,Text}) => {
@@ -116,24 +115,6 @@ export default function Guide () {
             )}
           />
         </Accordion>
-      </div>
-
-      <h1 className='font-bold mx-auto my-2 text-2xl text-center'>
-        Artikel mengenai<span className='text-blue-500'> penyakit mata</span>
-      </h1>
-      <div className='grid grid-cols-4 gap-4 mx-3 mt-2 mb-4 mw-w-md'>
-        {[
-          ['Bahaya Penyakit Mata',"https://nextjs.org/docs",1],
-          ['Penanganan Penyakit Mata?',"https://nextjs.org/learn",2],
-          ['Dokter Spesialis Penyakit Mata',"https://github.com/vercel/next.js/tree/master/examples",3],
-          ['Rumah Sakit Penyakit Mata',"https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app",4],
-        ].map(([title, url, id]) => (
-          <a href={url} key={id}
-            className='border-2 hover:border-blue-400 mx-2 px-3 py-1 rounded-lg text-left margin-up-hover hover:-mt-1 hover:mb-1 hover:shadow-xl duration-300 ease-in-out'
-          >
-            <h2 className='text-black text-center text-xl'>{title} &rarr;</h2>
-          </a>
-        ))}
       </div>
     </div>
   )
