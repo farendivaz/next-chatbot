@@ -68,7 +68,7 @@ const sympthom = [
 ];
 
 const question = `Apa kamu mengalami gejala`;
-const lastQuestion = `? <span class='border-3 border-blue-700 px-2 py-0 rounded-2xl'>y/t</span>`;
+const lastQuestion = `? <span class='border-3 border-indigo-700 px-2 py-0 rounded-2xl'>y/t</span>`;
 const gejala  = [
   [`this was index array numer 0`],
   [`${question} ${sympthom[1][0]} pada mata ${lastQuestion}`],

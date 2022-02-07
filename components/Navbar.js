@@ -8,7 +8,7 @@ export default function Navbar() {
         position:'sticky',
         top:'0px',
       }}
-      className='bg-blue-300 flex justify-center m-0 py-1 px-0 top-0 shadow-sm space-x-3 text-dark w-full z-10'
+      className='bg-indigo-300 flex justify-center m-0 py-1 px-0 top-0 shadow space-x-3 text-dark w-full z-10'
     >
       {[
         ['Home', '/'],
@@ -17,7 +17,7 @@ export default function Navbar() {
         ['Admin', '/login']
       ].map(([title, url], index) => (
         <Link href={url} key={index}>
-          <a className="font-bold hover:bg-blue-100 no-underline roboto rounded-lg my-0 px-3 py-2 text-gray-700 hover:text-gray-900">
+          <a className="font-bold hover:bg-indigo-100 no-underline roboto rounded-lg my-0 px-3 py-2 text-gray-900 hover:text-gray-900">
             {title}
           </a>
         </Link>
