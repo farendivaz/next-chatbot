@@ -25,6 +25,9 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 1.) Parsing error : Cannot find module 'next/babel'
 Solution : https://stackoverflow.com/questions/68163385/parsing-error-cannot-find-module-next-babel
 
+2.) error - ESLint: Failed to load config "next/babel"
+Solution : https://stackoverflow.com/questions/70339117/eslint-failed-to-load-config-next-babel-to-extend-from
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

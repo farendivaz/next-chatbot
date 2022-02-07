@@ -15,22 +15,22 @@ const AccordionBootstrap = ({eventKey,Title,Text}) => {
 
 export default function Guide () {
   return(
-    <div className='bg-indigo-300 h-screen m-0 poppins'>
+    <div className='bg-indigo-300 h-full m-0 poppins'>
 
       <HeadElement text={`Chatbot - guide`}/>
 
       <Navbar/>
 
-      <main style={{paddingTop:'20px'}}>
+      <main style={{paddingTop:'20px',paddingBottom:'50px'}}>
         <div 
-          className='border-2 border-white hover:border-indigo-600 mx-auto my-0 p-3 overflow-hidden rounded-lg shadow-lg'
+          className='border-2 border-white mx-auto mt-0 p-3 overflow-hidden rounded-lg shadow-lg'
           style={{maxWidth:'700px',width:'99%'}}
         >
           <p className='my-1 font-bold text-indigo-500 text-black' style={{fontSize:'20px'}}>
             Panduan Penggunaan Chatbot Sistem Pakar Skrining Penyakit Mata
           </p>
-          <hr></hr>
-          <Accordion defaultActiveKey='0' className='border-2 border-indigo-300 my-1 rounded hover:border-indigo-600'>
+          <hr/>
+          <Accordion defaultActiveKey='0' className='border-2 border-white my-1 rounded'>
             <AccordionBootstrap 
               eventKey={"0"}
               Title = {(<p className='font-bold m-0'>Panduan Umum</p>)}
