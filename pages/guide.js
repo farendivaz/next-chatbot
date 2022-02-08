@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import {Accordion} from 'react-bootstrap';
 import HeadElement from '../components/Head';
+import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 
 const AccordionBootstrap = ({eventKey,Title,Text}) => {
@@ -15,18 +16,18 @@ const AccordionBootstrap = ({eventKey,Title,Text}) => {
 
 export default function Guide () {
   return(
-    <div className='bg-indigo-300 h-full m-0 poppins'>
+    <div className='bg-blue-300 h-full m-0 poppins'>
 
       <HeadElement text={`Chatbot - guide`}/>
 
       <Navbar/>
 
-      <main style={{paddingTop:'20px',paddingBottom:'50px'}}>
+      <main style={{paddingTop:'100px',paddingBottom:'100px'}}>
         <div 
           className='border-2 border-white mx-auto mt-0 p-3 overflow-hidden rounded-lg shadow-lg'
           style={{maxWidth:'700px',width:'99%'}}
         >
-          <p className='my-1 font-bold text-indigo-500 text-black' style={{fontSize:'20px'}}>
+          <p className='my-1 font-bold text-blue-500 text-black' style={{fontSize:'20px'}}>
             Panduan Penggunaan Chatbot Sistem Pakar Skrining Penyakit Mata
           </p>
           <hr/>
@@ -40,13 +41,13 @@ export default function Guide () {
                     <span className='font-bold text-primary'>Ketikkan : </span>
                     mulai,  tes,  test atau skrining pada input chat untuk{' '}
                     melakukan skrining penyakit mata atau klik tombol{' '}
-                    <span className='font-bold text-indigo-500'>mulai</span> berwarna biru.
+                    <span className='font-bold text-blue-500'>mulai</span> berwarna biru.
                   </p>
                   <p className='my-1'>
-                    <span className='font-bold text-indigo-500'>Jawab </span>
+                    <span className='font-bold text-blue-500'>Jawab </span>
                     setiap pertanyaan dengan{' '}
-                    <span className='font-bold text-indigo-500'>y (ya)</span> atau{' '}
-                    <span className='font-bold text-indigo-500'>t (tidak)</span> atau{' '}
+                    <span className='font-bold text-blue-500'>y (ya)</span> atau{' '}
+                    <span className='font-bold text-blue-500'>t (tidak)</span> atau{' '}
                     klik tombol ya atau tidak yang berwarna biru.
                   </p>
                 </div>
@@ -93,11 +94,11 @@ export default function Guide () {
               Text = {(
                 <div>
                   <p className='my-1'>
-                    Hasil skrining dari sistem pakar ini <span className='font-bold text-indigo-500'>tidak bisa </span>
+                    Hasil skrining dari sistem pakar ini <span className='font-bold text-blue-500'>tidak bisa </span>
                     dijadikan sebagai keputusan akhir diagnosis penyakit mata anda.
                   </p>
                   <p className='my-1'>
-                    Hasil skrining tersebut <span className='font-bold text-indigo-500'>bisa </span>
+                    Hasil skrining tersebut <span className='font-bold text-blue-500'>bisa </span>
                     anda gunakan untuk konsultasi dengan dokter spesialis mata untuk diagnosis lebih lanjut.
                   </p>
                 </div>
@@ -106,6 +107,8 @@ export default function Guide () {
           </Accordion>
         </div>
       </main>
+
+      <Footer/>
     </div>
   )
 };

@@ -25,9 +25,9 @@ export default function ChatbotInterfaceCopy({
   }, [])
 
   return (
-    <div className='border-2 mx-auto mb-2 max-w-3xl overflow-hidden p-0 rounded-xl hover:border-indigo-500 shadow-lg w-full'>
+    <div className='border-2 mb-2 max-w-3xl overflow-hidden p-0 rounded-xl hover:border-blue-500 shadow-lg w-full'>
       <div className='mx-0 mb-0 w-100 rounded shadow-hover-primary'>
-        <h4 className='bg-indigo-600 mb-0 p-1 w-100 opensans rounded-top text-center text-light text-xl'>
+        <h4 className='bg-blue-600 mb-0 p-1 w-100 opensans rounded-top text-center text-light text-xl'>
           Chat Bot Sistem Pakar
         </h4>
         <div 
@@ -41,7 +41,7 @@ export default function ChatbotInterfaceCopy({
           <input 
             id='input' 
             type='text'
-            className='border-2 border-sky-500 hover:border-indigo-600 ml-auto px-3 py-2 rounded-full w-4/5'
+            className='border-2 border-sky-500 hover:border-blue-600 ml-auto px-3 py-2 rounded-full w-4/5'
             value={input}
             placeholder='Ketik respon kamu ...'
             onChange={handleChange}
@@ -51,7 +51,7 @@ export default function ChatbotInterfaceCopy({
             type='submit' 
             value='Submit' 
             onClick={handleSubmit}
-            className='bg-indigo-600 hover:bg-indigo-800 mx-1 py-2 rounded-full w-1/5'
+            className='bg-blue-600 hover:bg-blue-800 mx-1 py-2 rounded-full w-1/5'
           >
             <span className="mx-auto text-white text-lg"><SendIcon/></span>
           </button>
@@ -63,7 +63,7 @@ export default function ChatbotInterfaceCopy({
             type='submit' 
             value='Submit' 
             onClick={handleMulai} 
-            className='bg-indigo-600 hover:bg-indigo-800 py-2 rounded-full text-white'
+            className='bg-blue-600 hover:bg-blue-800 py-2 rounded-full text-white'
           >
             Skrining
           </button>
@@ -73,7 +73,7 @@ export default function ChatbotInterfaceCopy({
             type='submit' 
             value='Submit' 
             onClick={handleYa} 
-            className='bg-indigo-600 hover:bg-indigo-800 py-2 rounded-full text-white'
+            className='bg-blue-600 hover:bg-blue-800 py-2 rounded-full text-white'
           >
             Ya
           </button>
@@ -83,7 +83,7 @@ export default function ChatbotInterfaceCopy({
             type='submit' 
             value='Submit' 
             onClick={handleTidak} 
-            className='bg-indigo-600 hover:bg-indigo-800 py-2 rounded-full text-white'
+            className='bg-blue-600 hover:bg-blue-800 py-2 rounded-full text-white'
           >
             Tidak
           </button>

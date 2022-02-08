@@ -37,7 +37,7 @@ export default function Login() {
   }
   
   return (
-    <div className="bg-indigo-300 h-screen poppins" >
+    <div className="bg-blue-300 h-screen poppins" >
 
       <style jsx>{`
       `}</style>
@@ -49,7 +49,7 @@ export default function Login() {
       <main className='my-0'
         style={{paddingTop:'20px'}}
       >
-        <div className='bg-indigo-200 border-2 mx-auto max-w-md p-3 rounded shadow-sm'>
+        <div className='bg-blue-200 border-2 mx-auto max-w-md p-3 rounded shadow-sm'>
           <h4 className='font-bold'>Login Admin</h4>
           <hr/>
           <form onSubmit={loginHandler}>
@@ -57,7 +57,7 @@ export default function Login() {
               <label>Email</label>
               <input 
                 type='email' 
-                className='bg-indigo-50 border-2 border-indigo-500 hover:border-indigo-600 px-2 py-1 rounded text-black'
+                className='bg-blue-50 border-2 border-blue-500 hover:border-blue-600 px-2 py-1 rounded text-black'
                 value={email} 
                 onChange={(e) => {
                   setEmail(e.target.value);
@@ -78,7 +78,7 @@ export default function Login() {
               <label>Password</label>
               <input 
                 type='password'
-                className='bg-indigo-50 border-2 border-indigo-500 hover:border-indigo-600 px-2 py-1 rounded text-black'
+                className='bg-blue-50 border-2 border-blue-500 hover:border-blue-600 px-2 py-1 rounded text-black'
                 value={password}
                 onChange={(e) => {
                   setPassword(e.target.value);
@@ -97,7 +97,7 @@ export default function Login() {
             )}
             <hr/>
             <button 
-              className='bg-indigo-500 hover:bg-indigo-600 focus:ring focus:ring-indigo-200 text-white mx-auto my-2 px-4 py-2 rounded w-full'
+              className='bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-200 text-white mx-auto my-2 px-4 py-2 rounded w-full'
               onClick={loginHandler} type='submit'
             >
               MASUK

@@ -8,20 +8,21 @@ import '../styles/Home.module.css';
 
 export default function Home() {
   return (
-    <div className='bg-indigo-300 m-0 opensans'>
+    <div className='bg-blue-300 m-0 opensans'>
 
       <HeadElement text={`EyeScreening - Chatbot`}/>
       
-      <div className='bg-indigo-900 text-center text-white w-full'>
+      <div className='bg-blue-900 text-center text-white w-full'>
         Chatbot Expert System
       </div>
       
       <Navbar/>
 
-      <main className='flex flex-col' style={{paddingTop:'20px'}}>
+      <main className='flex flex-row justify-center' style={{paddingTop:'20px'}}>
         <InferenceMachine/>
-        <Footer/>
       </main>
+
+      <Footer/>
     </div>
   )
 }

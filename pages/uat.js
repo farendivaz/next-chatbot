@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar';
 
 export default function FormTesting () {
   return (
-    <div class='bg-indigo-300 h-screen m-0 poppins'>
+    <div class='bg-blue-300 h-screen m-0 poppins'>
 
       <HeadElement text={`UAT - From`} />
 
