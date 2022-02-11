@@ -1,4 +1,4 @@
-# Chatbot based Expert System for Eye Disease Screening Portfolio
+# Next.js Portfolio : Chatbot Based Expert System for Eye Disease Screening System
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
@@ -14,11 +14,39 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## List of Eye Disease in Inference Machine
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+1. Ablasi Retina
+2. Alergi Mata Merah
+3. Blefaritis
+4. Dakriosistitis
+5. Degenerasi Makula
+6. Eksoftalmus
+7. Endoftalmitis
+8. Glaukoma
+9. Hordeolum (Stye)
+10. Katarak
+11. Keratitis Pungtata Superfisialis
+12. Keratokonus
+13. Kalazion
+14. Konjungtivitis
+15. Miopi
+16. Oftalmia Neonatorium
+17. Optic Neuritis
+18. Pterygium
+19. Retinitis Pigmentosa
+20. Retinopati Diabetikum
+21. Selulitis Orbitalitas
+22. Trakoma
+23. Trombosis Sinus Kavernosus
+24. Ulkus Kornea
+25. Uveitis
+26. Xerophtalmania
+27. Skleritis
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Deployment
+
+This app was deployed on Vercel.
 
 ## Error Documentation
 
@@ -27,18 +55,3 @@ Solution : https://stackoverflow.com/questions/68163385/parsing-error-cannot-fin
 
 2.) error - ESLint: Failed to load config "next/babel"
 Solution : https://stackoverflow.com/questions/70339117/eslint-failed-to-load-config-next-babel-to-extend-from
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-p0
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
