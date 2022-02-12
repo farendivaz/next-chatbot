@@ -324,7 +324,6 @@ export default function InferenceMachineCopy () {
     else if (input !== 'mulai' || input !== 'tes'|| input !== 'test'  || input !== 'skrining') {
       if (diagnoseResult === '') {
         if (replyBefore === 'mulai' || replyBefore === 'tes' || replyBefore === 'test' || replyBefore === 'skrining') {
-          
           // the current value is ruleBase[i][j]
           if (input === 'y' || input === 'ya') {
             // save all yes reply before the last value in [i] array
@@ -391,7 +390,7 @@ export default function InferenceMachineCopy () {
                     let findIndexinArr = arr.indexOf(ruleBase[i][j])
                     // if ruleBase[i+1][j] is the last value of ruleBase[i], case gejala[24]
                     if (arr[findIndexinArr+1] !== undefined && arr[findIndexinArr+1] === ruleBase[i+1][ruleBase[i+1].length-1]) {
-                      reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. Hasil skrining menunjukkan kamu mengalami <strong>${allYesReply.length} gejala</strong> dari total <strong>${totalGejalaSpecialCase} gejala</strong> penyakit mata bernama <strong>${LastValueSpecialCase}</strong>. Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
+                      reply = `Kamu hanya menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. Belum bisa dipastikan penyakit mata yang tepat hanya dari 1 gejala tersebut. Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                       setDiagnoseResult(reply);
                     }
                     if (arr[findIndexinArr+1] !== undefined && arr[findIndexinArr+1] !== ruleBase[i+1][ruleBase[i+1].length-1]) {
@@ -408,7 +407,7 @@ export default function InferenceMachineCopy () {
                     // case ruleBase[57][1] and rulaBase[110][1]
                     // if i === ruleBase.length, case for gejala[58], gejala[14]
                     if (arr[findIndexinArr+1] === undefined) {
-                      reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. Hasil skrining menunjukkan kamu mengalami <strong>${allYesReply.length} gejala</strong> dari total <strong>${totalGejala[totalGejala.length-1]} gejala</strong> penyakit mata bernama <strong>${lastValue[lastValue.length-1]}</strong>. Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
+                      reply = `Kamu hanya menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. Belum bisa dipastikan penyakit mata yang tepat hanya dari 1 gejala tersebut. Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                       setDiagnoseResult(reply);
                     }
                 }
@@ -598,7 +597,11 @@ export default function InferenceMachineCopy () {
               else {
                 if (j === 0) { // works
                   // last value in ruleBase[i], case for gejala[58], works
-                  reply = `Maaf kamu tidak mengalami gejala penyakit mata yang ditanyakan oleh bot, sistem tidak dapat melakukan skrining. Tekan atau ketik mulai untuk mengulangi skrining`;
+                  reply = `Kamu <strong>tidak mengalami</strong> gejala penyakit mata yang ditanyakan oleh bot. Sistem <strong>tidak dapat melakukan skrining</strong> di luar gejala penyakit mata yang telah ditanyakan. <strong>Tekan</strong> atau ketik <strong>mulai</strong> untuk mengulangi skrining`;
+                  setDiagnoseResult(reply);
+                }
+                if (j === 1) {
+                  reply = `Kamu hanya menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. Belum bisa dipastikan penyakit mata yang tepat hanya dari 1 gejala tersebut. Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                   setDiagnoseResult(reply);
                 }
                 else {
