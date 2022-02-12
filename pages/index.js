@@ -12,7 +12,7 @@ export default function Home() {
 
       <HeadElement text={`EyeScreening - Chatbot`}/>
       
-      <div className='bg-blue-900 text-center text-white w-full'>
+      <div className='bg-blue-600 text-center text-white w-full'>
         Chatbot Expert System
       </div>
       

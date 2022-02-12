@@ -1,7 +1,7 @@
 export default function Footer () {
   const year= new Date().getFullYear();
   return (
-    <footer  className='bg-blue-900 mx-auto mt-3 px-8 py-2 text-center tex w-full'>
+    <footer  className='bg-blue-600 mx-auto mt-3 px-8 py-2 text-center tex w-full'>
       <p className="my-2 text-gray-400">
         Released under the{' '}
         <a href="https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt"
@@ -11,6 +11,9 @@ export default function Footer () {
       </p>
       <p className='my-2 text-gray-400'>
         &copy; { year } - Mochamad Rafli Ramadhan
+      </p>
+      <p className='mx-auto mt-2 mb-1 text-gray-400'>
+        Contact Developer
       </p>
       <div 
         className='text-lg my-1 mb-0 justify justify-row space-x-8'
