@@ -12,13 +12,13 @@ export default function Home() {
 
       <HeadElement text={`EyeScreening - Chatbot`}/>
       
-      <div className='bg-blue-600 text-center text-white w-full'>
+      <div className='bg-blue-500 text-center text-white w-full'>
         Chatbot Expert System
       </div>
       
       <Navbar/>
 
-      <main className='flex flex-row justify-center' style={{paddingTop:'20px'}}>
+      <main className='flex flex-row justify-center mt-3 mb-3'>
         <InferenceMachine/>
       </main>
 

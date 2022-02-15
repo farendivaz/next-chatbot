@@ -8,7 +8,7 @@ export default function Navbar() {
         position:'sticky',
         top:'0px',
       }}
-      className='bg-blue-300 flex justify-center m-0 py-1 px-0 top-0 shadow-sm space-x-3 text-dark w-full z-10'
+      className='bg-blue-300 flex justify-center m-0 py-1 px-0 top-0 shadow lg:space-x-4 md:space-x-3 sm:space-x-2 text-dark w-full z-10'
     >
       {[
         ['Home', '/'],

@@ -44,12 +44,14 @@ export default function Login() {
 
       <HeadElement text={`Login - Page`} />
 
+      <div className='bg-blue-500 text-center text-white w-full'>
+        Admin Login Form
+      </div>
+
       <Navbar/>
 
-      <main className='my-0'
-        style={{paddingTop:'20px'}}
-      >
-        <div className='bg-blue-200 border-2 mx-auto max-w-md p-3 rounded shadow-sm'>
+      <main className='mt-8'>
+        <div className='bg-blue-200 border-2 mx-auto max-w-md p-3 rounded shadow'>
           <h4 className='font-bold'>Login Admin</h4>
           <hr/>
           <form onSubmit={loginHandler}>

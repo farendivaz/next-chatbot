@@ -1,8 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import {Accordion} from 'react-bootstrap';
-import HeadElement from '../components/Head';
 import Footer from '../components/Footer';
+import HeadElement from '../components/Head';
 import Navbar from '../components/Navbar';
 
 const AccordionBootstrap = ({eventKey,Title,Text}) => {
@@ -20,9 +20,13 @@ export default function Guide () {
 
       <HeadElement text={`Chatbot - guide`}/>
 
+      <div className='bg-blue-500 text-center text-white w-full'>
+        Expert System User Guide
+      </div>
+
       <Navbar/>
 
-      <main style={{paddingTop:'100px',paddingBottom:'100px'}}>
+      <main className='flex flex-row justify-center mt-8 mb-4'>
         <div 
           className='border-2 border-white mx-auto mt-0 p-3 overflow-hidden rounded-lg shadow-lg'
           style={{maxWidth:'700px',width:'99%'}}
