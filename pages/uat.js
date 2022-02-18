@@ -8,7 +8,7 @@ export default function FormTesting () {
 
       <HeadElement text={`UAT - From`} />
 
-      <div className='bg-blue-500 text-center text-white w-full'>
+      <div className='bg-blue-500 roboto text-center text-white w-full'>
         Expert System UAT Form
       </div>
 

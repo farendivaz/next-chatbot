@@ -20,7 +20,7 @@ export default function Guide () {
 
       <HeadElement text={`Chatbot - guide`}/>
 
-      <div className='bg-blue-500 text-center text-white w-full'>
+      <div className='bg-blue-500 roboto text-center text-white w-full'>
         Expert System User Guide
       </div>
 
