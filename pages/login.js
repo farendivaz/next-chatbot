@@ -5,12 +5,15 @@ import HeadElement from '../components/Head';
 import Link from 'next/link';
 
 export default function Login() {
+  // initial state
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [send, setSend] = useState(false);
+  // validation
   const [emailEmpty, setEmailEmpty] = useState(false);
   const [passwordEmpty, setPasswordEmpty] = useState(false);
-  const [send, setSend] = useState(false);
-  const [error, setError] = useState('');
+  // use router
   const router = useRouter();
 
   const loginHandler = async (e) => {
@@ -27,12 +30,12 @@ export default function Login() {
     )
     .then((response) => {
       setSend(true);
-      // set token on localStorage
+      // set token on local storage
       (localStorage.setItem('token', response.data.token));
       router.push('/crud-dashboard');
     })
-    .catch((error) => {
-      setError(error.message);
+    .catch((errorMessage) => {
+      setErrorMessage(errorMessage.message);
     })
   }
   
@@ -69,11 +72,10 @@ export default function Login() {
         ))}
       </nav>
 
-      <main className='mt-8'>
-        <div className='bg-blue-100 mx-auto max-w-md lg:p-7 md:p-5 sm:p-3 rounded-xl shadow'>
+      <main className='bg-blue-100 mx-auto mt-8 max-w-md lg:p-7 md:p-5 sm:p-3 rounded-xl shadow'>
           <h3 className='font-bold'>Login Pengguna</h3>
           <p>Silahkan login dengan isi data berikut.</p>
-          <form onSubmit={loginHandler}>
+          <form onSubmit={''}>
             <div className='flex flex-col lg:my-3 md:my-3 sm:my-2'>
               <label>Email</label>
               <input 
@@ -85,14 +87,14 @@ export default function Login() {
                   setEmailEmpty(false);
                   setPasswordEmpty(false);
                   setSend(false);
-                  setError('');
+                  setErrorMessage('');
                 }}
                 placeholder='Alamat Email'
               />
             </div>
             {emailEmpty === true && (
               <div className="border-2 border-red-300 bg-red-100 p-3 rounded">
-                Email harus diisi
+                Email harus di isi
               </div>
             )}
             <div className='flex flex-col lg:my-3 md:my-3 sm:my-2'>
@@ -106,14 +108,14 @@ export default function Login() {
                   setEmailEmpty(false);
                   setPasswordEmpty(false);
                   setSend(false);
-                  setError('');
+                  setErrorMessage('');
                 }} 
                 placeholder='Masukkan Password'
               />
             </div>
             {passwordEmpty === true && (
               <div className="border-2 border-red-300 bg-red-100 p-3 rounded">
-                Password harus diisi
+                Password harus di isi
               </div>
             )}
             <button 
@@ -127,18 +129,18 @@ export default function Login() {
                 Tunggu sebentar...
               </div>
             )}
-            {error === 'Request failed with status code 409' && (
+            {errorMessage === 'Request failed with status code 409' && (
               <div className="border-2 border-red-300 bg-red-100 p-3 rounded my-2">
                 Email terdaftar, tapi password salah.
               </div>
             )}
-            {error === 'Request failed with status code 500' && (
+            {errorMessage === 'Request failed with status code 500' && (
               <div className="border-2 border-red-300 bg-red-100 p-3 rounded my-2">
                 Maaf email tidak terdaftar.
               </div>
             )}
           </form>
-          <hr/>
+          <hr className='my-2'/>
           <p>Belum punya akun?{' '}
             <Link href='/registration'>
               <a className='no-underline'>
@@ -146,7 +148,6 @@ export default function Login() {
               </a>
             </Link>
           </p>
-        </div>
       </main>
     </div>
   )
