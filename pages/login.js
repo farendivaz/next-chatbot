@@ -93,7 +93,7 @@ export default function Login() {
               />
             </div>
             {emailEmpty === true && (
-              <div className="border-2 border-red-300 bg-red-100 p-3 rounded">
+              <div className="border-2 border-red-300 bg-red-100 p-3 rounded text-black">
                 Email harus di isi
               </div>
             )}
@@ -114,7 +114,7 @@ export default function Login() {
               />
             </div>
             {passwordEmpty === true && (
-              <div className="border-2 border-red-300 bg-red-100 p-3 rounded">
+              <div className="border-2 border-red-300 bg-red-100 p-3 rounded text-black">
                 Password harus di isi
               </div>
             )}

@@ -105,7 +105,7 @@ export default function Registration() {
               />
             </div>
             {nameEmpty === true && (
-              <div className="border-2 border-red-300 bg-red-100 p-3 rounded">
+              <div className="border-2 border-red-300 bg-red-100 p-3 rounded text-black">
                 Nama harus di isi
               </div>
             )}
@@ -123,7 +123,7 @@ export default function Registration() {
               />
             </div>
             {emailEmpty === true && (
-              <div className="border-2 border-red-300 bg-red-100 p-3 rounded">
+              <div className="border-2 border-red-300 bg-red-100 p-3 rounded text-black">
                 Email harus di isi
               </div>
             )}
@@ -141,7 +141,7 @@ export default function Registration() {
               />
             </div>
             {passwordEmpty === true && (
-              <div className="border-2 border-red-300 bg-red-100 p-3 rounded">
+              <div className="border-2 border-red-300 bg-red-100 p-3 rounded text-black">
                 Password harus di isi
               </div>
             )}
