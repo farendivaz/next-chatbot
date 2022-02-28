@@ -19,6 +19,7 @@ export default function Registration() {
   const [nameEmpty, setNameEmpty] = useState(false);
   const [emailEmpty, setEmailEmpty] = useState(false);
   const [passwordEmpty, setPasswordEmpty] = useState(false);
+  const [passwordIsTooShort, setPasswordIsTooShort] = useState(false);
   const [passwordConfirmationEmpty, setPasswordConfirmationEmpty] = useState(false);
   const [passwordConfirmationMatch, setPasswordConfirmationMatch] = useState(false);
   const [roleNotChecked, setRoleNotChecked] = useState(false);
@@ -30,6 +31,7 @@ export default function Registration() {
     if (!name) { setNameEmpty(true); }
     if (!email) { setEmailEmpty(true); }
     if (!password) { setPasswordEmpty(true); }
+    if (password.length > 0 && password.length < 8) { setPasswordIsTooShort(true); }
     if (!passwordConfirmation) { setPasswordConfirmationEmpty(true); }
     if (passwordConfirmation !== password) { setPasswordConfirmationMatch(true); }
     if (!checkRole) { setRoleNotChecked(true); }
@@ -105,7 +107,7 @@ export default function Registration() {
               />
             </div>
             {nameEmpty === true && (
-              <div className="border-2 border-red-300 bg-red-100 p-3 rounded text-black">
+              <div className="border-2 border-red-300 bg-red-100 my-2 p-3 rounded text-black">
                 Nama harus di isi
               </div>
             )}
@@ -123,7 +125,7 @@ export default function Registration() {
               />
             </div>
             {emailEmpty === true && (
-              <div className="border-2 border-red-300 bg-red-100 p-3 rounded text-black">
+              <div className="border-2 border-red-300 bg-red-100 my-2 p-3 rounded text-black">
                 Email harus di isi
               </div>
             )}
@@ -136,13 +138,19 @@ export default function Registration() {
                 onChange={(e) => {
                   setPassword(e.target.value);
                   setPasswordEmpty(false);
+                  setPasswordIsTooShort(false);
                 }} 
                 placeholder='Masukkan Password'
               />
             </div>
             {passwordEmpty === true && (
-              <div className="border-2 border-red-300 bg-red-100 p-3 rounded text-black">
+              <div className="border-2 border-red-300 bg-red-100 my-2 p-3 rounded text-black">
                 Password harus di isi
+              </div>
+            )}
+            {passwordIsTooShort === true && (
+              <div className="border-2 border-red-300 bg-red-100 my-2 p-3 rounded text-black">
+                Password terlalu pendek
               </div>
             )}
             <div className='flex flex-col lg:my-3 md:my-3 sm:my-2'>
@@ -160,12 +168,12 @@ export default function Registration() {
               />
             </div>
             {passwordConfirmationEmpty === true && (
-              <div className="border-2 border-red-300 bg-red-100 p-3 rounded p-3">
+              <div className="border-2 border-red-300 bg-red-100 my-2 p-3 rounded p-3">
                 Konfirmasi password harus di isi
               </div>
             )}
             {passwordConfirmationMatch === true && (
-              <div className="border-2 border-red-300 bg-red-100 p-3 rounded p-3">
+              <div className="border-2 border-red-300 bg-red-100 my-2 p-3 rounded p-3">
                 Password tidak sama
               </div>
             )}
@@ -196,7 +204,7 @@ export default function Registration() {
               </label>
             </div>
             {roleNotChecked === true && (
-              <div className="border-2 border-red-300 bg-red-100 p-3 rounded p-3">
+              <div className="border-2 border-red-300 bg-red-100 my-2 p-3 rounded p-3">
                 Klik pernyataan di atas
               </div>
             )}
@@ -207,17 +215,17 @@ export default function Registration() {
               MASUK
             </button>
             {send === true && (
-              <div className="alert-info my-2">
+              <div className="border-2 border-red-300 bg-red-100 my-2 p-3 rounded my-2">
                 Tunggu sebentar...
               </div>
             )}
             {errorMessage === 'Request failed with status code 409' && (
-              <div className="border-2 border-red-300 bg-red-100 p-3 rounded my-2">
+              <div className="border-2 border-red-300 bg-red-100 my-2 p-3 rounded my-2">
                 Email terdaftar, tapi password salah.
               </div>
             )}
             {errorMessage === 'Request failed with status code 500' && (
-              <div className="border-2 border-red-300 bg-red-100 p-3 rounded my-2">
+              <div className="border-2 border-red-300 bg-red-100 my-2 p-3 rounded my-2">
                 Maaf email tidak terdaftar.
               </div>
             )}
