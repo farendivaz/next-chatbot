@@ -45,7 +45,7 @@ export default function Login() {
       <style jsx>{`
       `}</style>
 
-      <HeadElement text={`Registration - Page`} />
+      <HeadElement text={`Register - Page`} />
 
       <div className='bg-blue-500 roboto text-center text-white w-full'>
         User Login
@@ -61,7 +61,7 @@ export default function Login() {
       >
         {[
           ['Home', '/'],
-          ['Daftar', '/registration'],
+          ['Daftar', '/register'],
           ['Masuk', '/login']
         ].map(([title, url, style], index) => (
           <Link href={url} key={index}>
@@ -85,18 +85,17 @@ export default function Login() {
               onChange={(e) => {
                 setEmail(e.target.value);
                 setEmailEmpty(false);
-                setPasswordEmpty(false);
-                setSend(false);
-                setErrorMessage('');
               }}
               placeholder='Alamat Email'
             />
           </div>
+          {/* Validation */}
           {emailEmpty === true && (
             <div className="border-2 border-red-300 bg-red-100 p-3 rounded text-black">
               Email harus di isi
             </div>
           )}
+
           <div className='flex flex-col lg:my-3 md:my-3 sm:my-2'>
             <label>Password</label>
             <input 
@@ -105,25 +104,25 @@ export default function Login() {
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
-                setEmailEmpty(false);
                 setPasswordEmpty(false);
-                setSend(false);
-                setErrorMessage('');
               }} 
               placeholder='Masukkan Password'
             />
           </div>
+          {/* Validation */}
           {passwordEmpty === true && (
             <div className="border-2 border-red-300 bg-red-100 p-3 rounded text-black">
               Password harus di isi
             </div>
           )}
+
           <button 
             className='bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-200 text-white mx-auto lg:my-3 md:my-3 sm:my-2 px-4 py-2 rounded-full w-full'
             onClick={loginHandler} type='submit'
           >
             MASUK
           </button>
+          {/* Validation */}
           {send === true && (
             <div className="alert alert-info my-2">
               Tunggu sebentar...
@@ -136,13 +135,13 @@ export default function Login() {
           )}
           {errorMessage === 'Request failed with status code 500' && (
             <div className="border-2 border-red-300 bg-red-100 p-3 rounded my-2">
-              Maaf email tidak terdaftar.
+              Email tidak terdaftar, silahkan daftar terlebih dahulu.
             </div>
           )}
         </form>
         <hr className='my-2'/>
         <p>Belum punya akun?{' '}
-          <Link href='/registration'>
+          <Link href='/register'>
             <a className='no-underline'>
               Daftar di sini
             </a>
