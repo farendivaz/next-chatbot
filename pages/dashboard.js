@@ -27,27 +27,6 @@ export default function Crud() {
     router.push('/login');
   };
 
-  // add data
-  const [title, setTitle] = useState('');
-  const [topic, setTopic] = useState('');
-  const [link, setLink] = useState('');
-  const [successAddNewData, setSuccessAddNewData] = useState(false);
-  const [errorAddNewData, setErrorAddNewData] = useState('');
-  const submitNewData = () => {
-    axios.post('http://localhost:5000/api',{
-      title,
-      topic,
-      link,
-    })
-    .then(() => {
-      setSuccessAddNewData(true);
-    })
-    .catch((err) => { 
-      setErrorAddNewData(err.message);
-      setSuccessAddNewData(false);
-    })
-  }
-
   // edit data by id
   const [successEditData, setSuccessEditData] = useState(false);
   const [errorEditData, setErrorEditData] = useState('');
@@ -99,194 +78,45 @@ export default function Crud() {
   }, []);
 
   return (
-    <div className="bg-blue-300 poppins" >
+    <div className='bg-blue-300 m-0 opensans'>
 
-      <HeadElement text={`Dashboard - Web App`} />
-
+      <HeadElement text={`EyeScreening - Dashboard`}/>
+      
       <div className='bg-blue-500 roboto text-center text-white w-full'>
-        User Dashboard
+        Chatbot Expert System
       </div>
-
-      <nav style={{position:'fixed'}}
-        className='bg-black flex justify-end py-1 pr-3 top-0 shadow-sm space-x-3 text-black w-100 z-10'
+      
+      <nav 
+        style={{
+          position:'-webkit-sticky',
+          position:'sticky',
+          top:'0px',
+        }}
+        className='bg-blue-300 flex justify-center m-0 py-1 px-0 top-0 shadow lg:space-x-4 md:space-x-3 sm:space-x-2 text-dark w-full z-10'
       >
-        <button onClick={logoutHandler} className='bg-red-500 hover:bg-red-600 font-semibold mx-1 py-2 px-2 rounded text-white'>
-          <i className='bi bi-box-arrow-left mx-1'></i> Log Out
+        <Link href='/dashboard' key={index}>
+          <a className="font-bold hover:bg-blue-100 no-underline roboto rounded-lg my-0 px-3 py-2 text-gray-900 hover:text-gray-900">
+            Home
+          </a>
+        </Link>
+        <Link href='/guide_copy' key={index}>
+          <a className="font-bold hover:bg-blue-100 no-underline roboto rounded-lg my-0 px-3 py-2 text-gray-900 hover:text-gray-900">
+            Panduan
+          </a>
+        </Link>
+        <button 
+          class="mr-auto font-bold bg-red-500 hover:bg-red-600 focus:bg-red-700 no-underline my-0 px-3 py-2 rounded-lg"
+          onClick={logoutHandler}
+        >
+          Logout
         </button>
       </nav>
 
-      <main className='bg-blue-100 mx-auto mt-8 max-w-md lg:p-7 md:p-5 sm:p-3 rounded-xl shadow'>
-        <p className='fw-bold mx-1 text-dark text-lg'>
-          Login berhasil, Hallo{' '}
-          <span className='underline'>{user.name}</span>{' '}
-          <i class="bi bi-check-circle-fill text-blue-500"></i>
-        </p>
-        <hr/>
-        <form 
-          onSubmit={submitNewData}
-          className='border-2 border-blue-500 mt-1 mb-2 mx-auto p-3 rounded shadow-sm w-2/5'
-          style={{minWidth:'400px'}}
-        >
-          <h3 className='font-bold my-1 text-xl text-blue-700 text-left'>Add or Edit Data</h3>
-          <hr/>
-          <div className='flex flex-col my-1'>
-            <div className='my-1'>
-              <label className='form-label mx-auto'>Title</label>
-              <input className='form-control border-2 hover:border-blue-600 mx-auto rounded'
-                type='text'  
-                placeholder='Input Title'
-                value={title} 
-                onChange={(e) => {
-                  setTitle(e.target.value);
-                  setSuccessAddNewData(false);
-                  setSuccessEditData(false);
-                  setSuccessDeleteData(false);
-                  setErrorGetUserData('');
-                  setErrorAddNewData('');
-                  setErrorEditData('');
-                  setErrorDeleteData('');
-                }}
-              />
-            </div>
-            <div className='my-1'>
-              <label className='form-label mx-auto'>Topic</label>
-              <input className='form-control border-2 hover:border-blue-600 mx-auto rounded'
-                type='text'
-                placeholder='Input Topic'
-                value={topic} 
-                onChange={(e) => {
-                  setTopic(e.target.value);
-                  setSuccessAddNewData(false);
-                  setSuccessEditData(false);
-                  setSuccessDeleteData(false);
-                  setErrorGetUserData('');
-                  setErrorAddNewData('');
-                  setErrorEditData('');
-                  setErrorDeleteData('');
-                }}
-              />
-            </div>
-            <div className='my-1'>
-              <label className='form-label mx-auto'>Link</label>
-              <input className='form-control border-2 hover:border-blue-600 mx-auto rounded'
-                type='text'
-                placeholder='Input Link'
-                value={link} 
-                onChange={(e) => {
-                  setLink(e.target.value);
-                  setSuccessAddNewData(false);
-                  setSuccessEditData(false);
-                  setSuccessDeleteData(false);
-                  setErrorGetUserData('');
-                  setErrorAddNewData('');
-                  setErrorEditData('');
-                  setErrorDeleteData('');
-                }}
-              />
-            </div>    
-          </div>
-          <div className='d-grid gap-2 mt-2'>
-            <button type='submit' className='btn btn-primary'>Submit</button>
-          </div>
-          {successAddNewData === true && (
-            <div className='alert alert-primary my-2'>
-              Data berhasil di tambahkan
-            </div>
-          )}
-          {errorAddNewData && (
-            <div className='alert alert-primary my-1'>
-              Add data error : {errorAddNewData}
-            </div>
-          )}
-          {successEditData === true && (
-            <div className='alert alert-primary my-1'>
-              Data edited
-            </div>
-          )}
-          {errorEditData && (
-            <div className='alert alert-primary my-1'>
-              Edit data error : {errorEditData}
-            </div>
-          )}
-        </form>
-
-        <hr/>
-        
-        <h3 className='font-bold text-xl text-blue-700 text-center'>All Data Display</h3>
-        {errorGetUserData && (
-          <div className='alert alert-primary my-1'>
-            Get user data error : {errorGetUserData}
-          </div>
-        )}
-        {successDeleteData === true && (
-          <div className='alert alert-primary my-1'>
-            Data deleted
-          </div>
-        )}
-        {errorDeleteData && (
-          <div className='alert alert-primary my-1'>
-            Delete data error : {errorDeleteData}
-          </div>
-        )}
-        <div className='mx-auto' style={{
-          width:'98%',maxWidth: '98%','word-break':'break-all'
-        }}>
-          <table className='mx-auto mt-2 mb-3'>
-            <thead className='bg-gray-100'>
-              <tr className='border-2 border-gray-400'>
-                <th className='font-bold font-medium pl-3 text-left text-md text-gray-600 tracking-wider uppercase'>
-                  _id
-                </th>
-                <th className='font-bold font-medium pl-3 py-2 text-left text-md text-gray-600 tracking-wider uppercase'>
-                  Title
-                </th>
-                <th className='font-bold font-medium pl-3 py-2 text-left text-md text-gray-600 tracking-wider uppercase'>
-                  Topic
-                </th>
-                <th className='font-bold font-medium pl-3 py-2 text-left text-md text-gray-600 tracking-wider uppercase'>
-                  Link
-                </th>
-                <th className='font-bold font-medium pr-2 py-2 text-left text-md text-gray-600 tracking-wider uppercase'>
-                  Edit
-                </th>
-                <th className='font-bold font-medium pr-2 py-2 text-left text-md text-gray-600 tracking-wider uppercase'>
-                  Delete
-                </th>
-              </tr>
-            </thead>
-            {loading ? (
-              <Fragment>
-                <tr className='border-2 border-gray-200 text-center'>Loading...</tr>
-              </Fragment>
-            ) : (data.map((item, index) => {
-              return (
-                <Fragment key={index}>
-                  <tr className='bg-gray-200 border-2 border-gray-400'>
-                    <td className='mb-1 px-1'>{item._id}</td>
-                    <td className='mb-1 px-1'>{item.title}</td>
-                    <td className='mb-1 px-1'>{item.topic}</td>
-                    <td className='mb-1 px-1'>{item.link}</td>
-                    <td className='mb-1 px-1'>
-                      <button onClick={editData} 
-                        className='bg-blue-500 hover:bg-blue-700 font-semibold mx-1 py-1 px-2 rounded text-white'
-                      >
-                        <i className='bi bi-pencil-fill'></i>
-                      </button>
-                    </td>
-                    <td className='mb-1 px-1'>
-                      <button onClick= {() => deleteData(item._id)} 
-                        className='bg-red-500 hover:bg-red-700 font-semibold mx-1 py-1 px-2 rounded text-white'
-                      >
-                        <i className='bi bi-trash-fill'></i>
-                      </button>
-                    </td>
-                  </tr>
-                </Fragment>
-              )})
-            )}
-          </table>
-        </div>
+      <main className='flex flex-row justify-center mt-3 mb-3'>
+        <InferenceMachine/>
       </main>
+
+      <Footer/>
     </div>
   )
 }

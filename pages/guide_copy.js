@@ -3,7 +3,6 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import {Accordion} from 'react-bootstrap';
 import Footer from '../components/Footer';
 import HeadElement from '../components/Head';
-import Navbar from '../components/NavbarChatbot';
 
 const AccordionBootstrap = ({eventKey,Title,Text}) => {
   return (
@@ -15,6 +14,13 @@ const AccordionBootstrap = ({eventKey,Title,Text}) => {
 }
 
 export default function Guide () {
+  // log out
+  const logoutHandler = () => {
+    //remove token from localStorage
+    localStorage.removeItem('token');
+    router.push('/login');
+  };
+
   return(
     <div className='bg-blue-300 h-full m-0 poppins'>
 
@@ -24,7 +30,31 @@ export default function Guide () {
         Expert System User Guide
       </div>
 
-      <Navbar/>
+      <nav 
+        style={{
+          position:'-webkit-sticky',
+          position:'sticky',
+          top:'0px',
+        }}
+        className='bg-blue-300 flex justify-center m-0 py-1 px-0 top-0 shadow lg:space-x-4 md:space-x-3 sm:space-x-2 text-dark w-full z-10'
+      >
+        <Link href='/dashboard' key={index}>
+          <a className="font-bold hover:bg-blue-100 no-underline roboto rounded-lg my-0 px-3 py-2 text-gray-900 hover:text-gray-900">
+            Home
+          </a>
+        </Link>
+        <Link href='/guide_copy' key={index}>
+          <a className="font-bold hover:bg-blue-100 no-underline roboto rounded-lg my-0 px-3 py-2 text-gray-900 hover:text-gray-900">
+            Panduan
+          </a>
+        </Link>
+        <button 
+          class="mr-auto font-bold bg-red-500 hover:bg-red-600 focus:bg-red-700 no-underline my-0 px-3 py-2 rounded-lg"
+          onClick={logoutHandler}
+        >
+          Logout
+        </button>
+      </nav>
 
       <main className='flex flex-row justify-center mt-8 mb-4'>
         <div 
