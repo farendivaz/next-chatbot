@@ -32,7 +32,7 @@ export default function Login() {
       setSend(true);
       // set token on local storage
       (localStorage.setItem('token', response.data.token));
-      router.push('/crud-dashboard');
+      router.push('/dashboard');
     })
     .catch((errorMessage) => {
       setErrorMessage(errorMessage.message);
