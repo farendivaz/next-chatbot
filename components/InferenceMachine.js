@@ -443,7 +443,7 @@ export default function InferenceMachine () {
                     Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                     setDiagnoseResult(reply);
                     // set screening result on local storage
-                    (localStorage.setItem('screening_result', lastValue[lastValue.length-1]));
+                    (localStorage.setItem('screening_result', LastValueSpecialCase));
                   }
                   // if ruleBase[i+1][j] is not the last value of ruleBase[i]
                   if (arr[findIndexInArray+1] !== undefined && arr[findIndexInArray+1] !== ruleBase[i+1][ruleBase[i+1].length-1]) {
@@ -493,7 +493,7 @@ export default function InferenceMachine () {
                     Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                     setDiagnoseResult(reply);
                     // set screening result on local storage
-                    (localStorage.setItem('screening_result', lastValue[lastValue.length-1]));
+                    (localStorage.setItem('screening_result', LastValueSpecialCase));
                   }
                   // if ruleBase[i+1][j] is not the last value of ruleBase[i]
                   if (arr[findIndexInArray+1] !== undefined && arr[findIndexInArray+1] !== ruleBase[i+1][ruleBase[i+1].length-1]) {
@@ -547,7 +547,7 @@ export default function InferenceMachine () {
                     Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                     setDiagnoseResult(reply);
                     // set screening result on local storage
-                    (localStorage.setItem('screening_result', lastValue[lastValue.length-1]));
+                    (localStorage.setItem('screening_result', LastValueSpecialCase));
                   }
                   // if ruleBase[i+1][j] is not the last value of ruleBase[i]
                   if (arr[findIndexInArray+1] !== undefined && arr[findIndexInArray+1] !== ruleBase[i+1][ruleBase[i+1].length-1]) {
@@ -604,7 +604,7 @@ export default function InferenceMachine () {
                     Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                     setDiagnoseResult(reply);
                     // set screening result on local storage
-                    (localStorage.setItem('screening_result', lastValue[lastValue.length-1]));
+                    (localStorage.setItem('screening_result', LastValueSpecialCase));
                   }
                   // if ruleBase[i+1][j] is not the last value of ruleBase[i]
                   if (arr[findIndexInArray+1] !== undefined && arr[findIndexInArray+1] !== ruleBase[i+1][ruleBase[i+1].length-1]) {
@@ -664,7 +664,7 @@ export default function InferenceMachine () {
                     Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                     setDiagnoseResult(reply);
                     // set screening result on local storage
-                    (localStorage.setItem('screening_result', lastValue[lastValue.length-1]));
+                    (localStorage.setItem('screening_result', LastValueSpecialCase));
                   }
                   // if ruleBase[i+1][j] is not the last value of ruleBase[i]
                   if (arr[findIndexInArray+1] !== undefined && arr[findIndexInArray+1] !== ruleBase[i+1][ruleBase[i+1].length-1]) {
@@ -712,7 +712,7 @@ export default function InferenceMachine () {
                   Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                   setDiagnoseResult(reply);
                   // set screening result on local storage
-                  (localStorage.setItem('screening_result', lastValue[lastValue.length-1]));
+                  (localStorage.setItem('screening_result', LastValueSpecialCase));
                 }
                 // if ruleBase[i+1][j] is not the last value of ruleBase[i]
                 if (arr[findIndexInArray+1] !== undefined && arr[findIndexInArray+1] !== ruleBase[i+1][ruleBase[i+1].length-1]) {
