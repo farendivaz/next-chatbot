@@ -1,6 +1,6 @@
 import Footer from '../components/Footer';
 import HeadElement from '../components/Head';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/NavbarChatbot';
 
 export default function FormTesting () {
   return (
