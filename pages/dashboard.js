@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import HeadElement from '../components/Head';
 import {useRouter} from 'next/router';
+import Link from 'next/link';
 
 export default function Crud() {
   const router = useRouter();

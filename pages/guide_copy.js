@@ -3,6 +3,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import {Accordion} from 'react-bootstrap';
 import Footer from '../components/Footer';
 import HeadElement from '../components/Head';
+import Link from 'next/link';
 
 const AccordionBootstrap = ({eventKey,Title,Text}) => {
   return (
