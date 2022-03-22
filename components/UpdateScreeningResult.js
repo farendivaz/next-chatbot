@@ -3,6 +3,7 @@ import {useParams} from 'react-router-dom';
 import axios from 'axios';
 
 export default function UpdateScreeningResult() {
+  localStorage.setItem('userId', LastValueSpecialCase)
   const params = useParams();
   const [successUpdateScreeningResult, setSuccessUpdateScreeningResult] = useState("");
   const [errorUpdateScreeningResult, setErrorUpdateScreeningResult] = useState('');

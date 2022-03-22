@@ -30,4 +30,4 @@ export default function AddChat(input, reply) {
      setTimeout(() => {
        botText.innerHTML = `${reply}`
      }, 300)
-   }
+}

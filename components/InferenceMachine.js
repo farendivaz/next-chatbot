@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
+import {prompts,replies,alternative,coronavirus} from '../data/PromptsAndReplies';
 import AddChat from './AddChat';
 import AddChat2 from './AddChat2';
 import Compare from './Compare';
 import ChatbotInterface from './ChatbotInterface';
-import {prompts,replies,alternative,coronavirus,} from '../data/PromptsAndReplies';
 import UpdateScreeningResult from './UpdateScreeningResult';
 
 const question = `Apa kamu mengalami gejala`;
@@ -180,7 +180,7 @@ const ruleBase = [
   ['end of second screening'],
 ];
 
-export default function InferenceMachine () {
+export default function InferenceMachine ({userId}) {
   const [input, setInput] = useState('')
   // handle when form input was change or type by user and also get user input with setInput
   const handleChange = (event) => {
@@ -321,15 +321,18 @@ export default function InferenceMachine () {
                 setDiagnoseResult(reply); setI(i); setJ(j);
                 setRuleBaseBefore(ruleBase[i][j+1]); setReplyBefore('');
                 // set screening result on local storage
-                localStorage.setItem('screening_result', lastValue[lastValue.length-1]);
-                UpdateScreeningResult();
+                if (localStorage.setItem('screening_result', lastValue[lastValue.length-1])) {
+                  UpdateScreeningResult();
+                }
               }
               else {
                 reply = `Melalui skrining dicurigai kamu mengalami <strong>${totalGejala[totalGejala.length-1]} gejala</strong> dari penyakit mata <strong>${lastValue[lastValue.length-1]}</strong>. 
                 Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                 setDiagnoseResult(reply); setI(i); setJ(j); setReplyBefore('');
                 // set screening result on local storage
-                localStorage.setItem('screening_result', lastValue[lastValue.length-1]);
+                if (localStorage.setItem('screening_result', lastValue[lastValue.length-1])) {
+                  UpdateScreeningResult();
+                }
               }
             }
           }
@@ -445,7 +448,9 @@ export default function InferenceMachine () {
                     Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                     setDiagnoseResult(reply);
                     // set screening result on local storage
-                    localStorage.setItem('screening_result', LastValueSpecialCase);
+                    if (localStorage.setItem('screening_result', LastValueSpecialCase)) {
+                      UpdateScreeningResult();
+                    }
                   }
                   // if ruleBase[i+1][j] is not the last value of ruleBase[i]
                   if (arr[findIndexInArray+1] !== undefined && arr[findIndexInArray+1] !== ruleBase[i+1][ruleBase[i+1].length-1]) {
@@ -495,7 +500,9 @@ export default function InferenceMachine () {
                     Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                     setDiagnoseResult(reply);
                     // set screening result on local storage
-                    localStorage.setItem('screening_result', LastValueSpecialCase);
+                    if (localStorage.setItem('screening_result', LastValueSpecialCase)) {
+                      UpdateScreeningResult();
+                    }
                   }
                   // if ruleBase[i+1][j] is not the last value of ruleBase[i]
                   if (arr[findIndexInArray+1] !== undefined && arr[findIndexInArray+1] !== ruleBase[i+1][ruleBase[i+1].length-1]) {
@@ -549,7 +556,9 @@ export default function InferenceMachine () {
                     Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                     setDiagnoseResult(reply);
                     // set screening result on local storage
-                    localStorage.setItem('screening_result', LastValueSpecialCase);
+                    if (localStorage.setItem('screening_result', LastValueSpecialCase)) {
+                      UpdateScreeningResult();
+                    }
                   }
                   // if ruleBase[i+1][j] is not the last value of ruleBase[i]
                   if (arr[findIndexInArray+1] !== undefined && arr[findIndexInArray+1] !== ruleBase[i+1][ruleBase[i+1].length-1]) {
@@ -606,7 +615,9 @@ export default function InferenceMachine () {
                     Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                     setDiagnoseResult(reply);
                     // set screening result on local storage
-                    localStorage.setItem('screening_result', LastValueSpecialCase);
+                    if (localStorage.setItem('screening_result', LastValueSpecialCase)) {
+                      UpdateScreeningResult();
+                    }
                   }
                   // if ruleBase[i+1][j] is not the last value of ruleBase[i]
                   if (arr[findIndexInArray+1] !== undefined && arr[findIndexInArray+1] !== ruleBase[i+1][ruleBase[i+1].length-1]) {
@@ -666,7 +677,9 @@ export default function InferenceMachine () {
                     Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                     setDiagnoseResult(reply);
                     // set screening result on local storage
-                    localStorage.setItem('screening_result', LastValueSpecialCase);
+                    if (localStorage.setItem('screening_result', LastValueSpecialCase)) {
+                      UpdateScreeningResult();
+                    }
                   }
                   // if ruleBase[i+1][j] is not the last value of ruleBase[i]
                   if (arr[findIndexInArray+1] !== undefined && arr[findIndexInArray+1] !== ruleBase[i+1][ruleBase[i+1].length-1]) {
@@ -714,7 +727,9 @@ export default function InferenceMachine () {
                   Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                   setDiagnoseResult(reply);
                   // set screening result on local storage
-                  localStorage.setItem('screening_result', LastValueSpecialCase);
+                  if (localStorage.setItem('screening_result', LastValueSpecialCase)) {
+                    UpdateScreeningResult();
+                  }
                 }
                 // if ruleBase[i+1][j] is not the last value of ruleBase[i]
                 if (arr[findIndexInArray+1] !== undefined && arr[findIndexInArray+1] !== ruleBase[i+1][ruleBase[i+1].length-1]) {

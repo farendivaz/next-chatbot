@@ -39,18 +39,18 @@ export default function Guide () {
         }}
         className='bg-blue-300 flex justify-center m-0 py-1 px-0 top-0 shadow lg:space-x-4 md:space-x-3 sm:space-x-2 text-dark w-full z-10'
       >
-        <Link href='/dashboard' key={index}>
+        <Link href='/dashboard'>
           <a className="font-bold hover:bg-blue-100 no-underline roboto rounded-lg my-0 px-3 py-2 text-gray-900 hover:text-gray-900">
             Home
           </a>
         </Link>
-        <Link href='/guide_copy' key={index}>
+        <Link href='/guide_copy'>
           <a className="font-bold hover:bg-blue-100 no-underline roboto rounded-lg my-0 px-3 py-2 text-gray-900 hover:text-gray-900">
             Panduan
           </a>
         </Link>
         <button 
-          class="mr-auto font-bold bg-red-500 hover:bg-red-600 focus:bg-red-700 no-underline my-0 px-3 py-2 rounded-lg"
+          className="mr-auto font-bold bg-red-500 hover:bg-red-600 focus:bg-red-700 no-underline my-0 px-3 py-2 rounded-lg"
           onClick={logoutHandler}
         >
           Logout

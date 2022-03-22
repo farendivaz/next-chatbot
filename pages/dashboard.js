@@ -1,11 +1,22 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import HeadElement from '../components/Head';
-import {useRouter} from 'next/router';
 import Link from 'next/link';
+import {useRouter} from 'next/router';
+import Footer from '../components/Footer';
+import HeadElement from '../components/Head';
+import InferenceMachine from '../components/InferenceMachine';
 
 export default function Crud() {
   const router = useRouter();
+  useEffect(() => {
+    //get token from local storage when browser reload
+    const token = localStorage.getItem('token');
+    if(!token) { 
+      router.push('/login'); 
+    }
+    getUserData(token);
+  }, []);
+
   // authorization
   const [user, setUser] = useState('');
   const [errorGetUserData, setErrorGetUserData] = useState('');
@@ -14,14 +25,14 @@ export default function Crud() {
     axios.defaults.headers.common['authorization'] = `Bearer ${token}`
     await axios.get('http://localhost:5000/api/verify')
     .then((response) => {
-        setUser(response.data);
+      setUser(response.data);
+      localStorage.setItem('userId',response.data.id);
     })
     .catch((error) => { 
       setErrorGetUserData(error.message);
     })
   }
 
-  // log out
   const logoutHandler = () => {
     //remove token from localStorage
     localStorage.removeItem('token');
@@ -35,8 +46,7 @@ export default function Crud() {
     axios.put(`http://localhost:5000/api/${id}`)
     .then(() => {
       setSuccessEditData(true);
-      // refresh web app
-      window.location.reload();
+      window.location.reload(); // refresh web app
     })
     .catch((err) => { 
       setSuccessEditData(false);
@@ -60,31 +70,13 @@ export default function Crud() {
     })
   }
 
-  // run function when browser reload
-  useEffect(() => {
-    setErrorGetUserData('');
-    setSuccessAddNewData(false);
-    setSuccessEditData(false);
-    setSuccessDeleteData(false);
-    setErrorGetUserData('');
-    setErrorAddNewData('');
-    setErrorEditData('');
-    setErrorDeleteData('');
-    //get token from local storage
-    const token = localStorage.getItem('token');
-    if(!token) { 
-      router.push('/login'); 
-    }
-    getUserData(token);
-  }, []);
-
   return (
     <div className='bg-blue-300 m-0 opensans'>
 
       <HeadElement text={`EyeScreening - Dashboard`}/>
       
       <div className='bg-blue-500 roboto text-center text-white w-full'>
-        Chatbot Expert System
+        Hallo, {user.id}
       </div>
       
       <nav 
@@ -95,18 +87,18 @@ export default function Crud() {
         }}
         className='bg-blue-300 flex justify-center m-0 py-1 px-0 top-0 shadow lg:space-x-4 md:space-x-3 sm:space-x-2 text-dark w-full z-10'
       >
-        <Link href='/dashboard' key={index}>
+        <Link href='/dashboard'>
           <a className="font-bold hover:bg-blue-100 no-underline roboto rounded-lg my-0 px-3 py-2 text-gray-900 hover:text-gray-900">
             Home
           </a>
         </Link>
-        <Link href='/guide_copy' key={index}>
+        <Link href='/guide_copy'>
           <a className="font-bold hover:bg-blue-100 no-underline roboto rounded-lg my-0 px-3 py-2 text-gray-900 hover:text-gray-900">
             Panduan
           </a>
         </Link>
         <button 
-          class="mr-auto font-bold bg-red-500 hover:bg-red-600 focus:bg-red-700 no-underline my-0 px-3 py-2 rounded-lg"
+          className="mr-auto font-bold bg-red-500 hover:bg-red-600 focus:bg-red-700 no-underline my-0 px-3 py-2 rounded-lg"
           onClick={logoutHandler}
         >
           Logout
@@ -114,7 +106,7 @@ export default function Crud() {
       </nav>
 
       <main className='flex flex-row justify-center mt-3 mb-3'>
-        <InferenceMachine/>
+        <InferenceMachine userId={user.id}/>
       </main>
 
       <Footer/>
