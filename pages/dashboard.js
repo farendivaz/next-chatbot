@@ -26,7 +26,6 @@ export default function Crud() {
     await axios.get('http://localhost:5000/api/verify')
     .then((response) => {
       setUser(response.data);
-      localStorage.setItem('userId',response.data.id);
     })
     .catch((error) => { 
       setErrorGetUserData(error.message);
@@ -76,7 +75,7 @@ export default function Crud() {
       <HeadElement text={`EyeScreening - Dashboard`}/>
       
       <div className='bg-blue-500 roboto text-center text-white w-full'>
-        Hallo, {user.id}
+        Hallo, {user.name}
       </div>
       
       <nav 
