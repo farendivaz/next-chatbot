@@ -15,10 +15,11 @@ const AccordionBootstrap = ({eventKey,Title,Text}) => {
 }
 
 export default function Guide () {
-  // log out
   const logoutHandler = () => {
-    //remove token from localStorage
+    // remove token, user_id and screening_result from localStorage
     localStorage.removeItem('token');
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('screening_result');
     router.push('/login');
   };
 

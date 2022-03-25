@@ -26,24 +26,26 @@ export default function Register() {
   // use router
   const router = useRouter();
 
-  const registerHandler = async (e) => {
-    e.preventDefault();
-    await axios.post('http://localhost:5000/api/register', 
-      ({
-        name: name,
-        email: email,
-        password: password,
-        gender: gender,
-        role: role,
+  const registerHandler = async (e) => {    
+    if (nameEmpty === false && emailEmpty === false && passwordEmpty === false) {
+      e.preventDefault();
+      await axios.post('http://localhost:5000/api/register', 
+        ({
+          name: name,
+          email: email,
+          password: password,
+          gender: gender,
+          role: role,
+        })
+      )
+      .then((response) => {
+        setSend(true);
+        router.push('/login');
       })
-    )
-    .then((response) => {
-      setSend(true);
-      router.push('/login');
-    })
-    .catch((errorMessage) => {
-      setErrorMessage(errorMessage.message);
-    })
+      .catch((errorMessage) => {
+        setErrorMessage(errorMessage.message);
+      })
+    }
   }
   
   return (
@@ -156,7 +158,7 @@ export default function Register() {
           )}
           {passwordIsTooShort === true && (
             <div className="border-2 border-red-300 bg-red-100 my-2 p-3 rounded text-black">
-              Password terlalu pendek
+              Password terlalu pendek (minimal 8 karakter)
             </div>
           )}
 

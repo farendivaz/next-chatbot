@@ -33,8 +33,10 @@ export default function Crud() {
   }
 
   const logoutHandler = () => {
-    //remove token from localStorage
+    // remove token, user_id and screening_result from localStorage
     localStorage.removeItem('token');
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('screening_result');
     router.push('/login');
   };
 
@@ -97,7 +99,7 @@ export default function Crud() {
           </a>
         </Link>
         <button 
-          className="mr-auto font-bold bg-red-300 hover:bg-red-400 focus:bg-red-700 no-underline my-0 px-3 py-2 rounded-lg"
+          className="mr-auto font-bold bg-red-500 hover:bg-red-600 focus:bg-red-700 no-underline my-0 px-3 py-2 rounded-lg"
           onClick={logoutHandler}
         >
           Logout
