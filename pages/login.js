@@ -17,9 +17,6 @@ export default function Login() {
   const router = useRouter();
 
   const loginHandler = async (e) => {
-    // validation after button was click
-    if (!email) { setEmailEmpty(true); }
-    if (!password) { setPasswordEmpty(true); }
     e.preventDefault();
     // send data to server
     await axios.post('http://localhost:5000/api/login', 
@@ -87,7 +84,8 @@ export default function Login() {
               value={email} 
               onChange={(e) => {
                 setEmail(e.target.value);
-                setEmailEmpty(false);
+                if (e.target.value === '') { setEmailEmpty(true); }
+                if (e.target.value !== '') { setEmailEmpty(false); }
               }}
               placeholder='Alamat Email'
             />
@@ -107,7 +105,12 @@ export default function Login() {
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
-                setPasswordEmpty(false);
+                if (e.target.value === '') {
+                  setPasswordEmpty(true);
+                }
+                if (e.target.value !== '') {
+                  setPasswordEmpty(false);
+                }
               }} 
               placeholder='Masukkan Password'
             />

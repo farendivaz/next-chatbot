@@ -97,7 +97,7 @@ export default function Crud() {
           </a>
         </Link>
         <button 
-          className="mr-auto font-bold bg-red-500 hover:bg-red-600 focus:bg-red-700 no-underline my-0 px-3 py-2 rounded-lg"
+          className="mr-auto font-bold bg-red-300 hover:bg-red-400 focus:bg-red-700 no-underline my-0 px-3 py-2 rounded-lg"
           onClick={logoutHandler}
         >
           Logout
@@ -105,7 +105,7 @@ export default function Crud() {
       </nav>
 
       <main className='flex flex-row justify-center mt-3 mb-3'>
-        <InferenceMachine userId={user.id}/>
+        <InferenceMachine/>
       </main>
 
       <Footer/>

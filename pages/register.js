@@ -6,38 +6,28 @@ import Link from 'next/link';
 
 export default function Register() {
   // initial state
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [name, setName] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [passwordConfirmation, setPasswordConfirmation] = useState(null);
   const [gender, setGender] = useState('male');
-  const [checkRole, setCheckRole] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState('member');
+  // sending and error sending
   const [send, setSend] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   // validation
   const [nameEmpty, setNameEmpty] = useState(false);
   const [emailEmpty, setEmailEmpty] = useState(false);
   const [passwordEmpty, setPasswordEmpty] = useState(false);
   const [passwordIsTooShort, setPasswordIsTooShort] = useState(false);
   const [passwordConfirmationEmpty, setPasswordConfirmationEmpty] = useState(false);
-  const [passwordConfirmationMatch, setPasswordConfirmationMatch] = useState(false);
-  const [roleNotChecked, setRoleNotChecked] = useState(false);
+  const [passwordConfirmationMatch, setPasswordConfirmationMatch] = useState(true);
+  const [isCheck, setIsCheck] = useState(true);
   // use router
   const router = useRouter();
 
   const registerHandler = async (e) => {
-    // validation after button was click
-    if (!name) { setNameEmpty(true); }
-    if (!email) { setEmailEmpty(true); }
-    if (!password) { setPasswordEmpty(true); }
-    if (password.length > 0 && password.length < 8) { setPasswordIsTooShort(true); }
-    if (!passwordConfirmation) { setPasswordConfirmationEmpty(true); }
-    if (passwordConfirmation !== password) { setPasswordConfirmationMatch(true); }
-    if (!checkRole) { setRoleNotChecked(true); }
-    if (checkRole === true) { setRole('user'); }
     e.preventDefault();
-    // send data to server
     await axios.post('http://localhost:5000/api/register', 
       ({
         name: name,
@@ -100,7 +90,8 @@ export default function Register() {
               value={name} 
               onChange={(e) => {
                 setName(e.target.value);
-                setNameEmpty(false);
+                if (e.target.value === '') { setNameEmpty(true); }
+                if (e.target.value !== '') { setNameEmpty(false); }
               }}
               placeholder='Nama Lengkap'
             />
@@ -120,7 +111,8 @@ export default function Register() {
               value={email} 
               onChange={(e) => {
                 setEmail(e.target.value);
-                setEmailEmpty(false);
+                if (e.target.value === '') { setEmailEmpty(true); }
+                if (e.target.value !== '') { setEmailEmpty(false); }
               }}
               placeholder='Alamat Email'
             />
@@ -140,8 +132,18 @@ export default function Register() {
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
-                setPasswordEmpty(false);
-                setPasswordIsTooShort(false);
+                if (e.target.value === '') { 
+                  setPasswordEmpty(true);
+                  setPasswordIsTooShort(false);
+                }
+                if (e.target.value !== '' && e.target.value.length < 8) { 
+                  setPasswordEmpty(false); 
+                  setPasswordIsTooShort(true);
+                }
+                if (e.target.value !== '' && e.target.value.length >= 8) { 
+                  setPasswordEmpty(false); 
+                  setPasswordIsTooShort(false);
+                }
               }} 
               placeholder='Masukkan Password'
             />
@@ -166,8 +168,18 @@ export default function Register() {
               value={passwordConfirmation}
               onChange={(e) => {
                 setPasswordConfirmation(e.target.value);
-                setPasswordConfirmationEmpty(false);
-                setPasswordConfirmationMatch(false);
+                if (e.target.value === '') {
+                  setPasswordConfirmationEmpty(true);
+                  setPasswordConfirmationMatch(true);
+                }
+                if (e.target.value !== '' && e.target.value !== password) {
+                  setPasswordConfirmationEmpty(false);
+                  setPasswordConfirmationMatch(false);
+                }
+                if (e.target.value !== '' && e.target.value === password) {
+                  setPasswordConfirmationEmpty(false);
+                  setPasswordConfirmationMatch(true);
+                }
               }} 
               placeholder='Konfirmasi Password'
             />
@@ -178,7 +190,7 @@ export default function Register() {
               Konfirmasi password harus di isi
             </div>
           )}
-          {passwordConfirmationMatch === true && (
+          {passwordConfirmationMatch === false && (
             <div className="border-2 border-red-300 bg-red-100 my-2 p-3 rounded p-3">
               Password tidak sama
             </div>
@@ -202,17 +214,19 @@ export default function Register() {
             <label>
             <input 
               type="checkbox"
-              value={checkRole}
+              value={isCheck}
+              defaultChecked={isCheck}
               onChange={() => {
-                setCheckRole('user')
-                setRoleNotChecked(false);
+                setIsCheck(!isCheck)
+                if (isCheck === true) {setRole('')}
+                if (isCheck === false) {setRole('member')}
               }}
             />
               {' '}Saya mendaftar sebagai pengguna baru
             </label>
           </div>
           {/* Validation */}
-          {roleNotChecked === true && (
+          {isCheck === false && (
             <div className="border-2 border-red-300 bg-red-100 my-2 p-3 rounded p-3">
               Klik pernyataan di atas
             </div>
@@ -232,16 +246,22 @@ export default function Register() {
           )}
           {errorMessage === 'Request failed with status code 409' && (
             <div className="border-2 border-red-300 bg-red-100 my-2 p-3 rounded my-2">
-              Email terdaftar, tapi password salah.
+              Email sudah terdaftar, silahkan masuk{' '} 
+              <Link href='/login'>
+                <a className='no-underline'>
+                  di sini
+                </a>
+              </Link>.
             </div>
           )}
           {errorMessage === 'Request failed with status code 500' && (
             <div className="border-2 border-red-300 bg-red-100 my-2 p-3 rounded my-2">
-              Maaf email tidak terdaftar.
+              Pendaftaran gagal, coba cek apakah masih ada yang kosong.
             </div>
           )}
 
         </form>
+
         <hr className='my-2'/>
         <p>Sudah punya akun?{' '}
           <Link href='/login'>
