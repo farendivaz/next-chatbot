@@ -6,9 +6,10 @@ export default function ChatbotInterfaceCopy({
     handleChange,
     handleEnter,
     handleSubmit,
-    handleMulai,
-    handleYa,
-    handleTidak,
+    handleNextScreening,
+    handleStartScreening,
+    handleYes,
+    handleNo,
     lastValue,ruleBaseLength,ruleBaseILength,totalGejala
   }) {
 
@@ -62,7 +63,7 @@ export default function ChatbotInterfaceCopy({
           <button 
             type='submit' 
             value='Submit' 
-            onClick={handleMulai} 
+            onClick={handleStartScreening} 
             className='bg-blue-600 hover:bg-blue-800 py-2 rounded-full text-white'
           >
             Skrining
@@ -72,7 +73,17 @@ export default function ChatbotInterfaceCopy({
           <button 
             type='submit' 
             value='Submit' 
-            onClick={handleYa} 
+            onClick={handleNextScreening} 
+            className='bg-blue-600 hover:bg-blue-800 py-2 rounded-full text-white'
+          >
+            Lanjut
+          </button>
+        </div>
+        <div className='d-grid gap-2 p-1 w-1/3'>
+          <button 
+            type='submit' 
+            value='Submit' 
+            onClick={handleYes} 
             className='bg-blue-600 hover:bg-blue-800 py-2 rounded-full text-white'
           >
             Ya
@@ -82,7 +93,7 @@ export default function ChatbotInterfaceCopy({
           <button 
             type='submit' 
             value='Submit' 
-            onClick={handleTidak} 
+            onClick={handleNo} 
             className='bg-blue-600 hover:bg-blue-800 py-2 rounded-full text-white'
           >
             Tidak
