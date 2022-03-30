@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import HeadElement from '../components/Head';
+import Navbar from '../components/NavbarChatbot';
 import Link from 'next/link';
 
 export default function Register() {
@@ -49,7 +50,7 @@ export default function Register() {
   }
   
   return (
-    <div className="bg-blue-300 pb-9 poppins" >
+    <div className="lg:h-full md:h-screen h-screen bg-blue-300 pb-9 poppins" >
 
       <style jsx>{`
       `}</style>
@@ -60,32 +61,13 @@ export default function Register() {
         Registrasi User
       </div>
 
-      <nav
-        style={{
-          position:'-webkit-sticky',
-          position:'sticky',
-          top:'0px',
-        }}
-        className='bg-blue-300 flex justify-center m-0 py-1 px-0 top-0 shadow lg:space-x-4 md:space-x-3 sm:space-x-2 text-dark w-full z-10'
-      >
-        {[
-          ['Home', '/'],
-          ['Daftar', '/register'],
-          ['Masuk', '/login']
-        ].map(([title, url], index) => (
-          <Link href={url} key={index}>
-            <a className="font-bold hover:bg-blue-100 no-underline roboto rounded-lg my-0 px-3 py-2 text-gray-900 hover:text-gray-900">
-              {title}
-            </a>
-          </Link>
-        ))}
-      </nav>
+      <Navbar/>
 
-      <main className='bg-blue-100 mx-auto max-w-md mt-8 lg:p-7 md:p-5 sm:p-3 rounded-xl shadow'>
+      <main className='bg-blue-100 mx-auto max-w-md mt-8 lg:p-7 md:p-5 p-3 rounded-xl shadow'>
         <h3 className='font-bold'>Registrasi Pengguna Baru</h3>
         <p>Mohon isi data berikut dengan benar.</p>
         <form onSubmit={''}>
-          <div className='flex flex-col lg:my-3 md:my-3 sm:my-2'>
+          <div className='flex flex-col lg:my-3 md:my-3 my-2'>
             <label>Nama Lengkap</label>
             <input type="text"
               className='bg-blue-50 border-2 border-blue-500 hover:border-blue-600 px-2 py-1 rounded text-black'
@@ -105,7 +87,7 @@ export default function Register() {
             </div>
           )}
 
-          <div className='flex flex-col lg:my-3 md:my-3 sm:my-2'>
+          <div className='flex flex-col lg:my-3 md:my-3 my-2'>
             <label>Email</label>
             <input 
               type='email' 
@@ -126,7 +108,7 @@ export default function Register() {
             </div>
           )}
 
-          <div className='flex flex-col lg:my-3 md:my-3 sm:my-2'>
+          <div className='flex flex-col lg:my-3 md:my-3 my-2'>
             <label>Password</label>
             <input 
               type='password'
@@ -162,7 +144,7 @@ export default function Register() {
             </div>
           )}
 
-          <div className='flex flex-col lg:my-3 md:my-3 sm:my-2'>
+          <div className='flex flex-col lg:my-3 md:my-3 my-2'>
             <label>Konfirmasi Password</label>
             <input 
               type='password'
@@ -198,7 +180,7 @@ export default function Register() {
             </div>
           )}
 
-          <div className='flex flex-col lg:my-3 md:my-3 sm:my-2'>
+          <div className='flex flex-col lg:my-3 md:my-3 my-2'>
             <label className="form-label">Jenis kelamin</label>
             <select 
               className='bg-blue-50 border-2 border-blue-500 hover:border-blue-600 px-2 py-2 rounded text-black'
@@ -212,7 +194,7 @@ export default function Register() {
             </select>
           </div>
 
-          <div className='flex flex-col lg:my-3 md:my-3 sm:my-2'>
+          <div className='flex flex-col lg:my-3 md:my-3 my-2'>
             <label>
             <input 
               type="checkbox"
@@ -235,7 +217,7 @@ export default function Register() {
           )}
           
           <button
-            className='bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-200 text-white mx-auto lg:my-3 md:my-3 sm:my-2 px-4 py-2 rounded-full w-full'
+            className='bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-200 text-white mx-auto lg:my-3 md:my-3 my-2 px-4 py-2 rounded-full w-full'
             onClick={registerHandler} type='submit'
           >
             DAFTAR

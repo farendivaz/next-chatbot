@@ -1,7 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
 import {Accordion} from 'react-bootstrap';
-import Footer from '../components/Footer';
 import HeadElement from '../components/Head';
 import Navbar from '../components/NavbarChatbot';
 
@@ -16,7 +13,7 @@ const AccordionBootstrap = ({eventKey,Title,Text}) => {
 
 export default function Guide () {
   return(
-    <div className='bg-blue-300 h-full m-0 poppins'>
+    <div className='h-screen bg-blue-300 h-full m-0 poppins'>
 
       <HeadElement text={`Chatbot - guide`}/>
 
@@ -111,8 +108,6 @@ export default function Guide () {
           </Accordion>
         </div>
       </main>
-
-      <Footer/>
     </div>
   )
 };

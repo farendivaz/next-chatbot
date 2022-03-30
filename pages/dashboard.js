@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Link from 'next/link';
 import {useRouter} from 'next/router';
+import Navbar from '../components/NavbarChatbot';
 import Footer from '../components/Footer';
 import HeadElement from '../components/Head';
 import InferenceMachine from '../components/InferenceMachine';
@@ -31,14 +31,6 @@ export default function Crud() {
       setErrorGetUserData(error.message);
     })
   }
-
-  const logoutHandler = () => {
-    // remove token, user_id and screening_result from localStorage
-    localStorage.removeItem('token');
-    localStorage.removeItem('user_id');
-    localStorage.removeItem('screening_result');
-    router.push('/login');
-  };
 
   // edit data by id
   const [successEditData, setSuccessEditData] = useState(false);
@@ -72,7 +64,7 @@ export default function Crud() {
   }
 
   return (
-    <div className='bg-blue-300 m-0 opensans'>
+    <div className='lg:h-full md:h-screen h-full bg-blue-300 m-0 opensans'>
 
       <HeadElement text={`EyeScreening - Dashboard`}/>
       
@@ -80,31 +72,7 @@ export default function Crud() {
         Hallo, {user.name}
       </div>
       
-      <nav 
-        style={{
-          position:'-webkit-sticky',
-          position:'sticky',
-          top:'0px',
-        }}
-        className='bg-blue-300 flex justify-center m-0 py-1 px-0 top-0 shadow lg:space-x-4 md:space-x-3 sm:space-x-2 text-dark w-full z-10'
-      >
-        <Link href='/dashboard'>
-          <a className="font-bold hover:bg-blue-100 no-underline roboto rounded-lg my-0 px-3 py-2 text-gray-900 hover:text-gray-900">
-            Home
-          </a>
-        </Link>
-        <Link href='/guide_copy'>
-          <a className="font-bold hover:bg-blue-100 no-underline roboto rounded-lg my-0 px-3 py-2 text-gray-900 hover:text-gray-900">
-            Panduan
-          </a>
-        </Link>
-        <button 
-          className="mr-auto font-bold bg-red-500 hover:bg-red-600 focus:bg-red-700 no-underline my-0 px-3 py-2 rounded-lg"
-          onClick={logoutHandler}
-        >
-          Logout
-        </button>
-      </nav>
+      <Navbar/>
 
       <main className='flex flex-row justify-center mt-3 mb-3'>
         <InferenceMachine/>

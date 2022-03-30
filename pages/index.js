@@ -1,5 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
 import Footer from '../components/Footer';
 import HeadElement from '../components/Head';
 import Navbar from '../components/NavbarChatbot';
@@ -8,7 +6,7 @@ import '../styles/Home.module.css';
 
 export default function Home() {
   return (
-    <div className='bg-blue-300 m-0 opensans'>
+    <div className='lg:h-full md:h-screen h-full bg-blue-300 m-0 opensans'>
 
       <HeadElement text={`EyeScreening - Chatbot`}/>
       
