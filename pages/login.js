@@ -33,7 +33,7 @@ export default function Login() {
       // set user id on local storage
       localStorage.setItem('user_id', response.data.user.id);
       // redirect to dashboard
-      router.push('/dashboard');
+      router.push(`/dashboard/${response.data.user.id}`);
     })
     .catch((errorMessage) => {
       setErrorMessage(errorMessage.message);
@@ -46,7 +46,7 @@ export default function Login() {
       <style jsx>{`
       `}</style>
 
-      <HeadElement text={`Register - Page`} />
+      <HeadElement text={`Login - Page`} />
 
       <div className='bg-blue-500 roboto text-center text-white w-full'>
         User Login

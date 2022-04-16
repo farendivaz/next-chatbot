@@ -52,7 +52,7 @@ export default function Navbar() {
       {tokenEmpty === false && (
         <>
           {[
-            ['Home', '/dashboard'],
+            ['Home', '/dashboard/[id]'],
             ['Panduan','/guide'],
             ['UAT', '/uat'],
           ].map(([title, url], index) => (

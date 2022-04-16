@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import {useRouter} from 'next/router';
-import Navbar from '../components/NavbarChatbot';
-import Footer from '../components/Footer';
-import HeadElement from '../components/Head';
-import InferenceMachine from '../components/InferenceMachine';
+import Navbar from '../../components/NavbarChatbot';
+import Footer from '../../components/Footer';
+import HeadElement from '../../components/Head';
+import InferenceMachine from '../../components/InferenceMachine';
 
 export default function Crud() {
   const router = useRouter();
