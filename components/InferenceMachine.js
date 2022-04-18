@@ -239,6 +239,17 @@ export default function InferenceMachine () {
   let [ruleBaseBefore, setRuleBaseBefore] = useState('');
 
   function Screening(input) {
+    // auto update screening result when screening result come up
+    function UpdateScreeningResult() {
+      // get user id and screening result from local storage
+      const userId = localStorage.getItem("user_id");
+      const screening_result = localStorage.getItem("screening_result");
+      axios.put(`http://localhost:5000/api/users/${userId}`,
+        ({
+          updatedScreeningResult: screening_result
+        })
+      )
+    }
     let reply;
     if (input === 'mulai' || input === 'tes'|| input === 'test'  || input === 'skrining') {
       // re-empty
@@ -340,6 +351,9 @@ export default function InferenceMachine () {
                   setRuleBaseBefore(ruleBase[i][j+1]); setReplyBefore('');
                   // set screening result on local storage
                   localStorage.setItem('screening_result', lastValue[lastValue.length-1]);
+                  if(localStorage.getItem('token')) { 
+                    UpdateScreeningResult();
+                  } 
                 }
                 if (ruleBase[i][j+1] === 'Anda mengalami gejala mata merah dan penglihatan menurun') {
                   reply =  `Anda mengalami gejala mata merah dan penglihatan menurun/kabur secara tidak akut (tidak tiba-tiba) pada mata. 
@@ -348,7 +362,10 @@ export default function InferenceMachine () {
                   setDiagnoseResult(reply); setI(i); setJ(j);
                   setRuleBaseBefore(ruleBase[i][j+1]); setReplyBefore('');
                   // set screening result on local storage
-                  localStorage.setItem('screening_result', lastValue[lastValue.length-1]);
+                  localStorage.setItem('screening_result', 'Anda mengalami gejala mata merah dan penglihatan menurun');
+                  if(localStorage.getItem('token')) { 
+                    UpdateScreeningResult();
+                  }
                 }
                 if (
                   ruleBase[i][j+1] !== 'Endoftalmitis, Keraritis, Panofthalmitis, Thombosis Sinus Cavernosus, Uvetis Akut atau Glaukoma Sekunder/Akut' &&
@@ -366,6 +383,9 @@ export default function InferenceMachine () {
                     setDiagnoseResult(reply); setI(i); setJ(j); setReplyBefore('');
                     // set screening result on local storage
                     localStorage.setItem('screening_result', lastValue[lastValue.length-1]);
+                    if(localStorage.getItem('token')) { 
+                      UpdateScreeningResult();
+                    }
                   }
                   else {
                     reply = `Melalui skrining dicurigai kamu mengalami <strong>${totalGejala[totalGejala.length-1]} gejala</strong> dari penyakit mata <strong>${lastValue[lastValue.length-1]}</strong>. 
@@ -373,6 +393,9 @@ export default function InferenceMachine () {
                     setDiagnoseResult(reply); setI(i); setJ(j); setReplyBefore('');
                     // set screening result on local storage
                     localStorage.setItem('screening_result', lastValue[lastValue.length-1]);
+                    if(localStorage.getItem('token')) { 
+                      UpdateScreeningResult();
+                    }
                   }
                 }
               }
@@ -392,6 +415,9 @@ export default function InferenceMachine () {
                   setRuleBaseBefore(ruleBase[i][j+1]); setReplyBefore('');
                   // set screening result on local storage
                   localStorage.setItem('screening_result', lastValueSpecialCase);
+                  if(localStorage.getItem('token')) { 
+                    UpdateScreeningResult();
+                  }
                 }
                 if (ruleBase[i][j+1] === 'Anda mengalami gejala mata merah dan penglihatan menurun') {
                   reply =  `Anda mengalami gejala mata merah dan penglihatan menurun/kabur secara tidak akut (tidak tiba-tiba) pada mata. 
@@ -401,6 +427,9 @@ export default function InferenceMachine () {
                   setRuleBaseBefore(ruleBase[i][j+1]); setReplyBefore('');
                   // set screening result on local storage
                   localStorage.setItem('screening_result', lastValueSpecialCase);
+                  if(localStorage.getItem('token')) { 
+                    UpdateScreeningResult();
+                  }
                 }
                 if (
                   ruleBase[i][j+1] !== 'Endoftalmitis, Keraritis, Panofthalmitis, Thombosis Sinus Cavernosus, Uvetis Akut atau Glaukoma Sekunder/Akut' &&
@@ -418,6 +447,9 @@ export default function InferenceMachine () {
                     setDiagnoseResult(reply); setI(i); setJ(j); setReplyBefore('');
                     // set screening result on local storage
                     localStorage.setItem('screening_result', lastValue[lastValue.length-1]);
+                    if(localStorage.getItem('token')) { 
+                      UpdateScreeningResult();
+                    }
                   }
                   else {
                     reply = `Melalui skrining dicurigai kamu mengalami <strong>${totalGejala[totalGejala.length-1]} gejala</strong> dari penyakit mata <strong>${lastValueSpecialCase}</strong>. 
@@ -425,6 +457,9 @@ export default function InferenceMachine () {
                     setDiagnoseResult(reply); setI(i); setJ(j); setReplyBefore('');
                     // set screening result on local storage
                     localStorage.setItem('screening_result', lastValueSpecialCase);
+                    if(localStorage.getItem('token')) { 
+                      UpdateScreeningResult();
+                    }
                   }
                 }
               }
@@ -560,6 +595,9 @@ export default function InferenceMachine () {
                       setDiagnoseResult(reply);
                       // set screening result on local storage
                       localStorage.setItem('screening_result', ruleBase[i+1][ruleBase[i+1].length-1]);
+                      if(localStorage.getItem('token')) { 
+                        UpdateScreeningResult();
+                      }
                     }
                     // if ruleBase[i+1][j] is not the last value of ruleBase[i]
                     if (arr[findIndexInArray+1] !== ruleBase[i+1][ruleBase[i+1].length-1]) {
@@ -618,6 +656,9 @@ export default function InferenceMachine () {
                       setDiagnoseResult(reply);
                       // set screening result on local storage
                       localStorage.setItem('screening_result', ruleBase[i+1][ruleBase[i+1].length-1]);
+                      if(localStorage.getItem('token')) { 
+                        UpdateScreeningResult();
+                      }
                     }
                     // if ruleBase[i+1][j] is not the last value of ruleBase[i]
                     if (arr[findIndexInArray+1] !== ruleBase[i+1][ruleBase[i+1].length-1]) {
@@ -680,6 +721,9 @@ export default function InferenceMachine () {
                       setDiagnoseResult(reply);
                       // set screening result on local storage
                       localStorage.setItem('screening_result', ruleBase[i+1][ruleBase[i+1].length-1]);
+                      if(localStorage.getItem('token')) { 
+                        UpdateScreeningResult();
+                      }
                     }
                     // if ruleBase[i+1][j] is not the last value of ruleBase[i]
                     if (arr[findIndexInArray+1] !== ruleBase[i+1][ruleBase[i+1].length-1]) {
@@ -745,6 +789,9 @@ export default function InferenceMachine () {
                       setDiagnoseResult(reply);
                       // set screening result on local storage
                       localStorage.setItem('screening_result', lastValueSpecialCase);
+                      if(localStorage.getItem('token')) { 
+                        UpdateScreeningResult();
+                      }
                     }
                     // if ruleBase[i+1][j] is not the last value of ruleBase[i]
                     if (arr[findIndexInArray+1] !== ruleBase[i+1][ruleBase[i+1].length-1]) {
@@ -813,6 +860,9 @@ export default function InferenceMachine () {
                       setDiagnoseResult(reply);
                       // set screening result on local storage
                       localStorage.setItem('screening_result', ruleBase[i+1][ruleBase[i+1].length-1]);
+                      if(localStorage.getItem('token')) { 
+                        UpdateScreeningResult();
+                      }
                     }
                     // if ruleBase[i+1][j] is not the last value of ruleBase[i]
                     if (arr[findIndexInArray+1] !== ruleBase[i+1][ruleBase[i+1].length-1]) {
@@ -869,6 +919,9 @@ export default function InferenceMachine () {
                     setDiagnoseResult(reply);
                     // set screening result on local storage
                     localStorage.setItem('screening_result', ruleBase[i+1][ruleBase[i+1].length-1]);
+                    if(localStorage.getItem('token')) { 
+                      UpdateScreeningResult();
+                    }
                   }
                   // if ruleBase[i+1][j] is not the last value of ruleBase[i]
                   if (arr[findIndexInArray+1] !== ruleBase[i+1][ruleBase[i+1].length-1]) {
