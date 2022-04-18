@@ -13,7 +13,7 @@ const AccordionBootstrap = ({eventKey,Title,Text}) => {
 
 export default function Guide () {
   return(
-    <div className='h-screen bg-blue-300 h-full m-0 poppins'>
+    <div className='h-screen bg-blue-300 m-0 pb-5 poppins'>
 
       <HeadElement text={`Chatbot - guide`}/>
 

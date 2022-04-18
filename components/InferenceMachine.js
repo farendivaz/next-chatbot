@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import AddChat from "./AddChat";
-import AddChat2 from "./AddChat2";
-import Compare from "./Compare";
-import ChatbotInterface from "./ChatbotInterface";
-import {prompts,replies,alternative,coronavirus} from "../data/PromptsAndReplies";
+import { useEffect, useState } from 'react';
+import AddChat from './AddChat';
+import AddChat2 from './AddChat2';
+import Compare from './Compare';
+import ChatbotInterface from './ChatbotInterface';
+import {prompts,replies,alternative,coronavirus,} from '../data/PromptsAndReplies';
 
 const question = `Apa kamu mengalami gejala`;
 const yesOrNo = `? <span class='border-3 border-blue-500 px-2 py-0 rounded-2xl'>ya/tidak</span>`;
@@ -199,23 +199,23 @@ export default function InferenceMachine () {
       setInput('')  // return empty form after user press enter
     }
   }
-  const handleMulai = () => {
+  const handleStartScreening = () => {
     Output('skrining') // input = 'mulai'
     setInput('')       // return empty form after user press button
   }
-  const handleLanjut = () => {
+  const handleNextScreening = () => {
     Output('lanjut') // input = 'lanjut'
     setInput('')     // return empty form after user press the button
     setinputNow('lanjut')
     setinputBefore(inputNow)
   }
-  const handleYa = () => {
+  const handleYes = () => {
     Output('ya')    // input = 'ya'
     setInput('')    // return empty form after user press button
     setinputNow('ya')
     setinputBefore(inputNow)
   }
-  const handleTidak = () => {
+  const handleNo = () => {
     Output('tidak') // input = 'tidak'
     setInput('')    // return empty form after user press button
     setinputNow('tidak')
@@ -972,10 +972,10 @@ export default function InferenceMachine () {
       handleChange = {handleChange}
       handleEnter = {handleEnter}
       handleSubmit = {handleSubmit}
-      handleLanjut = {handleLanjut}
-      handleMulai = {handleMulai}
-      handleYa = {handleYa}
-      handleTidak = {handleTidak}
+      handleNextScreening = {handleNextScreening}
+      handleStartScreening = {handleStartScreening}
+      handleYes = {handleYes}
+      handleNo = {handleNo}
     />
   )
 }
