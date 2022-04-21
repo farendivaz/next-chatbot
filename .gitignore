@@ -6,6 +6,7 @@
 .pnp.js
 .env
 /config
+/controllers
 /models
 /pages/api
 
