@@ -27,19 +27,12 @@ export default function Register() {
   // use router
   const router = useRouter();
 
-  const registerHandler = async (e) => {    
+  const registerHandler = async (e) => {
     if (nameEmpty === false && emailEmpty === false && passwordEmpty === false) {
       e.preventDefault();
       await axios.post('http://localhost:5000/api/register', 
-        ({
-          name: name,
-          email: email,
-          password: password,
-          gender: gender,
-          role: role,
-        })
-      )
-      .then((response) => {
+        ({ name: name, email: email, password: password, gender: gender, role: role })
+      ).then((response) => {
         setSend(true);
         // set token on local storage
         localStorage.setItem('token', response.data.token);
@@ -47,9 +40,8 @@ export default function Register() {
         localStorage.setItem('user_id', response.data.user.id);
         // redirect to dashboard (auto sign in after register)
         router.push(`/dashboard/${response.data.user.id}`);
-      })
-      .catch((errorMessage) => {
-        setErrorMessage(errorMessage.message);
+      }).catch((error) => {
+        setErrorMessage(error.message);
       })
     }
   }
@@ -79,6 +71,7 @@ export default function Register() {
               value={name} 
               onChange={(e) => {
                 setName(e.target.value);
+                setErrorMessage('');
                 if (e.target.value === '') { setNameEmpty(true); }
                 if (e.target.value !== '') { setNameEmpty(false); }
               }}
@@ -100,6 +93,7 @@ export default function Register() {
               value={email} 
               onChange={(e) => {
                 setEmail(e.target.value);
+                setErrorMessage('');
                 if (e.target.value === '') { setEmailEmpty(true); }
                 if (e.target.value !== '') { setEmailEmpty(false); }
               }}
@@ -121,6 +115,7 @@ export default function Register() {
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
+                setErrorMessage('');
                 if (e.target.value === '') { 
                   setPasswordEmpty(true);
                   setPasswordIsTooShort(false);
@@ -157,6 +152,7 @@ export default function Register() {
               value={passwordConfirmation}
               onChange={(e) => {
                 setPasswordConfirmation(e.target.value);
+                setErrorMessage('');
                 if (e.target.value === '') {
                   setPasswordConfirmationEmpty(true);
                   setPasswordConfirmationMatch(true);
@@ -192,6 +188,7 @@ export default function Register() {
               value={gender}
               onChange={(e) => {
                 setGender(e.target.value);
+                setErrorMessage('');
               }}
             >
               <option value='male'>Laki-laki</option>
@@ -206,7 +203,8 @@ export default function Register() {
               value={isCheck}
               defaultChecked={isCheck}
               onChange={() => {
-                setIsCheck(!isCheck)
+                setIsCheck(!isCheck);
+                setErrorMessage('');
                 if (isCheck === true) {setRole('')}
                 if (isCheck === false) {setRole('member')}
               }}

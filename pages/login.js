@@ -14,18 +14,14 @@ export default function Login() {
   // validation
   const [emailEmpty, setEmailEmpty] = useState(false);
   const [passwordEmpty, setPasswordEmpty] = useState(false);
+  const [passwordIsTooShort, setPasswordIsTooShort] = useState(false);
   // use router
   const router = useRouter();
 
   const loginHandler = async (e) => {
     e.preventDefault();
     // send data to server
-    await axios.post('http://localhost:5000/api/login', 
-      ({
-        email,
-        password,
-      })
-    )
+    await axios.post('http://localhost:5000/api/login', ({ email, password }) )
     .then((response) => {
       setSend(true);
       // set token on local storage
@@ -34,17 +30,13 @@ export default function Login() {
       localStorage.setItem('user_id', response.data.user.id);
       // redirect to dashboard
       router.push(`/dashboard/${response.data.user.id}`);
-    })
-    .catch((errorMessage) => {
-      setErrorMessage(errorMessage.message);
+    }).catch((error) => {
+      setErrorMessage(error.message);
     })
   }
   
   return (
     <div className="bg-blue-300 h-screen poppins" >
-
-      <style jsx>{`
-      `}</style>
 
       <HeadElement text={`Login - Page`} />
 
@@ -61,11 +53,12 @@ export default function Login() {
           <div className='flex flex-col lg:my-3 md:my-3 my-2'>
             <label>Email</label>
             <input 
-              type='email' 
+              type='email'
               className='bg-blue-50 border-2 border-blue-500 hover:border-blue-600 px-2 py-1 rounded text-black'
-              value={email} 
+              value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
+                setErrorMessage('');
                 if (e.target.value === '') { setEmailEmpty(true); }
                 if (e.target.value !== '') { setEmailEmpty(false); }
               }}
@@ -87,11 +80,18 @@ export default function Login() {
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
-                if (e.target.value === '') {
+                setErrorMessage('');
+                if (e.target.value === '') { 
                   setPasswordEmpty(true);
+                  setPasswordIsTooShort(false);
                 }
-                if (e.target.value !== '') {
-                  setPasswordEmpty(false);
+                if (e.target.value !== '' && e.target.value.length < 8) { 
+                  setPasswordEmpty(false); 
+                  setPasswordIsTooShort(true);
+                }
+                if (e.target.value !== '' && e.target.value.length >= 8) { 
+                  setPasswordEmpty(false); 
+                  setPasswordIsTooShort(false);
                 }
               }} 
               placeholder='Masukkan Password'
@@ -99,8 +99,13 @@ export default function Login() {
           </div>
           {/* Validation */}
           {passwordEmpty === true && (
-            <div className="border-2 border-red-300 bg-red-100 p-3 rounded text-black">
+            <div className="border-2 border-red-300 bg-red-100 my-2 p-3 rounded text-black">
               Password harus di isi
+            </div>
+          )}
+          {passwordIsTooShort === true && (
+            <div className="border-2 border-red-300 bg-red-100 my-2 p-3 rounded text-black">
+              Password terlalu pendek (minimal 8 karakter)
             </div>
           )}
 
@@ -116,14 +121,14 @@ export default function Login() {
               Tunggu sebentar...
             </div>
           )}
-          {errorMessage === 'Request failed with status code 409' && (
-            <div className="border-2 border-red-300 bg-red-100 p-3 rounded my-2">
-              Email terdaftar, tapi password salah.
-            </div>
-          )}
-          {errorMessage === 'Request failed with status code 500' && (
+          {errorMessage === 'Request failed with status code 404' && (
             <div className="border-2 border-red-300 bg-red-100 p-3 rounded my-2">
               Email tidak terdaftar, silahkan daftar terlebih dahulu.
+            </div>
+          )}
+          {errorMessage === 'Request failed with status code 401' && (
+            <div className="border-2 border-red-300 bg-red-100 p-3 rounded my-2">
+              Email terdaftar, tapi password salah.
             </div>
           )}
         </form>
