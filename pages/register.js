@@ -41,7 +41,12 @@ export default function Register() {
       )
       .then((response) => {
         setSend(true);
-        router.push('/login');
+        // set token on local storage
+        localStorage.setItem('token', response.data.token);
+        // set user id on local storage
+        localStorage.setItem('user_id', response.data.user.id);
+        // redirect to dashboard (auto sign in after register)
+        router.push(`/dashboard/${response.data.user.id}`);
       })
       .catch((errorMessage) => {
         setErrorMessage(errorMessage.message);
