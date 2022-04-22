@@ -21,7 +21,7 @@ export default function Login() {
   const loginHandler = async (e) => {
     e.preventDefault();
     // send data to server
-    await axios.post(`${process.env.API}/api/login`, ({ email, password }) )
+    await axios.post(`https://express-mongoose-validator.herokuapp.com/api/login`, ({ email, password }) )
     .then((response) => {
       setSend(true);
       // set token on local storage

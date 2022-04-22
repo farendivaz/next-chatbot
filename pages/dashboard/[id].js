@@ -23,7 +23,7 @@ export default function Crud() {
   const getUserData = async (token) => {
     //set axios header with type Authorization + Bearer token
     axios.defaults.headers.common['authorization'] = `Bearer ${token}`
-    await axios.get(`${process.env.API}/api/verify`)
+    await axios.get('https://express-mongoose-validator.herokuapp.com/api/verify')
     .then((response) => {
       setUser(response.data);
     })
