@@ -30,7 +30,7 @@ export default function Register() {
   const registerHandler = async (e) => {
     if (nameEmpty === false && emailEmpty === false && passwordEmpty === false) {
       e.preventDefault();
-      await axios.post('http://localhost:5000/api/register', 
+      await axios.post(`${process.env.API}/api/register`, 
         ({ name: name, email: email, password: password, gender: gender, role: role })
       ).then((response) => {
         setSend(true);

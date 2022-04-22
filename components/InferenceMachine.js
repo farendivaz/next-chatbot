@@ -245,7 +245,7 @@ export default function InferenceMachine () {
       // get user id and screening result from local storage
       const userId = localStorage.getItem("user_id");
       const screening_result = localStorage.getItem("screening_result");
-      axios.put(`http://localhost:5000/api/users/${userId}`,
+      axios.put(`${process.env.API}/api/users/${userId}`,
         ({
           updatedScreeningResult: screening_result
         })

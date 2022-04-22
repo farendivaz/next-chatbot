@@ -23,7 +23,7 @@ export default function Crud() {
   const getUserData = async (token) => {
     //set axios header with type Authorization + Bearer token
     axios.defaults.headers.common['authorization'] = `Bearer ${token}`
-    await axios.get('http://localhost:5000/api/verify')
+    await axios.get(`${process.env.API}/api/verify`)
     .then((response) => {
       setUser(response.data);
     })
