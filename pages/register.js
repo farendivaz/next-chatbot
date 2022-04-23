@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { Spinner } from 'react-bootstrap';
 import axios from 'axios';
 import HeadElement from '../components/Head';
 import Navbar from '../components/NavbarChatbot';
@@ -39,10 +40,10 @@ export default function Register() {
   const registerHandler = async (e) => {
     if (nameEmpty === false && emailEmpty === false && passwordEmpty === false) {
       e.preventDefault();
+      setSend(true);
       await axios.post('https://express-mongoose-validator.herokuapp.com/api/register', 
         ({ name: name, email: email, password: password, gender: gender, role: role })
       ).then((response) => {
-        setSend(true);
         // set token on local storage
         localStorage.setItem('token', response.data.token);
         // set user id on local storage
@@ -80,6 +81,7 @@ export default function Register() {
               value={name} 
               onChange={(e) => {
                 setName(e.target.value);
+                setSend(false);
                 setErrorMessage('');
                 if (e.target.value === '') { setNameEmpty(true); }
                 if (e.target.value !== '') { setNameEmpty(false); }
@@ -102,6 +104,7 @@ export default function Register() {
               value={email} 
               onChange={(e) => {
                 setEmail(e.target.value);
+                setSend(false);
                 setErrorMessage('');
                 if (e.target.value === '') { setEmailEmpty(true); }
                 if (e.target.value !== '') { setEmailEmpty(false); }
@@ -124,6 +127,7 @@ export default function Register() {
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
+                setSend(false);
                 setErrorMessage('');
                 if (e.target.value === '') { 
                   setPasswordEmpty(true);
@@ -161,6 +165,7 @@ export default function Register() {
               value={passwordConfirmation}
               onChange={(e) => {
                 setPasswordConfirmation(e.target.value);
+                setSend(false);
                 setErrorMessage('');
                 if (e.target.value === '') {
                   setPasswordConfirmationEmpty(true);
@@ -197,6 +202,7 @@ export default function Register() {
               value={gender}
               onChange={(e) => {
                 setGender(e.target.value);
+                setSend(false);
                 setErrorMessage('');
               }}
             >
@@ -213,6 +219,7 @@ export default function Register() {
               defaultChecked={isCheck}
               onChange={() => {
                 setIsCheck(!isCheck);
+                setSend(false);
                 setErrorMessage('');
                 if (isCheck === true) {setRole('')}
                 if (isCheck === false) {setRole('member')}
@@ -237,7 +244,14 @@ export default function Register() {
           {/* Validation */}
           {send === true && (
             <div className="border-2 border-red-300 bg-red-100 my-2 p-3 rounded my-2">
-              Tunggu sebentar...
+              <Spinner
+                as="span"
+                animation="grow"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+                variant="primary"
+              /> Tunggu sebentar...
             </div>
           )}
           {errorMessage === 'Request failed with status code 409' && (

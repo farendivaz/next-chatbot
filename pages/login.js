@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Spinner} from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap';
 import axios from 'axios';
 import HeadElement from '../components/Head';
 import Navbar from '../components/NavbarChatbot';
