@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
+import { Spinner } from 'react-bootstrap';
 import Link from 'next/link';
 
 export default function Navbar() {
@@ -16,7 +17,9 @@ export default function Navbar() {
     }
   }, []);
 
+  const [loading, setLoading] = useState(false);
   const logoutHandler = () => {
+    setLoading(true);
     // remove token, user_id and screening_result from localStorage
     localStorage.removeItem('token');
     localStorage.removeItem('user_id');
@@ -62,12 +65,29 @@ export default function Navbar() {
                 </a>
             </Link>
           ))}
-          <button 
-            className="font-bold bg-red-200 hover:bg-red-100 focus:bg-red-300 no-underline my-0 lg:px-3 md:px-3 px-2 py-2 rounded-lg"
-            onClick={logoutHandler}
-          >
-            Keluar
-          </button>
+          {loading === false && (
+            <button 
+              className="font-bold bg-red-200 hover:bg-red-100 focus:bg-red-300 no-underline my-0 lg:px-3 md:px-3 px-2 py-2 rounded-lg"
+              onClick={logoutHandler}
+            >
+              Keluar
+            </button>
+          )}
+          {loading === true && (
+            <button 
+              className="font-bold bg-red-200 hover:bg-red-100 focus:bg-red-300 no-underline my-0 lg:px-3 md:px-3 px-2 py-2 rounded-lg"
+              onClick={logoutHandler}
+            >
+              <Spinner
+                as="span"
+                animation="grow"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+                variant="danger"
+              /> Keluar
+            </button>
+          )}
         </>
       )}
     </nav>

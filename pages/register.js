@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import HeadElement from '../components/Head';
@@ -6,6 +6,17 @@ import Navbar from '../components/NavbarChatbot';
 import Link from 'next/link';
 
 export default function Register() {
+  // use router
+  const router = useRouter();
+  useEffect(() => {
+    //get token and user id from local storage when browser reload
+    const token = localStorage.getItem('token');
+    const userId = localStorage.getItem('user_id');
+    if(token && userId) {
+      router.push(`/dashboard/${userId}`);
+    }
+  }, []);
+
   // initial state
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
@@ -24,8 +35,6 @@ export default function Register() {
   const [passwordConfirmationEmpty, setPasswordConfirmationEmpty] = useState(false);
   const [passwordConfirmationMatch, setPasswordConfirmationMatch] = useState(true);
   const [isCheck, setIsCheck] = useState(true);
-  // use router
-  const router = useRouter();
 
   const registerHandler = async (e) => {
     if (nameEmpty === false && emailEmpty === false && passwordEmpty === false) {
@@ -52,7 +61,7 @@ export default function Register() {
       <style jsx>{`
       `}</style>
 
-      <HeadElement text={`Login - Page`} />
+      <HeadElement text={`Register - Page`} />
 
       <div className='bg-blue-500 roboto text-center text-white w-full'>
         Registrasi User

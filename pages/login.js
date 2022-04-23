@@ -1,11 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { Spinner} from 'react-bootstrap';
 import axios from 'axios';
 import HeadElement from '../components/Head';
 import Navbar from '../components/NavbarChatbot';
 import Link from 'next/link';
 
 export default function Login() {
+  // use router
+  const router = useRouter();
+  useEffect(() => {
+    //get token and user id from local storage when browser reload
+    const token = localStorage.getItem('token');
+    const userId = localStorage.getItem('user_id');
+    if(token && userId) {
+      router.push(`/dashboard/${userId}`);
+    }
+  }, []);
+
   // initial state
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,15 +27,13 @@ export default function Login() {
   const [emailEmpty, setEmailEmpty] = useState(false);
   const [passwordEmpty, setPasswordEmpty] = useState(false);
   const [passwordIsTooShort, setPasswordIsTooShort] = useState(false);
-  // use router
-  const router = useRouter();
 
   const loginHandler = async (e) => {
     e.preventDefault();
+    setSend(true);
     // send data to server
     await axios.post(`https://express-mongoose-validator.herokuapp.com/api/login`, ({ email, password }) )
     .then((response) => {
-      setSend(true);
       // set token on local storage
       localStorage.setItem('token', response.data.token);
       // set user id on local storage
@@ -58,6 +68,7 @@ export default function Login() {
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
+                setSend(false);
                 setErrorMessage('');
                 if (e.target.value === '') { setEmailEmpty(true); }
                 if (e.target.value !== '') { setEmailEmpty(false); }
@@ -80,6 +91,7 @@ export default function Login() {
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
+                setSend(false);
                 setErrorMessage('');
                 if (e.target.value === '') { 
                   setPasswordEmpty(true);
@@ -118,7 +130,14 @@ export default function Login() {
           {/* Validation */}
           {send === true && (
             <div className="alert alert-info my-2">
-              Tunggu sebentar...
+              <Spinner
+                as="span"
+                animation="grow"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+                variant="primary"
+              /> Tunggu sebentar...
             </div>
           )}
           {errorMessage === 'Request failed with status code 404' && (
