@@ -51,6 +51,7 @@ export default function Register() {
         // redirect to dashboard (auto sign in after register)
         router.push(`/dashboard/${response.data.user.id}`);
       }).catch((error) => {
+        setSend(false);
         setErrorMessage(error.message);
       })
     }
@@ -243,7 +244,7 @@ export default function Register() {
           </button>
           {/* Validation */}
           {send === true && (
-            <div className="border-2 border-red-300 bg-red-100 my-2 p-3 rounded my-2">
+            <div className="border-2 border-blue-300 bg-blue-100 my-2 p-3 rounded my-2">
               <Spinner
                 as="span"
                 animation="grow"

@@ -41,6 +41,7 @@ export default function Login() {
       // redirect to dashboard
       router.push(`/dashboard/${response.data.user.id}`);
     }).catch((error) => {
+      setSend(false);
       setErrorMessage(error.message);
     })
   }
@@ -129,7 +130,7 @@ export default function Login() {
           </button>
           {/* Validation */}
           {send === true && (
-            <div className="alert alert-info my-2">
+            <div className="border-2 border-blue-300 bg-blue-100 my-2 p-3 rounded my-2">
               <Spinner
                 as="span"
                 animation="grow"
