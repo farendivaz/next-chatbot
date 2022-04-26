@@ -15,6 +15,10 @@ export default function Crud() {
       router.push('/login'); 
     }
     getUserData(token);
+    const isAlertTrue = localtorage.getItem('alert');
+    if (isAlertTrue) {
+      
+    }
   }, []);
 
   // authorization

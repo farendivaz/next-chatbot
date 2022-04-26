@@ -13,8 +13,11 @@ export default function Register() {
     //get token and user id from local storage when browser reload
     const token = localStorage.getItem('token');
     const userId = localStorage.getItem('user_id');
+    // if user already login, this register page can not be accessed
     if(token && userId) {
       router.push(`/dashboard/${userId}`);
+      // set alert on local storage and show it on dashboard page
+      localStorage.setItem('alert',true)
     }
   }, []);
 
