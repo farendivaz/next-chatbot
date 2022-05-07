@@ -121,63 +121,27 @@ const ruleBase = [
   // index = [10][0] -/ 2 diseases - Algorithm for 'Endoftalmitis, Keraritis, Panofthalmitis, Thombosis Sinus Cavernosus, Uvetis Akut atau Glaukoma Sekunder/Akut' yang perlu pemeriksaan fisik lebih lanjut untuk mengetahui tekanan mata'
   [s[6],g[1],g[12],g[25],g[26],'Keratitis Pungtata Superfisialis'],
   [s[6],g[59],'Endoftalmitis (Infecius atau Non-Infecius)'],
-  [g[1],s[6],g[12],g[25],g[26],'Keratitis Pungtata Superfisialis'],
   [g[1],g[12],g[49],g[56],g[57],'Uveitis (akut atau posterior)'],
-  [g[12],s[6],g[1],g[25],g[26],'Keratitis Pungtata Superfisialis'],
-  [g[12],g[1],g[49],g[56],g[57],'Uveitis (akut atau posterior)'],
   [g[23],g[32],g[33],g[34],'Thombosis Sinus Kavernosus'],
-  [g[25],s[6],g[1],g[12],g[26],'Keratitis Pungtata Superfisialis'],
-  [g[26],s[6],g[1],g[12],g[25],'Keratitis Pungtata Superfisialis'],
-  [g[32],g[23],g[33],g[34],'Thombosis Sinus Kavernosus'],
-  [g[33],g[23],g[32],g[34],'Thombosis Sinus Kavernosus'],
-  [g[34],g[23],g[32],g[33],'Thombosis Sinus Kavernosus'],
-  [g[49],g[1],g[12],g[56],g[57],'Uveitis (akut atau posterior)'],
-  [g[56],g[1],g[12],g[49],g[57],'Uveitis (akut atau posterior)'],
-  [g[57],g[1],g[12],g[49],g[56],'Uveitis (akut atau posterior)'],
-  [g[59],s[6],'Endoftalmitis (Infecius atau Non-Infecius)'],
   ['end of second screening'],
-  // index = [27][0] - 3 diseases - Algorithm for 'Episkelritis, Hordeolum, Keratokonjungtivitis Flikte Nularis, Konjungtivitis Akut atau Oinguekulitis'
-  [g[1],g[12],g[25],g[58],'Konjungtivitis'],
+  // index = [15][0] - 3 diseases - Algorithm for 'Episkelritis, Hordeolum, Keratokonjungtivitis Flikte Nularis, Konjungtivitis Akut atau Oinguekulitis'
   [g[1],g[9],g[12],g[25],'Hordeolum'],
+  [g[1],g[12],g[25],g[58],'Konjungtivitis'],
   [g[1],g[59],'Episkelritis (Nodular atau Diffuse)'],
-  [g[9],g[1],g[12],g[25],'Hordeolum'],
-  [g[12],g[1],g[25],g[58],'Konjungtivitis'],
-  [g[12],g[1],g[9],g[25],'Hordeolum'],
-  [g[25],g[1],g[9],g[12],'Hordeolum'],
-  [g[25],g[1],g[12],g[58],'Konjungtivitis'],
-  [g[58],g[1],g[12],g[25],'Konjungtivitis'],
-  [g[59],g[1],'Episcleritis (Nodular atau Diffuse)'],
   ['end of second screening'],
-  // index = [38][0] - 2 Diseases - Algortihm for 'Alergi, Blefaritis, Hemangioma, Iritasi, Gangguan Pembuluh Darah atau Konjungtivitis Kronis'
+  // index = [19][0] - 2 Diseases - Algortihm for 'Alergi, Blefaritis, Hemangioma, Iritasi, Gangguan Pembuluh Darah atau Konjungtivitis Kronis'
   [g[1],g[3],g[7],g[8],g[10],g[25],'Blefaritis'],
-  [g[3],g[1],g[7],g[8],g[10],g[25],'Blefaritis'],
-  [g[7],g[1],g[3],g[8],g[10],g[25],'Blefaritis'],
-  [g[8],g[1],g[3],g[7],g[10],g[25],'Blefaritis'],
-  [g[10],g[1],g[3],g[7],g[8],g[25],'Blefaritis'],
   [g[10],g[25],g[27],g[28],'Konjungtivitis Alergi'],
-  [g[25],g[1],g[3],g[7],g[8],g[10],'Blefaritis'],
-  [g[25],g[10],g[27],g[28],'Konjungtivitis Alergi'],
-  [g[27],g[10],g[25],g[28],'Konjungtivitis Alergi'],
-  [g[28],g[10],g[25],g[27],'Konjungtivitis Alergi'],
   ['end of second screening'],
-  // index = [49][0] - 2 Diseases - Algorithm for 'Abalsi Retina, Perdarahan Vitreus, Neuritis Optik, Kelainan Vaskular Retina, Hifema Spontan, Keracunan Metanol, Stroke Oksipitalis atau Malingering dan Histeria'
+  // index = [22][0] - 2 Diseases - Algorithm for 'Abalsi Retina, Perdarahan Vitreus, Neuritis Optik, Kelainan Vaskular Retina, Hifema Spontan, Keracunan Metanol, Stroke Oksipitalis atau Malingering dan Histeria'
   [g[17],g[46],'Abalsi Retina'],
   [g[35],g[36],'Optic Neuritis (Papillitis, Retrobulbar neuritis atau Neuroretinitis)'],
-  [g[36],g[35],'Optic Neuritis (Papillitis, Retrobulbar neuritis atau Neuroretinitis)'],
-  [g[46],g[17],'Abalsi Retina'],
   ['end of second screening'],
-  // index = [54][0] - 4 diseases - Algortihm for 'Sikatrik Kornea, Kelainan Refraksi, Katarak, Uveitis Posterior, Glaukoma Sudut Terbuka Primer, Retinopati Diabetika & Hipertensi, Penyakit Macula, Papil Udema, Amblyopia, Neuropati Optik atau Retinisi Pigmentosa'
+  // index = [25][0] - 4 diseases - Algortihm for 'Sikatrik Kornea, Kelainan Refraksi, Katarak, Uveitis Posterior, Glaukoma Sudut Terbuka Primer, Retinopati Diabetika & Hipertensi, Penyakit Macula, Papil Udema, Amblyopia, Neuropati Optik atau Retinisi Pigmentosa'
   [s[6],g[1],g[19],g[20],g[60],g[62],'Katarak'],
-  [g[1],s[6],g[19],g[20],g[60],g[62],'Katarak'],
   [s[7],g[44],g[45],'Degenerasi Macula'],  
   [g[17],'Retinopati Diabetika'],
-  [g[19],s[6],g[1],g[20],g[60],g[62],'Katarak'],
   [g[19],'Retinitis Pigmentosa'],
-  [g[20],s[6],g[1],g[19],g[60],g[62],'Katarak'],
-  [g[44],s[7],g[45],'Degenerasi Macula'],
-  [g[45],s[7],g[44],'Degenerasi Macula'],
-  [g[60],s[6],g[1],g[19],g[20],g[62],'Katarak'],
-  [g[62],s[6],g[1],g[19],g[20],g[60],'Katarak'],
   ['end of second screening'],
 ];
 
@@ -276,9 +240,10 @@ export default function InferenceMachine () {
         }
         if (ruleBaseBefore === 'dengan gejala mata merah dan penglihatan menurun tidak akut') {
           reply = diagnoseResult;
+          setDiagnoseResult(reply);
         }
         if (ruleBaseBefore === 'Episkelritis, Hordeolum, Keratokonjungtivitis Flikte Nularis, Konjungtivitis Akut atau Oinguekulitis') {
-          reply = ruleBase[27][0]; setI(27); setJ(0); 
+          reply = ruleBase[15][0]; setI(15); setJ(0); 
           setDiagnoseResult('');
         }
         if (ruleBaseBefore === 'Perdarahan Subkonjungtiva') {
@@ -286,11 +251,11 @@ export default function InferenceMachine () {
           setDiagnoseResult(reply);
         }
         if (ruleBaseBefore === 'Alergi, Blefaritis, Hemangioma, Iritasi, Gangguan Pembuluh Darah atau Konjungtivitis Kronis') {
-          reply = ruleBase[38][0]; setI(38); setJ(0); 
+          reply = ruleBase[19][0]; setI(19); setJ(0); 
           setDiagnoseResult('');
         }
         if (ruleBaseBefore === 'Abalsi Retina, Perdarahan Vitreus, Neuritis Optik, Kelainan Vaskular Retina, Hifema Spontan, Keracunan Metanol, Stroke Oksipitalis atau Malingering dan Histeria') {
-          reply = ruleBase[49][0]; setI(49); setJ(0); 
+          reply = ruleBase[22][0]; setI(22); setJ(0); 
           setDiagnoseResult('');
         }
         if (ruleBaseBefore === 'Tumor, Strabismus atau Ophthalmopathy Thyroid') {
@@ -298,7 +263,7 @@ export default function InferenceMachine () {
           setDiagnoseResult(reply);
         }
         if (ruleBaseBefore === 'Sikatrik Kornea, Kelainan Refraksi, Katarak, Uveitis Posterior, Glaukoma Sudut Terbuka Primer, Retinopati Diabetika & Hipertensi, Penyakit Macula, Papil Udema, Amblyopia, Neuropati Optik atau Retinisi Pigmentosa') {
-          reply = ruleBase[54][0]; setI(54); setJ(0); 
+          reply = ruleBase[25][0]; setI(25); setJ(0); 
           setDiagnoseResult('');
         }
       }
