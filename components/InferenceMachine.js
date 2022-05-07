@@ -221,7 +221,8 @@ export default function InferenceMachine () {
       setLastValueWhenUserResponYes([]); 
       setLastValueWhenUserResponNo('');
       setAllYesReply([]); 
-      setTotalSympthomWhenUserResponYes([]); 
+      setTotalSympthomWhenUserResponYes([]);
+      setTotalSympthomWhenUserResponNo([]);
       setRuleBaseBefore('');
       setReplyBefore(input);
       // reply
@@ -237,6 +238,7 @@ export default function InferenceMachine () {
         setLastValueWhenUserResponNo('');
         setAllYesReply([]); 
         setTotalSympthomWhenUserResponYes([]);
+        setTotalSympthomWhenUserResponNo([]);
         setReplyBefore('lanjut');
         if (ruleBaseBefore === 'Endoftalmitis, Keraritis, Panofthalmitis, Thombosis Sinus Cavernosus, Uvetis Akut atau Glaukoma Sekunder/Akut') {
           reply = ruleBase[10][0]; setI(10); setJ(0);
@@ -376,7 +378,7 @@ export default function InferenceMachine () {
                   ruleBase[i][j+1] === 'Tumor, Strabismus atau Ophthalmopathy Thyroid' ||
                   ruleBase[i][j+1] === 'Sikatrik Kornea, Kelainan Refraksi, Katarak, Uveitis Posterior, Glaukoma Sudut Terbuka Primer, Retinopati Diabetika & Hipertensi, Penyakit Macula, Papil Udema, Amblyopia, Neuropati Optik atau Retinisi Pigmentosa'
                 ) {
-                  reply = `Melalui skrining dicurigai kamu mengalami <strong>${totalSympthomWhenUserResponYes[totalSympthomWhenUserResponYes.length-1]} gejala</strong> dari penyakit mata <strong>${lastValueWhenUserResponNo}</strong>. 
+                  reply = `Melalui skrining dicurigai kamu mengalami <strong>${totalSympthomWhenUserResponNo[totalSympthomWhenUserResponNo.length-1]} gejala</strong> dari penyakit mata <strong>${lastValueWhenUserResponNo}</strong>. 
                   Ketik atau tekan lanjut untuk melanjutkan skrining kedua.`
                   setDiagnoseResult(reply); setI(i); setJ(j);
                   setRuleBaseBefore(ruleBase[i][j+1]); setReplyBefore('');
@@ -419,7 +421,7 @@ export default function InferenceMachine () {
                     }
                   }
                   else {
-                    reply = `Melalui skrining dicurigai kamu mengalami <strong>${totalSympthomWhenUserResponYes[totalSympthomWhenUserResponYes.length-1]} gejala</strong> dari penyakit mata <strong>${lastValueWhenUserResponNo}</strong>. 
+                    reply = `Melalui skrining dicurigai kamu mengalami <strong>${totalSympthomWhenUserResponNo[totalSympthomWhenUserResponNo.length-1]} gejala</strong> dari penyakit mata <strong>${lastValueWhenUserResponNo}</strong>.
                     Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                     setDiagnoseResult(reply); setI(i); setJ(j); setReplyBefore('');
                     // set screening result on local storage
@@ -470,7 +472,7 @@ export default function InferenceMachine () {
                       if (ruleBase[x][0] === arr[findIndexInArray+1]) {
                         setI(x); setJ(0);
                         setLastValueWhenUserResponNo(ruleBase[x][ruleBase[x].length-1]);
-                        setTotalSympthomWhenUserResponNo(ruleBase[x].length);
+                        setTotalSympthomWhenUserResponNo([...totalSympthomWhenUserResponNo, ruleBase[x].length-1]);
                         break
                       }
                     }
@@ -529,7 +531,7 @@ export default function InferenceMachine () {
                           if (ruleBase[x][j] === arr[findIndexInArray+1]) {
                             setI(x); setJ(j);
                             setLastValueWhenUserResponNo(ruleBase[x][ruleBase[x].length-1])
-                            setTotalSympthomWhenUserResponNo(ruleBase[x].length);;
+                            setTotalSympthomWhenUserResponNo([...totalSympthomWhenUserResponNo, ruleBase[x].length-1]);
                             break
                           }
                         }
@@ -605,7 +607,7 @@ export default function InferenceMachine () {
                           if (ruleBase[x][j] === arr[findIndexInArray+1]) {
                             setI(x); setJ(j);
                             setLastValueWhenUserResponNo(ruleBase[x][ruleBase[x].length-1]);
-                            setTotalSympthomWhenUserResponNo(ruleBase[x].length);
+                            setTotalSympthomWhenUserResponNo([...totalSympthomWhenUserResponNo, ruleBase[x].length-1]);
                             break
                           }
                         }
@@ -682,7 +684,7 @@ export default function InferenceMachine () {
                           if (ruleBase[x][j] === arr[findIndexInArray+1]) {
                             setI(x); setJ(j);
                             setLastValueWhenUserResponNo(ruleBase[x][ruleBase[x].length-1]);
-                            setTotalSympthomWhenUserResponNo(ruleBase[x].length);
+                            setTotalSympthomWhenUserResponNo([...totalSympthomWhenUserResponNo, ruleBase[x].length-1]);
                             break
                           }
                         }
@@ -763,7 +765,7 @@ export default function InferenceMachine () {
                           if (ruleBase[x][j] === arr[findIndexInArray+1]) {
                             setI(x); setJ(j);
                             setLastValueWhenUserResponNo(ruleBase[x][ruleBase[x].length-1]);
-                            setTotalSympthomWhenUserResponNo(ruleBase[x].length);
+                            setTotalSympthomWhenUserResponNo([...totalSympthomWhenUserResponNo, ruleBase[x].length-1]);
                             break
                           }
                         }
@@ -847,7 +849,7 @@ export default function InferenceMachine () {
                           if (ruleBase[x][j] === arr[findIndexInArray+1]) {
                             setI(x); setJ(j);
                             setLastValueWhenUserResponNo(ruleBase[x][ruleBase[x].length-1]);
-                            setTotalSympthomWhenUserResponNo(ruleBase[x].length);
+                            setTotalSympthomWhenUserResponNo([...totalSympthomWhenUserResponNo, ruleBase[x].length-1]);
                             break
                           }
                         }
@@ -934,7 +936,7 @@ export default function InferenceMachine () {
                           if (ruleBase[x][j] === arr[findIndexInArray+1]) {
                             setI(x); setJ(j);
                             setLastValueWhenUserResponNo(ruleBase[x][ruleBase[x].length-1]);
-                            setTotalSympthomWhenUserResponNo(ruleBase[x].length);
+                            setTotalSympthomWhenUserResponNo([...totalSympthomWhenUserResponNo, ruleBase[x].length-1]);
                             break
                           }
                         }
@@ -1009,7 +1011,7 @@ export default function InferenceMachine () {
                         if (ruleBase[x][j] === arr[findIndexInArray+1]) {
                           setI(x); setJ(j);
                           setLastValueWhenUserResponNo(ruleBase[x][ruleBase[x].length-1]);
-                          setTotalSympthomWhenUserResponNo(ruleBase[x].length);
+                          setTotalSympthomWhenUserResponNo([...totalSympthomWhenUserResponNo, ruleBase[x].length-1]);
                           break
                         }
                       }
