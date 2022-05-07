@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import SendIcon from '@mui/icons-material/Send';
 
 export default function ChatbotInterfaceCopy({
-    input,i,j,
+    input,
     handleChange,
     handleEnter,
     handleSubmit,
@@ -10,7 +10,6 @@ export default function ChatbotInterfaceCopy({
     handleStartScreening,
     handleYes,
     handleNo,
-    lastValue,ruleBaseLength,ruleBaseILength,totalGejala
   }) {
 
   // create a ref 
@@ -100,13 +99,6 @@ export default function ChatbotInterfaceCopy({
           </button>
         </div>
       </div>
-      {/*
-      <div className='my-1 mx-2'>[ i ][ j ] : [{i}][{j}]</div>
-      <div className='my-1 mx-2'>ruleBase[ i ].Length : {ruleBaseILength}</div>
-      <div className='my-1 mx-2'>ruleBase.length : {ruleBaseLength}</div>
-      <div className='my-1 mx-2'>lastValue : {lastValue}</div>
-      <div className='my-1 mx-2'>totalGejala : {totalGejala}</div>
-      */}
     </div>
   )
 }

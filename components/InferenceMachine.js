@@ -188,17 +188,17 @@ export default function InferenceMachine () {
   // initialize state for screening system
   let [i,setI] = useState(0);
   let [j,setJ] = useState(0);
-  let [right, setRight] = useState('');
-  let [arrayPlusOne, setArrayPlusOne] = useState('');
   let [inputNow, setinputNow] = useState('');
   let [inputBefore, setinputBefore] = useState('');
-  let [replyNow, setReplyNow] = useState('');
   let [replyBefore, setReplyBefore] = useState('');
-  let [nextReply, setNextReply] = useState('');
   let [allYesReply, setAllYesReply] = useState([]);
-  let [lastValue, setLastValue] = useState([]);
-  let [lastValueSpecialCase, setlastValueSpecialCase] = useState([]);
-  let [totalGejala, setTotalGejala] = useState([]);
+
+  let [lastValueWhenUserResponYes, setLastValueWhenUserResponYes] = useState([]);
+  let [lastValueWhenUserResponNo, setLastValueWhenUserResponNo] = useState([]);
+  
+  let [totalSympthomWhenUserResponYes, setTotalSympthomWhenUserResponYes] = useState([]);
+  let [totalSympthomWhenUserResponNo, setTotalSympthomWhenUserResponNo] = useState([]);
+  
   let [diagnoseResult, setDiagnoseResult] = useState('');
   let [ruleBaseBefore, setRuleBaseBefore] = useState('');
 
@@ -217,23 +217,27 @@ export default function InferenceMachine () {
     let reply;
     if (input === 'mulai' || input === 'tes'|| input === 'test'  || input === 'skrining') {
       // re-empty
-      setArrayPlusOne(''); setRight('');
-      setDiagnoseResult('');setReplyNow(''); setLastValue([]); setlastValueSpecialCase('');
-      setAllYesReply([]); setTotalGejala([]); setRuleBaseBefore('');
+      setDiagnoseResult('');
+      setLastValueWhenUserResponYes([]); 
+      setLastValueWhenUserResponNo('');
+      setAllYesReply([]); 
+      setTotalSympthomWhenUserResponYes([]); 
+      setRuleBaseBefore('');
       setReplyBefore(input);
       // reply
       reply = ruleBase[1][0]; setI(1); setJ(0);
     }
     else if (input === 'lanjut') {
-      setArrayPlusOne('');
-      setRight('');
       if (replyBefore === 'mulai' || replyBefore === 'tes'|| replyBefore === 'test'  || replyBefore === 'skrining') {
         reply = 'Jawab <strong>ya/tidak</strong> terlebih dahulu.'
       }
       else {
         // re-empty
-        setReplyNow(''); setLastValue([]);  setlastValueSpecialCase(''); setAllYesReply([]); 
-        setTotalGejala([]); setReplyBefore('lanjut');
+        setLastValueWhenUserResponYes([]);
+        setLastValueWhenUserResponNo('');
+        setAllYesReply([]); 
+        setTotalSympthomWhenUserResponYes([]);
+        setReplyBefore('lanjut');
         if (ruleBaseBefore === 'Endoftalmitis, Keraritis, Panofthalmitis, Thombosis Sinus Cavernosus, Uvetis Akut atau Glaukoma Sekunder/Akut') {
           reply = ruleBase[10][0]; setI(10); setJ(0);
           setDiagnoseResult('');
@@ -283,20 +287,18 @@ export default function InferenceMachine () {
         ) {
           // the current value is ruleBase[i][j]
           if (input === 'y' || input === 'ya') {
-            setNextReply(ruleBase[i][j+1]);
             // save all yes reply before the last value in [i] array
             setAllYesReply([...allYesReply, ruleBase[i][j]]);
             // make sure there is no same value in array
             allYesReply = [...new Set(allYesReply)];
             // get total sympthon
-            setTotalGejala([...totalGejala, ruleBase[i].length-1])
+            setTotalSympthomWhenUserResponYes([...totalSympthomWhenUserResponYes, ruleBase[i].length-1])
             // get last value of the array
-            setLastValue([...lastValue, ruleBase[i][ruleBase[i].length-1]]);
+            setLastValueWhenUserResponYes([...lastValueWhenUserResponYes, ruleBase[i][ruleBase[i].length-1]]);
             // if ruleBase[i][j+1] is not last value in [i] array
             if (ruleBase[i][j+1] !== ruleBase[i][ruleBase[i].length - 1]) {
               reply = ruleBase[i][j+1]; 
               setI(i); setJ(j+1);
-              setReplyNow(reply)
             }
             // if ruleBase[i][j+1] is the last value in [i] array
             else if (ruleBase[i][j+1] === ruleBase[i][ruleBase[i].length - 1]) {
@@ -310,7 +312,7 @@ export default function InferenceMachine () {
                   ruleBase[i][j+1] === 'Tumor, Strabismus atau Ophthalmopathy Thyroid' ||
                   ruleBase[i][j+1] === 'Sikatrik Kornea, Kelainan Refraksi, Katarak, Uveitis Posterior, Glaukoma Sudut Terbuka Primer, Retinopati Diabetika & Hipertensi, Penyakit Macula, Papil Udema, Amblyopia, Neuropati Optik atau Retinisi Pigmentosa'
                 ) {
-                  reply = `Melalui skrining dicurigai kamu mengalami <strong>${totalGejala[totalGejala.length-1]} gejala</strong> dari penyakit mata <strong>${lastValue[lastValue.length-1]}</strong>. 
+                  reply = `Melalui skrining dicurigai kamu mengalami <strong>${totalSympthomWhenUserResponYes[totalSympthomWhenUserResponYes.length-1]} gejala</strong> dari penyakit mata <strong>${lastValueWhenUserResponYes[lastValueWhenUserResponYes.length-1]}</strong>. 
                   Ketik atau tekan lanjut untuk melanjutkan skrining kedua.`
                   setDiagnoseResult(reply); setI(i); setJ(j);
                   setRuleBaseBefore(ruleBase[i][j+1]); setReplyBefore('');
@@ -343,7 +345,7 @@ export default function InferenceMachine () {
                 ) {
                   // 2nd screening
                   if (j === 0) {
-                    reply = `Melalui skrining dicurigai kamu mengalami <strong>1 gejala</strong> dari penyakit mata <strong>${lastValue[lastValue.length-1]}</strong>. 
+                    reply = `Melalui skrining dicurigai kamu mengalami <strong>1 gejala</strong> dari penyakit mata <strong>${lastValueWhenUserResponYes[lastValueWhenUserResponYes.length-1]}</strong>. 
                     Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                     setDiagnoseResult(reply); setI(i); setJ(j); setReplyBefore('');
                     // set screening result on local storage
@@ -353,7 +355,7 @@ export default function InferenceMachine () {
                     }
                   }
                   else {
-                    reply = `Melalui skrining dicurigai kamu mengalami <strong>${totalGejala[totalGejala.length-1]} gejala</strong> dari penyakit mata <strong>${lastValue[lastValue.length-1]}</strong>. 
+                    reply = `Melalui skrining dicurigai kamu mengalami <strong>${totalSympthomWhenUserResponYes[totalSympthomWhenUserResponYes.length-1]} gejala</strong> dari penyakit mata <strong>${lastValueWhenUserResponYes[lastValueWhenUserResponYes.length-1]}</strong>. 
                     Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                     setDiagnoseResult(reply); setI(i); setJ(j); setReplyBefore('');
                     // set screening result on local storage
@@ -374,7 +376,7 @@ export default function InferenceMachine () {
                   ruleBase[i][j+1] === 'Tumor, Strabismus atau Ophthalmopathy Thyroid' ||
                   ruleBase[i][j+1] === 'Sikatrik Kornea, Kelainan Refraksi, Katarak, Uveitis Posterior, Glaukoma Sudut Terbuka Primer, Retinopati Diabetika & Hipertensi, Penyakit Macula, Papil Udema, Amblyopia, Neuropati Optik atau Retinisi Pigmentosa'
                 ) {
-                  reply = `Melalui skrining dicurigai kamu mengalami <strong>${totalGejala[totalGejala.length-1]} gejala</strong> dari penyakit mata <strong>${lastValueSpecialCase}</strong>. 
+                  reply = `Melalui skrining dicurigai kamu mengalami <strong>${totalSympthomWhenUserResponYes[totalSympthomWhenUserResponYes.length-1]} gejala</strong> dari penyakit mata <strong>${lastValueWhenUserResponNo}</strong>. 
                   Ketik atau tekan lanjut untuk melanjutkan skrining kedua.`
                   setDiagnoseResult(reply); setI(i); setJ(j);
                   setRuleBaseBefore(ruleBase[i][j+1]); setReplyBefore('');
@@ -407,7 +409,7 @@ export default function InferenceMachine () {
                 ) {
                   // 2nd screening
                   if (j === 0) {
-                    reply = `Melalui skrining dicurigai kamu mengalami <strong>1 gejala</strong> dari penyakit mata <strong>${lastValueSpecialCase}</strong>. 
+                    reply = `Melalui skrining dicurigai kamu mengalami <strong>1 gejala</strong> dari penyakit mata <strong>${lastValueWhenUserResponNo}</strong>. 
                     Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                     setDiagnoseResult(reply); setI(i); setJ(j); setReplyBefore('');
                     // set screening result on local storage
@@ -417,7 +419,7 @@ export default function InferenceMachine () {
                     }
                   }
                   else {
-                    reply = `Melalui skrining dicurigai kamu mengalami <strong>${totalGejala[totalGejala.length-1]} gejala</strong> dari penyakit mata <strong>${lastValueSpecialCase}</strong>. 
+                    reply = `Melalui skrining dicurigai kamu mengalami <strong>${totalSympthomWhenUserResponYes[totalSympthomWhenUserResponYes.length-1]} gejala</strong> dari penyakit mata <strong>${lastValueWhenUserResponNo}</strong>. 
                     Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                     setDiagnoseResult(reply); setI(i); setJ(j); setReplyBefore('');
                     // set screening result on local storage
@@ -431,8 +433,6 @@ export default function InferenceMachine () {
             }
           }
           else if (input === 't' || input === 'tidak') {
-              // set total sympthon in the array and last value
-              // let totalGejalaSpecialCase = ruleBase[i+1].length-1;
               if (j === 0) {
                 let arr = [''];
                 for (let x = i; x < ruleBase.length ; x++) {
@@ -469,7 +469,8 @@ export default function InferenceMachine () {
                     for (let x = i; x < ruleBase.length ; x++) {
                       if (ruleBase[x][0] === arr[findIndexInArray+1]) {
                         setI(x); setJ(0);
-                        setlastValueSpecialCase(ruleBase[x][ruleBase[x].length-1]);
+                        setLastValueWhenUserResponNo(ruleBase[x][ruleBase[x].length-1]);
+                        setTotalSympthomWhenUserResponNo(ruleBase[x].length);
                         break
                       }
                     }
@@ -493,7 +494,6 @@ export default function InferenceMachine () {
                   arr = [...new Set(arr)]
                   // find value index in array
                   let findIndexInArray = arr.indexOf(ruleBase[i][j])
-                  setArrayPlusOne(arr[findIndexInArray+1]);
                   if (arr[findIndexInArray+1] !== undefined) {
                     // if ruleBase[i+1][j] is the last value of ruleBase[i]
                     if (arr[findIndexInArray+1] === ruleBase[i+1][ruleBase[i+1].length-1]) {
@@ -523,13 +523,13 @@ export default function InferenceMachine () {
                     }
                     // if ruleBase[i+1][j] is not the last value
                     if (arr[findIndexInArray+1] !== ruleBase[i+1][ruleBase[i+1].length-1]) {
-                      setRight('false');
                       reply = arr[findIndexInArray+1];
                       for (let x = i; x < ruleBase.length ; x++) {
                         if (ruleBase[x][j-1] === ruleBase[i][j-1]) {
                           if (ruleBase[x][j] === arr[findIndexInArray+1]) {
                             setI(x); setJ(j);
-                            setlastValueSpecialCase(ruleBase[x][ruleBase[x].length-1]);
+                            setLastValueWhenUserResponNo(ruleBase[x][ruleBase[x].length-1])
+                            setTotalSympthomWhenUserResponNo(ruleBase[x].length);;
                             break
                           }
                         }
@@ -604,7 +604,8 @@ export default function InferenceMachine () {
                         if (ruleBase[x][j-1] === ruleBase[i][j-1]) {
                           if (ruleBase[x][j] === arr[findIndexInArray+1]) {
                             setI(x); setJ(j);
-                            setlastValueSpecialCase(ruleBase[x][ruleBase[x].length-1]);
+                            setLastValueWhenUserResponNo(ruleBase[x][ruleBase[x].length-1]);
+                            setTotalSympthomWhenUserResponNo(ruleBase[x].length);
                             break
                           }
                         }
@@ -680,7 +681,8 @@ export default function InferenceMachine () {
                         if (ruleBase[x][j-1] === ruleBase[i][j-1]) {
                           if (ruleBase[x][j] === arr[findIndexInArray+1]) {
                             setI(x); setJ(j);
-                            setlastValueSpecialCase(ruleBase[x][ruleBase[x].length-1]);
+                            setLastValueWhenUserResponNo(ruleBase[x][ruleBase[x].length-1]);
+                            setTotalSympthomWhenUserResponNo(ruleBase[x].length);
                             break
                           }
                         }
@@ -760,7 +762,8 @@ export default function InferenceMachine () {
                         if (ruleBase[x][j-1] === ruleBase[i][j-1]) {
                           if (ruleBase[x][j] === arr[findIndexInArray+1]) {
                             setI(x); setJ(j);
-                            setlastValueSpecialCase(ruleBase[x][ruleBase[x].length-1]);
+                            setLastValueWhenUserResponNo(ruleBase[x][ruleBase[x].length-1]);
+                            setTotalSympthomWhenUserResponNo(ruleBase[x].length);
                             break
                           }
                         }
@@ -843,7 +846,8 @@ export default function InferenceMachine () {
                         if (ruleBase[x][j-1] === ruleBase[i][j-1]) {
                           if (ruleBase[x][j] === arr[findIndexInArray+1]) {
                             setI(x); setJ(j);
-                            setlastValueSpecialCase(ruleBase[x][ruleBase[x].length-1]);
+                            setLastValueWhenUserResponNo(ruleBase[x][ruleBase[x].length-1]);
+                            setTotalSympthomWhenUserResponNo(ruleBase[x].length);
                             break
                           }
                         }
@@ -929,7 +933,8 @@ export default function InferenceMachine () {
                         if (ruleBase[x][j-1] === ruleBase[i][j-1]) {
                           if (ruleBase[x][j] === arr[findIndexInArray+1]) {
                             setI(x); setJ(j);
-                            setlastValueSpecialCase(ruleBase[x][ruleBase[x].length-1]);
+                            setLastValueWhenUserResponNo(ruleBase[x][ruleBase[x].length-1]);
+                            setTotalSympthomWhenUserResponNo(ruleBase[x].length);
                             break
                           }
                         }
@@ -1003,7 +1008,8 @@ export default function InferenceMachine () {
                       if (ruleBase[x][j-1] === ruleBase[i][j-1]) {
                         if (ruleBase[x][j] === arr[findIndexInArray+1]) {
                           setI(x); setJ(j);
-                          setlastValueSpecialCase(ruleBase[x][ruleBase[x].length-1]);
+                          setLastValueWhenUserResponNo(ruleBase[x][ruleBase[x].length-1]);
+                          setTotalSympthomWhenUserResponNo(ruleBase[x].length);
                           break
                         }
                       }
@@ -1079,23 +1085,9 @@ export default function InferenceMachine () {
 
   return (
     <ChatbotInterface
-      right={right}
       input = {input}
       inputNow = {inputNow}
       inputBefore = {inputBefore}
-      i = {i}
-      j = {j}
-      arrayPlusOne = {arrayPlusOne}
-      ruleBaseBefore = {ruleBaseBefore}
-      ruleBaseILength = {ruleBase[i].length}
-      ruleBaseLength = {ruleBase.length}
-      replyBefore = {replyBefore}
-      nextReply = {nextReply}
-      replyNow = {replyNow}
-      allYesReply = {allYesReply}
-      lastValue = {lastValue}
-      lastValueSpecialCase = {lastValueSpecialCase}
-      totalGejala = {totalGejala}
       handleChange = {handleChange}
       handleEnter = {handleEnter}
       handleSubmit = {handleSubmit}
