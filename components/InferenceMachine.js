@@ -7,7 +7,7 @@ import ChatbotInterface from './ChatbotInterface';
 import {prompts,replies,alternative,coronavirus,} from '../data/PromptsAndReplies';
 
 const question = `Apa kamu mengalami gejala`;
-const yesOrNo = `? <span class='border-3 border-blue-500 px-2 py-0 rounded-2xl'>ya/tidak</span>`;
+const yesOrNo = `? <span className='border-3 border-blue-500 px-2 py-0 rounded-2xl'>ya/tidak</span>`;
 const g  = [
   [`index array number 0`],
   // question 1 - 5

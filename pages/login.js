@@ -16,8 +16,6 @@ export default function Login() {
     // if user already login, this login page can not be accessed
     if(token && userId) {
       router.push(`/dashboard/${userId}`);
-      // set alert on local storage and show it on dashboard page
-      localStorage.setItem('alert',true)
     }
   }, []);
 
