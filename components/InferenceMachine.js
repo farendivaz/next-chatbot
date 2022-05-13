@@ -88,7 +88,7 @@ const g  = [
 ]
 // list of general sympthon or gejala
 const s = [
-  `${question} mata merah pada mata ${yesOrNo}. Mata merah umumnya terjadi karena pelebaran pembuluh darah di mata.`, // gejala 0
+  `${question} mata merah pada mata ${yesOrNo}`, // gejala 0
   `${question} penglihatan menurun/kabur pada mata ${yesOrNo}`, // gejala 1
   `${question} penglihatan tidak menurun/tidak kabur pada mata ${yesOrNo}`, // gejala 2
   `${question} penglihatan menurun/kabur secara akut (tiba-tiba) pada mata ${yesOrNo}`, // gejala 3
