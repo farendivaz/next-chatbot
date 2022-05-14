@@ -32,7 +32,7 @@ export default function ChatbotInterfaceCopy({
         </h4>
         <div 
           id='messages' 
-          className='bg-chat h-96 max-h-96 mx-0 px-2 py-1 w-100 overflow-y-scroll' 
+          className='bg-chat h-96 max-h-96 mx-0 px-2 py-1 w-100 overflow-y-scroll'
           ref={messageEl}
         >
           {/*Chat will be append in here*/}

@@ -193,8 +193,8 @@ export default function InferenceMachine () {
   let [replyBefore, setReplyBefore] = useState('');
   let [allYesReply, setAllYesReply] = useState([]);
 
-  let [lastValueWhenUserResponYes, setLastValueWhenUserResponYes] = useState([]);
-  let [lastValueWhenUserResponNo, setLastValueWhenUserResponNo] = useState([]);
+  let [lastValueWhenUserResponYes, setLastValueWhenUserResponYes] = useState('');
+  let [lastValueWhenUserResponNo, setLastValueWhenUserResponNo] = useState('');
   
   let [totalSympthomWhenUserResponYes, setTotalSympthomWhenUserResponYes] = useState([]);
   let [totalSympthomWhenUserResponNo, setTotalSympthomWhenUserResponNo] = useState([]);
@@ -218,7 +218,7 @@ export default function InferenceMachine () {
     if (input === 'mulai' || input === 'tes'|| input === 'test'  || input === 'skrining') {
       // re-empty
       setDiagnoseResult('');
-      setLastValueWhenUserResponYes([]); 
+      setLastValueWhenUserResponYes(''); 
       setLastValueWhenUserResponNo('');
       setAllYesReply([]); 
       setTotalSympthomWhenUserResponYes([]);
@@ -234,7 +234,7 @@ export default function InferenceMachine () {
       }
       else {
         // re-empty
-        setLastValueWhenUserResponYes([]);
+        setLastValueWhenUserResponYes('');
         setLastValueWhenUserResponNo('');
         setAllYesReply([]); 
         setTotalSympthomWhenUserResponYes([]);
@@ -296,7 +296,7 @@ export default function InferenceMachine () {
             // get total sympthon
             setTotalSympthomWhenUserResponYes([...totalSympthomWhenUserResponYes, ruleBase[i].length-1])
             // get last value of the array
-            setLastValueWhenUserResponYes([...lastValueWhenUserResponYes, ruleBase[i][ruleBase[i].length-1]]);
+            setLastValueWhenUserResponYes(ruleBase[i][ruleBase[i].length-1]);
             // if ruleBase[i][j+1] is not last value in [i] array
             if (ruleBase[i][j+1] !== ruleBase[i][ruleBase[i].length - 1]) {
               reply = ruleBase[i][j+1]; 
@@ -314,7 +314,7 @@ export default function InferenceMachine () {
                   ruleBase[i][j+1] === 'Tumor, Strabismus atau Ophthalmopathy Thyroid' ||
                   ruleBase[i][j+1] === 'Sikatrik Kornea, Kelainan Refraksi, Katarak, Uveitis Posterior, Glaukoma Sudut Terbuka Primer, Retinopati Diabetika & Hipertensi, Penyakit Macula, Papil Udema, Amblyopia, Neuropati Optik atau Retinisi Pigmentosa'
                 ) {
-                  reply = `Melalui skrining dicurigai kamu mengalami <strong>${totalSympthomWhenUserResponYes[totalSympthomWhenUserResponYes.length-1]} gejala</strong> dari penyakit mata <strong>${lastValueWhenUserResponYes[lastValueWhenUserResponYes.length-1]}</strong>. 
+                  reply = `Melalui skrining dicurigai kamu mengalami <strong>${totalSympthomWhenUserResponYes[totalSympthomWhenUserResponYes.length-1]} gejala</strong> dari penyakit mata <strong>${lastValueWhenUserResponYes}</strong>. 
                   Ketik atau tekan lanjut untuk melanjutkan skrining kedua.`
                   setDiagnoseResult(reply); setI(i); setJ(j);
                   setRuleBaseBefore(ruleBase[i][j+1]); setReplyBefore('');
@@ -347,7 +347,7 @@ export default function InferenceMachine () {
                 ) {
                   // 2nd screening
                   if (j === 0) {
-                    reply = `Melalui skrining dicurigai kamu mengalami <strong>1 gejala</strong> dari penyakit mata <strong>${lastValueWhenUserResponYes[lastValueWhenUserResponYes.length-1]}</strong>. 
+                    reply = `Melalui skrining dicurigai kamu mengalami <strong>1 gejala</strong> dari penyakit mata <strong>${lastValueWhenUserResponYes}</strong>. 
                     Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                     setDiagnoseResult(reply); setI(i); setJ(j); setReplyBefore('');
                     // set screening result on local storage
@@ -357,7 +357,7 @@ export default function InferenceMachine () {
                     }
                   }
                   else {
-                    reply = `Melalui skrining dicurigai kamu mengalami <strong>${totalSympthomWhenUserResponYes[totalSympthomWhenUserResponYes.length-1]} gejala</strong> dari penyakit mata <strong>${lastValueWhenUserResponYes[lastValueWhenUserResponYes.length-1]}</strong>. 
+                    reply = `Melalui skrining dicurigai kamu mengalami <strong>${totalSympthomWhenUserResponYes[totalSympthomWhenUserResponYes.length-1]} gejala</strong> dari penyakit mata <strong>${lastValueWhenUserResponYes}</strong>. 
                     Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                     setDiagnoseResult(reply); setI(i); setJ(j); setReplyBefore('');
                     // set screening result on local storage
