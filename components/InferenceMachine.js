@@ -106,11 +106,11 @@ const ruleBase = [
   [''],
   // Algorithm for Red Eyes 
   // consist of 7 + 5 + 1 + 6 = 19 diseases
-  [s[0],s[1],s[3],'Endoftalmitis, Keraritis, Panofthalmitis, Thombosis Sinus Cavernosus, Uvetis Akut atau Glaukoma Sekunder/Akut'],
-  [s[0],s[1],'Sindroma mata kering atau Uveitis kronis'],
+  [s[0],s[1],s[3],'Endoftalmitis, Keraritis, Panofthalmitis, Trombosis Sinus Cavernosus, Uveitis Akut atau Glaukoma Sekunder/Akut'],
+  [s[0],s[1],'Sindroma Mata Kering atau Uveitis Kronis'],
   [s[0],s[6],'Episkelritis, Hordeolum, Keratokonjungtivitis Flikte Nularis, Konjungtivitis Akut atau Oinguekulitis'],
   [s[0],s[8],'Perdarahan Subkonjungtiva'],
-  [s[0],s[9],'Alergi, Blefaritis, Hemangioma, Iritasi, Gangguan Pembuluh Darah atau Konjungtivitis Kronis'],
+  [s[0],s[9],'Blefaritis, Hemangioma, Iritasi, Gangguan Pembuluh Darah, Konjungtivitis Alergi atau Konjungtivitis Kronis'],
   // Algorithm for Decreasing Eye Sight only for Normal Eye Color (Not Red)
   // consist of 8 + 3 + 11 = 22 diseases
   [s[1],s[3],s[11],'Abalsi Retina, Perdarahan Vitreus, Neuritis Optik, Kelainan Vaskular Retina, Hifema Spontan, Keracunan Metanol, Stroke Oksipitalis atau Malingering dan Histeria'],
@@ -118,18 +118,18 @@ const ruleBase = [
   [s[1],s[5],'Sikatrik Kornea, Kelainan Refraksi, Katarak, Uveitis Posterior, Glaukoma Sudut Terbuka Primer, Retinopati Diabetika & Hipertensi, Penyakit Macula, Papil Udema, Amblyopia, Neuropati Optik atau Retinisi Pigmentosa'],
   ['end of first screening'],
   // 16 specific eye disease out of 41 diseases
-  // index = [10][0] -/ 2 diseases - Algorithm for 'Endoftalmitis, Keraritis, Panofthalmitis, Thombosis Sinus Cavernosus, Uvetis Akut atau Glaukoma Sekunder/Akut' yang perlu pemeriksaan fisik lebih lanjut untuk mengetahui tekanan mata'
+  // index = [10][0] -/ 2 diseases - Algorithm for 'Endoftalmitis, Keraritis, Panofthalmitis, Trombosis Sinus Cavernosus, Uveitis Akut atau Glaukoma Sekunder/Akut' yang perlu pemeriksaan fisik lebih lanjut untuk mengetahui tekanan mata'
   [s[6],g[1],g[12],g[25],g[26],'Keratitis Pungtata Superfisialis'],
   [s[6],g[59],'Endoftalmitis (Infecius atau Non-Infecius)'],
   [g[1],g[12],g[49],g[56],g[57],'Uveitis (akut atau posterior)'],
-  [g[23],g[32],g[33],g[34],'Thombosis Sinus Kavernosus'],
+  [g[23],g[32],g[33],g[34],'Trombosis Sinus Kavernosus'],
   ['end of second screening'],
   // index = [15][0] - 3 diseases - Algorithm for 'Episkelritis, Hordeolum, Keratokonjungtivitis Flikte Nularis, Konjungtivitis Akut atau Oinguekulitis'
   [g[1],g[9],g[12],g[25],'Hordeolum'],
   [g[1],g[12],g[25],g[58],'Konjungtivitis'],
   [g[1],g[59],'Episkelritis (Nodular atau Diffuse)'],
   ['end of second screening'],
-  // index = [19][0] - 2 Diseases - Algortihm for 'Alergi, Blefaritis, Hemangioma, Iritasi, Gangguan Pembuluh Darah atau Konjungtivitis Kronis'
+  // index = [19][0] - 2 Diseases - Algortihm for 'Blefaritis, Hemangioma, Iritasi, Gangguan Pembuluh Darah, Konjungtivitis Alergi atau Konjungtivitis Kronis'
   [g[1],g[3],g[7],g[8],g[10],g[25],'Blefaritis'],
   [g[10],g[25],g[27],g[28],'Konjungtivitis Alergi'],
   ['end of second screening'],
@@ -242,12 +242,12 @@ export default function InferenceMachine () {
         setTotalSympthomWhenUserResponYes([]);
         setTotalSympthomWhenUserResponNo([]);
         setReplyBefore('lanjut');
-        if (ruleBaseBefore === 'Endoftalmitis, Keraritis, Panofthalmitis, Thombosis Sinus Cavernosus, Uvetis Akut atau Glaukoma Sekunder/Akut') {
+        if (ruleBaseBefore === 'Endoftalmitis, Keraritis, Panofthalmitis, Trombosis Sinus Cavernosus, Uveitis Akut atau Glaukoma Sekunder/Akut') {
           reply = ruleBase[10][0]; setI(10); setJ(0);
           setDiagnoseResult('');
         }
-        if (ruleBaseBefore === 'Sindroma mata kering atau Uveitis kronis') {
-          reply = `Silahkan konsultasikan penyakit mata <strong>Sindroma mata kering atau Uveitis kronis</strong> dengan dokter spesialis mata`;
+        if (ruleBaseBefore === 'Sindroma Mata Kering atau Uveitis Kronis') {
+          reply = `Silahkan konsultasikan penyakit mata <strong>Sindroma Mata Kering atau Uveitis Kronis</strong> dengan dokter spesialis mata`;
           setDiagnoseResult(reply);
         }
         if (ruleBaseBefore === 'Episkelritis, Hordeolum, Keratokonjungtivitis Flikte Nularis, Konjungtivitis Akut atau Oinguekulitis') {
@@ -258,7 +258,7 @@ export default function InferenceMachine () {
           reply = `Silahkan konsultasikan penyakit mata <strong>Perdarahan Subkonjungtiva</strong> dengan dokter spesialis mata`;
           setDiagnoseResult(reply);
         }
-        if (ruleBaseBefore === 'Alergi, Blefaritis, Hemangioma, Iritasi, Gangguan Pembuluh Darah atau Konjungtivitis Kronis') {
+        if (ruleBaseBefore === 'Blefaritis, Hemangioma, Iritasi, Gangguan Pembuluh Darah, Konjungtivitis Alergi atau Konjungtivitis Kronis') {
           reply = ruleBase[19][0]; setI(19); setJ(0); 
           setDiagnoseResult('');
         }
@@ -308,10 +308,10 @@ export default function InferenceMachine () {
             else if (ruleBase[i][j+1] === ruleBase[i][ruleBase[i].length - 1]) {
               if (inputNow === 'ya') {
                 if (
-                  ruleBase[i][j+1] === 'Endoftalmitis, Keraritis, Panofthalmitis, Thombosis Sinus Cavernosus, Uvetis Akut atau Glaukoma Sekunder/Akut' ||
+                  ruleBase[i][j+1] === 'Endoftalmitis, Keraritis, Panofthalmitis, Trombosis Sinus Cavernosus, Uveitis Akut atau Glaukoma Sekunder/Akut' ||
                   ruleBase[i][j+1] === 'Episkelritis, Hordeolum, Keratokonjungtivitis Flikte Nularis, Konjungtivitis Akut atau Oinguekulitis' ||
                   ruleBase[i][j+1] === 'Perdarahan Subkonjungtiva' ||
-                  ruleBase[i][j+1] === 'Alergi, Blefaritis, Hemangioma, Iritasi, Gangguan Pembuluh Darah atau Konjungtivitis Kronis' ||
+                  ruleBase[i][j+1] === 'Blefaritis, Hemangioma, Iritasi, Gangguan Pembuluh Darah, Konjungtivitis Alergi atau Konjungtivitis Kronis' ||
                   ruleBase[i][j+1] === 'Abalsi Retina, Perdarahan Vitreus, Neuritis Optik, Kelainan Vaskular Retina, Hifema Spontan, Keracunan Metanol, Stroke Oksipitalis atau Malingering dan Histeria' ||
                   ruleBase[i][j+1] === 'Tumor, Strabismus atau Ophthalmopathy Thyroid' ||
                   ruleBase[i][j+1] === 'Sikatrik Kornea, Kelainan Refraksi, Katarak, Uveitis Posterior, Glaukoma Sudut Terbuka Primer, Retinopati Diabetika & Hipertensi, Penyakit Macula, Papil Udema, Amblyopia, Neuropati Optik atau Retinisi Pigmentosa'
@@ -327,7 +327,7 @@ export default function InferenceMachine () {
                     UpdateScreeningResult()
                   }
                 }
-                if (ruleBase[i][j+1] === 'Sindroma mata kering atau Uveitis kronis') {
+                if (ruleBase[i][j+1] === 'Sindroma Mata Kering atau Uveitis Kronis') {
                   reply =  `Kamu mengalami gejala mata merah dan penglihatan menurun/kabur secara tidak akut (tidak tiba-tiba) pada mata. 
                   Belum bisa dipastikan hasil skrining penyakit mata dari gejala-gejala tersebut. 
                   Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
@@ -367,10 +367,10 @@ export default function InferenceMachine () {
               }
               if (inputNow === 'tidak') {
                 if (
-                  ruleBase[i][j+1] === 'Endoftalmitis, Keraritis, Panofthalmitis, Thombosis Sinus Cavernosus, Uvetis Akut atau Glaukoma Sekunder/Akut' ||
+                  ruleBase[i][j+1] === 'Endoftalmitis, Keraritis, Panofthalmitis, Trombosis Sinus Cavernosus, Uveitis Akut atau Glaukoma Sekunder/Akut' ||
                   ruleBase[i][j+1] === 'Episkelritis, Hordeolum, Keratokonjungtivitis Flikte Nularis, Konjungtivitis Akut atau Oinguekulitis' ||
                   ruleBase[i][j+1] === 'Perdarahan Subkonjungtiva' ||
-                  ruleBase[i][j+1] === 'Alergi, Blefaritis, Hemangioma, Iritasi, Gangguan Pembuluh Darah atau Konjungtivitis Kronis' ||
+                  ruleBase[i][j+1] === 'Blefaritis, Hemangioma, Iritasi, Gangguan Pembuluh Darah, Konjungtivitis Alergi atau Konjungtivitis Kronis' ||
                   ruleBase[i][j+1] === 'Abalsi Retina, Perdarahan Vitreus, Neuritis Optik, Kelainan Vaskular Retina, Hifema Spontan, Keracunan Metanol, Stroke Oksipitalis atau Malingering dan Histeria' ||
                   ruleBase[i][j+1] === 'Tumor, Strabismus atau Ophthalmopathy Thyroid' ||
                   ruleBase[i][j+1] === 'Sikatrik Kornea, Kelainan Refraksi, Katarak, Uveitis Posterior, Glaukoma Sudut Terbuka Primer, Retinopati Diabetika & Hipertensi, Penyakit Macula, Papil Udema, Amblyopia, Neuropati Optik atau Retinisi Pigmentosa'
@@ -386,7 +386,7 @@ export default function InferenceMachine () {
                     UpdateScreeningResult()
                   }
                 }
-                if (ruleBase[i][j+1] === 'Sindroma mata kering atau Uveitis kronis') {
+                if (ruleBase[i][j+1] === 'Sindroma Mata Kering atau Uveitis Kronis') {
                   reply =  `Kamu mengalami gejala mata merah dan penglihatan menurun/kabur secara tidak akut (tidak tiba-tiba) pada mata. 
                   Belum bisa dipastikan hasil skrining penyakit mata dari gejala-gejala tersebut. 
                   Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
