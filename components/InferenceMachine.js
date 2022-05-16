@@ -307,9 +307,11 @@ export default function InferenceMachine () {
             // if ruleBase[i][j+1] is the last value in [i] array
             else if (ruleBase[i][j+1] === ruleBase[i][ruleBase[i].length - 1]) {
               if (inputNow === 'ya') {
+                // 1st screening
                 if (
                   ruleBase[i][j+1] === 'Endoftalmitis, Keraritis, Panofthalmitis, Trombosis Sinus Cavernosus, Uveitis Akut atau Glaukoma Sekunder/Akut' ||
                   ruleBase[i][j+1] === 'Episkelritis, Hordeolum, Keratokonjungtivitis Flikte Nularis, Konjungtivitis Akut atau Oinguekulitis' ||
+                  ruleBase[i][j+1] === 'Sindroma Mata Kering atau Uveitis Kronis' ||
                   ruleBase[i][j+1] === 'Perdarahan Subkonjungtiva' ||
                   ruleBase[i][j+1] === 'Blefaritis, Hemangioma, Iritasi, Gangguan Pembuluh Darah, Konjungtivitis Alergi atau Konjungtivitis Kronis' ||
                   ruleBase[i][j+1] === 'Abalsi Retina, Perdarahan Vitreus, Neuritis Optik, Kelainan Vaskular Retina, Hifema Spontan, Keracunan Metanol, Stroke Oksipitalis atau Malingering dan Histeria' ||
@@ -327,20 +329,8 @@ export default function InferenceMachine () {
                     UpdateScreeningResult()
                   }
                 }
-                if (ruleBase[i][j+1] === 'Sindroma Mata Kering atau Uveitis Kronis') {
-                  reply =  `Kamu mengalami gejala mata merah dan penglihatan menurun/kabur secara tidak akut (tidak tiba-tiba) pada mata. 
-                  Belum bisa dipastikan hasil skrining penyakit mata dari gejala-gejala tersebut. 
-                  Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
-                  setDiagnoseResult(reply); setI(i); setJ(j);
-                  setRuleBaseBefore(ruleBase[i][j+1]); setReplyBefore('');
-                  // set screening result on local storage
-                  localStorage.setItem('screening_result', reply);
-                  if(localStorage.getItem('token')) {
-                    UpdateScreeningResult()
-                  }
-                }
+                // 2nd screening
                 else {
-                  // 2nd screening
                   if (j === 0) {
                     reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length+1} pertanyaan yang ditanyakan oleh bot.
                     Melalui skrining dicurigai kamu mengalami <strong>1 gejala</strong> dari penyakit mata <strong>${lastValueWhenUserResponYes}</strong>. 
@@ -366,9 +356,11 @@ export default function InferenceMachine () {
                 }
               }
               if (inputNow === 'tidak') {
+                // 1st screening
                 if (
                   ruleBase[i][j+1] === 'Endoftalmitis, Keraritis, Panofthalmitis, Trombosis Sinus Cavernosus, Uveitis Akut atau Glaukoma Sekunder/Akut' ||
                   ruleBase[i][j+1] === 'Episkelritis, Hordeolum, Keratokonjungtivitis Flikte Nularis, Konjungtivitis Akut atau Oinguekulitis' ||
+                  ruleBase[i][j+1] === 'Sindroma Mata Kering atau Uveitis Kronis' ||
                   ruleBase[i][j+1] === 'Perdarahan Subkonjungtiva' ||
                   ruleBase[i][j+1] === 'Blefaritis, Hemangioma, Iritasi, Gangguan Pembuluh Darah, Konjungtivitis Alergi atau Konjungtivitis Kronis' ||
                   ruleBase[i][j+1] === 'Abalsi Retina, Perdarahan Vitreus, Neuritis Optik, Kelainan Vaskular Retina, Hifema Spontan, Keracunan Metanol, Stroke Oksipitalis atau Malingering dan Histeria' ||
@@ -386,20 +378,8 @@ export default function InferenceMachine () {
                     UpdateScreeningResult()
                   }
                 }
-                if (ruleBase[i][j+1] === 'Sindroma Mata Kering atau Uveitis Kronis') {
-                  reply =  `Kamu mengalami gejala mata merah dan penglihatan menurun/kabur secara tidak akut (tidak tiba-tiba) pada mata. 
-                  Belum bisa dipastikan hasil skrining penyakit mata dari gejala-gejala tersebut. 
-                  Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
-                  setDiagnoseResult(reply); setI(i); setJ(j);
-                  setRuleBaseBefore(ruleBase[i][j+1]); setReplyBefore('');
-                  // set screening result on local storage
-                  localStorage.setItem('screening_result', reply);
-                  if(localStorage.getItem('token')) {
-                    UpdateScreeningResult()
-                  }
-                }
+                // 2nd screening
                 else {
-                  // 2nd screening
                   if (j === 0) {
                     reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length+1} pertanyaan yang ditanyakan oleh bot.
                     Melalui skrining dicurigai kamu mengalami <strong>1 gejala</strong> dari penyakit mata <strong>${lastValueWhenUserResponNo}</strong>. 
@@ -490,15 +470,38 @@ export default function InferenceMachine () {
                   let findIndexInArray = arr.indexOf(ruleBase[i][j])
                   if (arr[findIndexInArray+1] !== undefined) {
                     // if ruleBase[i+1][j] is the last value of ruleBase[i]
-                    if (arr[findIndexInArray+1] === ruleBase[i+1][ruleBase[i+1].length-1]) {
-                      reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                      Melalui skrining dicurigai kamu mengalami <strong>${allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${ruleBase[i+1][ruleBase[i+1].length-1]}</strong>. 
-                      Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
-                      setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
-                      // set screening result on local storage
-                      localStorage.setItem('screening_result', reply);
-                      if(localStorage.getItem('token')) {
-                        UpdateScreeningResult()
+                    if (arr[findIndexInArray+1] === ruleBase[i+1][ruleBase[i+1].length-1]) {// 1st screening
+                      if (
+                        ruleBase[i][j+1] === 'Endoftalmitis, Keraritis, Panofthalmitis, Trombosis Sinus Cavernosus, Uveitis Akut atau Glaukoma Sekunder/Akut' ||
+                        ruleBase[i][j+1] === 'Episkelritis, Hordeolum, Keratokonjungtivitis Flikte Nularis, Konjungtivitis Akut atau Oinguekulitis' ||
+                        ruleBase[i][j+1] === 'Sindroma Mata Kering atau Uveitis Kronis' ||
+                        ruleBase[i][j+1] === 'Perdarahan Subkonjungtiva' ||
+                        ruleBase[i][j+1] === 'Blefaritis, Hemangioma, Iritasi, Gangguan Pembuluh Darah, Konjungtivitis Alergi atau Konjungtivitis Kronis' ||
+                        ruleBase[i][j+1] === 'Abalsi Retina, Perdarahan Vitreus, Neuritis Optik, Kelainan Vaskular Retina, Hifema Spontan, Keracunan Metanol, Stroke Oksipitalis atau Malingering dan Histeria' ||
+                        ruleBase[i][j+1] === 'Tumor, Strabismus atau Ophthalmopathy Thyroid' ||
+                        ruleBase[i][j+1] === 'Sikatrik Kornea, Kelainan Refraksi, Katarak, Uveitis Posterior, Glaukoma Sudut Terbuka Primer, Retinopati Diabetika & Hipertensi, Penyakit Macula, Papil Udema, Amblyopia, Neuropati Optik atau Retinisi Pigmentosa'
+                      ) {                        
+                        reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot.
+                        Melalui skrining dicurigai kamu mengalami <strong>${allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${ruleBase[i+1][ruleBase[i+1].length-1]}</strong>.
+                        Ketik atau tekan lanjut untuk melanjutkan skrining kedua.`
+                        setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                        // set screening result on local storage
+                        localStorage.setItem('screening_result', reply);
+                        if(localStorage.getItem('token')) {
+                          UpdateScreeningResult()
+                        }
+                      }
+                      // 2nd screening
+                      else {
+                        reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                        Melalui skrining dicurigai kamu mengalami <strong>${allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${ruleBase[i+1][ruleBase[i+1].length-1]}</strong>. 
+                        Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
+                        setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                        // set screening result on local storage
+                        localStorage.setItem('screening_result', reply);
+                        if(localStorage.getItem('token')) {
+                          UpdateScreeningResult()
+                        }
                       }
                     }
                     // if ruleBase[i+1][j] is not the last value
@@ -552,15 +555,38 @@ export default function InferenceMachine () {
                   let findIndexInArray = arr.indexOf(ruleBase[i][j])
                   if (arr[findIndexInArray+1] !== undefined) {
                     // if ruleBase[i+1][j] is the last value of ruleBase[i]
-                    if (arr[findIndexInArray+1] === ruleBase[i+1][ruleBase[i+1].length-1]) {
-                      reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                      Melalui skrining dicurigai kamu mengalami <strong>${allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${ruleBase[i+1][ruleBase[i+1].length-1]}</strong>. 
-                      Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
-                      setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
-                      // set screening result on local storage
-                      localStorage.setItem('screening_result', reply);
-                      if(localStorage.getItem('token')) {
-                        UpdateScreeningResult()
+                    if (arr[findIndexInArray+1] === ruleBase[i+1][ruleBase[i+1].length-1]) {// 1st screening
+                      if (
+                        ruleBase[i][j+1] === 'Endoftalmitis, Keraritis, Panofthalmitis, Trombosis Sinus Cavernosus, Uveitis Akut atau Glaukoma Sekunder/Akut' ||
+                        ruleBase[i][j+1] === 'Episkelritis, Hordeolum, Keratokonjungtivitis Flikte Nularis, Konjungtivitis Akut atau Oinguekulitis' ||
+                        ruleBase[i][j+1] === 'Sindroma Mata Kering atau Uveitis Kronis' ||
+                        ruleBase[i][j+1] === 'Perdarahan Subkonjungtiva' ||
+                        ruleBase[i][j+1] === 'Blefaritis, Hemangioma, Iritasi, Gangguan Pembuluh Darah, Konjungtivitis Alergi atau Konjungtivitis Kronis' ||
+                        ruleBase[i][j+1] === 'Abalsi Retina, Perdarahan Vitreus, Neuritis Optik, Kelainan Vaskular Retina, Hifema Spontan, Keracunan Metanol, Stroke Oksipitalis atau Malingering dan Histeria' ||
+                        ruleBase[i][j+1] === 'Tumor, Strabismus atau Ophthalmopathy Thyroid' ||
+                        ruleBase[i][j+1] === 'Sikatrik Kornea, Kelainan Refraksi, Katarak, Uveitis Posterior, Glaukoma Sudut Terbuka Primer, Retinopati Diabetika & Hipertensi, Penyakit Macula, Papil Udema, Amblyopia, Neuropati Optik atau Retinisi Pigmentosa'
+                      ) {                        
+                        reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot.
+                        Melalui skrining dicurigai kamu mengalami <strong>${allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${ruleBase[i+1][ruleBase[i+1].length-1]}</strong>.
+                        Ketik atau tekan lanjut untuk melanjutkan skrining kedua.`
+                        setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                        // set screening result on local storage
+                        localStorage.setItem('screening_result', reply);
+                        if(localStorage.getItem('token')) {
+                          UpdateScreeningResult()
+                        }
+                      }
+                      // 2nd screening
+                      else {
+                        reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                        Melalui skrining dicurigai kamu mengalami <strong>${allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${ruleBase[i+1][ruleBase[i+1].length-1]}</strong>. 
+                        Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
+                        setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                        // set screening result on local storage
+                        localStorage.setItem('screening_result', reply);
+                        if(localStorage.getItem('token')) {
+                          UpdateScreeningResult()
+                        }
                       }
                     }
                     // if ruleBase[i+1][j] is not the last value of ruleBase[i]
@@ -615,15 +641,38 @@ export default function InferenceMachine () {
                   let findIndexInArray = arr.indexOf(ruleBase[i][j])
                   if (arr[findIndexInArray+1] !== undefined) {
                     // if ruleBase[i+1][j] is the last value of ruleBase[i]
-                    if (arr[findIndexInArray+1] === ruleBase[i+1][ruleBase[i+1].length-1]) {
-                      reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                      Melalui skrining dicurigai kamu mengalami <strong>${allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${ruleBase[i+1][ruleBase[i+1].length-1]}</strong>. 
-                      Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
-                      setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
-                      // set screening result on local storage
-                      localStorage.setItem('screening_result', reply);
-                      if(localStorage.getItem('token')) {
-                        UpdateScreeningResult()
+                    if (arr[findIndexInArray+1] === ruleBase[i+1][ruleBase[i+1].length-1]) {// 1st screening
+                      if (
+                        ruleBase[i][j+1] === 'Endoftalmitis, Keraritis, Panofthalmitis, Trombosis Sinus Cavernosus, Uveitis Akut atau Glaukoma Sekunder/Akut' ||
+                        ruleBase[i][j+1] === 'Episkelritis, Hordeolum, Keratokonjungtivitis Flikte Nularis, Konjungtivitis Akut atau Oinguekulitis' ||
+                        ruleBase[i][j+1] === 'Sindroma Mata Kering atau Uveitis Kronis' ||
+                        ruleBase[i][j+1] === 'Perdarahan Subkonjungtiva' ||
+                        ruleBase[i][j+1] === 'Blefaritis, Hemangioma, Iritasi, Gangguan Pembuluh Darah, Konjungtivitis Alergi atau Konjungtivitis Kronis' ||
+                        ruleBase[i][j+1] === 'Abalsi Retina, Perdarahan Vitreus, Neuritis Optik, Kelainan Vaskular Retina, Hifema Spontan, Keracunan Metanol, Stroke Oksipitalis atau Malingering dan Histeria' ||
+                        ruleBase[i][j+1] === 'Tumor, Strabismus atau Ophthalmopathy Thyroid' ||
+                        ruleBase[i][j+1] === 'Sikatrik Kornea, Kelainan Refraksi, Katarak, Uveitis Posterior, Glaukoma Sudut Terbuka Primer, Retinopati Diabetika & Hipertensi, Penyakit Macula, Papil Udema, Amblyopia, Neuropati Optik atau Retinisi Pigmentosa'
+                      ) {                        
+                        reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot.
+                        Melalui skrining dicurigai kamu mengalami <strong>${allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${ruleBase[i+1][ruleBase[i+1].length-1]}</strong>.
+                        Ketik atau tekan lanjut untuk melanjutkan skrining kedua.`
+                        setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                        // set screening result on local storage
+                        localStorage.setItem('screening_result', reply);
+                        if(localStorage.getItem('token')) {
+                          UpdateScreeningResult()
+                        }
+                      }
+                      // 2nd screening
+                      else {
+                        reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                        Melalui skrining dicurigai kamu mengalami <strong>${allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${ruleBase[i+1][ruleBase[i+1].length-1]}</strong>. 
+                        Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
+                        setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                        // set screening result on local storage
+                        localStorage.setItem('screening_result', reply);
+                        if(localStorage.getItem('token')) {
+                          UpdateScreeningResult()
+                        }
                       }
                     }
                     // if ruleBase[i+1][j] is not the last value of ruleBase[i]
@@ -682,15 +731,38 @@ export default function InferenceMachine () {
                   let findIndexInArray = arr.indexOf(ruleBase[i][j])
                   if (arr[findIndexInArray+1] !== undefined) {
                     // if ruleBase[i+1][j] is the last value of ruleBase[i]
-                    if (arr[findIndexInArray+1] === ruleBase[i+1][ruleBase[i+1].length-1]) {
-                      reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                      Melalui skrining dicurigai kamu mengalami <strong>${allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${ruleBase[i+1][ruleBase[i+1].length-1]}</strong>. 
-                      Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
-                      setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
-                      // set screening result on local storage
-                      localStorage.setItem('screening_result', reply);
-                      if(localStorage.getItem('token')) {
-                        UpdateScreeningResult()
+                    if (arr[findIndexInArray+1] === ruleBase[i+1][ruleBase[i+1].length-1]) {// 1st screening
+                      if (
+                        ruleBase[i][j+1] === 'Endoftalmitis, Keraritis, Panofthalmitis, Trombosis Sinus Cavernosus, Uveitis Akut atau Glaukoma Sekunder/Akut' ||
+                        ruleBase[i][j+1] === 'Episkelritis, Hordeolum, Keratokonjungtivitis Flikte Nularis, Konjungtivitis Akut atau Oinguekulitis' ||
+                        ruleBase[i][j+1] === 'Sindroma Mata Kering atau Uveitis Kronis' ||
+                        ruleBase[i][j+1] === 'Perdarahan Subkonjungtiva' ||
+                        ruleBase[i][j+1] === 'Blefaritis, Hemangioma, Iritasi, Gangguan Pembuluh Darah, Konjungtivitis Alergi atau Konjungtivitis Kronis' ||
+                        ruleBase[i][j+1] === 'Abalsi Retina, Perdarahan Vitreus, Neuritis Optik, Kelainan Vaskular Retina, Hifema Spontan, Keracunan Metanol, Stroke Oksipitalis atau Malingering dan Histeria' ||
+                        ruleBase[i][j+1] === 'Tumor, Strabismus atau Ophthalmopathy Thyroid' ||
+                        ruleBase[i][j+1] === 'Sikatrik Kornea, Kelainan Refraksi, Katarak, Uveitis Posterior, Glaukoma Sudut Terbuka Primer, Retinopati Diabetika & Hipertensi, Penyakit Macula, Papil Udema, Amblyopia, Neuropati Optik atau Retinisi Pigmentosa'
+                      ) {                        
+                        reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot.
+                        Melalui skrining dicurigai kamu mengalami <strong>${allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${ruleBase[i+1][ruleBase[i+1].length-1]}</strong>.
+                        Ketik atau tekan lanjut untuk melanjutkan skrining kedua.`
+                        setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                        // set screening result on local storage
+                        localStorage.setItem('screening_result', reply);
+                        if(localStorage.getItem('token')) {
+                          UpdateScreeningResult()
+                        }
+                      }
+                      // 2nd screening
+                      else {
+                        reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                        Melalui skrining dicurigai kamu mengalami <strong>${allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${ruleBase[i+1][ruleBase[i+1].length-1]}</strong>. 
+                        Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
+                        setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                        // set screening result on local storage
+                        localStorage.setItem('screening_result', reply);
+                        if(localStorage.getItem('token')) {
+                          UpdateScreeningResult()
+                        }
                       }
                     }
                     // if ruleBase[i+1][j] is not the last value of ruleBase[i]
@@ -752,15 +824,38 @@ export default function InferenceMachine () {
                   let findIndexInArray = arr.indexOf(ruleBase[i][j])
                   if (arr[findIndexInArray+1] !== undefined) {
                     // if ruleBase[i+1][j] is the last value of ruleBase[i]
-                    if (arr[findIndexInArray+1] === ruleBase[i+1][ruleBase[i+1].length-1]) {
-                      reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                      Melalui skrining dicurigai kamu mengalami <strong>${allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${ruleBase[i+1][ruleBase[i+1].length-1]}</strong>. 
-                      Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
-                      setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
-                      // set screening result on local storage
-                      localStorage.setItem('screening_result', reply);
-                      if(localStorage.getItem('token')) {
-                        UpdateScreeningResult()
+                    if (arr[findIndexInArray+1] === ruleBase[i+1][ruleBase[i+1].length-1]) {// 1st screening
+                      if (
+                        ruleBase[i][j+1] === 'Endoftalmitis, Keraritis, Panofthalmitis, Trombosis Sinus Cavernosus, Uveitis Akut atau Glaukoma Sekunder/Akut' ||
+                        ruleBase[i][j+1] === 'Episkelritis, Hordeolum, Keratokonjungtivitis Flikte Nularis, Konjungtivitis Akut atau Oinguekulitis' ||
+                        ruleBase[i][j+1] === 'Sindroma Mata Kering atau Uveitis Kronis' ||
+                        ruleBase[i][j+1] === 'Perdarahan Subkonjungtiva' ||
+                        ruleBase[i][j+1] === 'Blefaritis, Hemangioma, Iritasi, Gangguan Pembuluh Darah, Konjungtivitis Alergi atau Konjungtivitis Kronis' ||
+                        ruleBase[i][j+1] === 'Abalsi Retina, Perdarahan Vitreus, Neuritis Optik, Kelainan Vaskular Retina, Hifema Spontan, Keracunan Metanol, Stroke Oksipitalis atau Malingering dan Histeria' ||
+                        ruleBase[i][j+1] === 'Tumor, Strabismus atau Ophthalmopathy Thyroid' ||
+                        ruleBase[i][j+1] === 'Sikatrik Kornea, Kelainan Refraksi, Katarak, Uveitis Posterior, Glaukoma Sudut Terbuka Primer, Retinopati Diabetika & Hipertensi, Penyakit Macula, Papil Udema, Amblyopia, Neuropati Optik atau Retinisi Pigmentosa'
+                      ) {                        
+                        reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot.
+                        Melalui skrining dicurigai kamu mengalami <strong>${allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${ruleBase[i+1][ruleBase[i+1].length-1]}</strong>.
+                        Ketik atau tekan lanjut untuk melanjutkan skrining kedua.`
+                        setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                        // set screening result on local storage
+                        localStorage.setItem('screening_result', reply);
+                        if(localStorage.getItem('token')) {
+                          UpdateScreeningResult()
+                        }
+                      }
+                      // 2nd screening
+                      else {
+                        reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                        Melalui skrining dicurigai kamu mengalami <strong>${allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${ruleBase[i+1][ruleBase[i+1].length-1]}</strong>. 
+                        Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
+                        setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                        // set screening result on local storage
+                        localStorage.setItem('screening_result', reply);
+                        if(localStorage.getItem('token')) {
+                          UpdateScreeningResult()
+                        }
                       }
                     }
                     // if ruleBase[i+1][j] is not the last value of ruleBase[i]
@@ -825,15 +920,38 @@ export default function InferenceMachine () {
                   let findIndexInArray = arr.indexOf(ruleBase[i][j])
                   if (arr[findIndexInArray+1] !== undefined) {
                     // if ruleBase[i+1][j] is the last value of ruleBase[i]
-                    if (arr[findIndexInArray+1] === ruleBase[i+1][ruleBase[i+1].length-1]) {
-                      reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                      Melalui skrining dicurigai kamu mengalami <strong>${allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${ruleBase[i+1][ruleBase[i+1].length-1]}</strong>. 
-                      Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
-                      setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
-                      // set screening result on local storage
-                      localStorage.setItem('screening_result', reply);
-                      if(localStorage.getItem('token')) {
-                        UpdateScreeningResult()
+                    if (arr[findIndexInArray+1] === ruleBase[i+1][ruleBase[i+1].length-1]) {// 1st screening
+                      if (
+                        ruleBase[i][j+1] === 'Endoftalmitis, Keraritis, Panofthalmitis, Trombosis Sinus Cavernosus, Uveitis Akut atau Glaukoma Sekunder/Akut' ||
+                        ruleBase[i][j+1] === 'Episkelritis, Hordeolum, Keratokonjungtivitis Flikte Nularis, Konjungtivitis Akut atau Oinguekulitis' ||
+                        ruleBase[i][j+1] === 'Sindroma Mata Kering atau Uveitis Kronis' ||
+                        ruleBase[i][j+1] === 'Perdarahan Subkonjungtiva' ||
+                        ruleBase[i][j+1] === 'Blefaritis, Hemangioma, Iritasi, Gangguan Pembuluh Darah, Konjungtivitis Alergi atau Konjungtivitis Kronis' ||
+                        ruleBase[i][j+1] === 'Abalsi Retina, Perdarahan Vitreus, Neuritis Optik, Kelainan Vaskular Retina, Hifema Spontan, Keracunan Metanol, Stroke Oksipitalis atau Malingering dan Histeria' ||
+                        ruleBase[i][j+1] === 'Tumor, Strabismus atau Ophthalmopathy Thyroid' ||
+                        ruleBase[i][j+1] === 'Sikatrik Kornea, Kelainan Refraksi, Katarak, Uveitis Posterior, Glaukoma Sudut Terbuka Primer, Retinopati Diabetika & Hipertensi, Penyakit Macula, Papil Udema, Amblyopia, Neuropati Optik atau Retinisi Pigmentosa'
+                      ) {                        
+                        reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot.
+                        Melalui skrining dicurigai kamu mengalami <strong>${allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${ruleBase[i+1][ruleBase[i+1].length-1]}</strong>.
+                        Ketik atau tekan lanjut untuk melanjutkan skrining kedua.`
+                        setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                        // set screening result on local storage
+                        localStorage.setItem('screening_result', reply);
+                        if(localStorage.getItem('token')) {
+                          UpdateScreeningResult()
+                        }
+                      }
+                      // 2nd screening
+                      else {
+                        reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                        Melalui skrining dicurigai kamu mengalami <strong>${allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${ruleBase[i+1][ruleBase[i+1].length-1]}</strong>. 
+                        Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
+                        setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                        // set screening result on local storage
+                        localStorage.setItem('screening_result', reply);
+                        if(localStorage.getItem('token')) {
+                          UpdateScreeningResult()
+                        }
                       }
                     }
                     // if ruleBase[i+1][j] is not the last value of ruleBase[i]
