@@ -274,6 +274,9 @@ export default function InferenceMachine () {
           reply = ruleBase[25][0]; setI(25); setJ(0); 
           setDiagnoseResult('');
         }
+        else {
+          reply = diagnoseResult;
+        }
       }
     }
     // if (input !== 'mulai' || input !== 'tes'|| input !== 'test'  || input !== 'skrining' || input !== 'lanjut')
@@ -523,7 +526,7 @@ export default function InferenceMachine () {
                     reply = `Kamu hanya menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
                     Belum bisa dipastikan penyakit mata yang tepat hanya dari 1 gejala tersebut. 
                     Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
-                    setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                    setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore('');
                   }
                 }
                 // if ruleBase[i+1][j-1] === undefined || ruleBase[i][j-1] !== ruleBase[i+1][j-1]
@@ -531,7 +534,7 @@ export default function InferenceMachine () {
                   reply = `Kamu hanya menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
                   Belum bisa dipastikan penyakit mata yang tepat hanya dari 1 gejala tersebut. 
                   Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
-                  setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                  setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore('');
                 }
               }
               else if (j === 2) { 
@@ -608,7 +611,7 @@ export default function InferenceMachine () {
                     reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
                     Belum bisa ditentukan hasil skrining penyakit mata dengan gejala-gejala yang kamu jawab <strong>ya</strong>. 
                     Silahkan ulangi skrining atau konsultasikan gejala-gejala tersebut dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
-                    setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                    setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore('');
                   }
                 }
                 // if ruleBase[i+1][j-1] === undefined || ruleBase[i+1][j-2] === undefined
@@ -616,7 +619,7 @@ export default function InferenceMachine () {
                   reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
                   Belum bisa ditentukan hasil skrining penyakit mata dengan gejala-gejala yang kamu jawab <strong>ya</strong>. 
                   Silahkan ulangi skrining atau konsultasikan gejala-gejala tersebut dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
-                  setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                  setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore('');
                 }
               }
               else if (j === 3) {
@@ -644,7 +647,7 @@ export default function InferenceMachine () {
                     if (arr[findIndexInArray+1] === ruleBase[i+1][ruleBase[i+1].length-1]) {// 1st screening
                       if (
                         ruleBase[i][j+1] === 'Endoftalmitis, Keraritis, Panofthalmitis, Trombosis Sinus Cavernosus, Uveitis Akut atau Glaukoma Sekunder/Akut' ||
-                        ruleBase[i][j+1] === 'Episkelritis, Hordeolum, Keratokonjungtivitis Flikte Nularis, Konjungtivitis Akut atau Oinguekulitis' ||
+                        ruleBase[i][j+1] === 'Episkelritis, Hordeolum, Keratokonjungtivitis Flikte Nularis, Konjungtivitis Akut atau Pinguekulitis' ||
                         ruleBase[i][j+1] === 'Sindroma Mata Kering atau Uveitis Kronis' ||
                         ruleBase[i][j+1] === 'Perdarahan Subkonjungtiva' ||
                         ruleBase[i][j+1] === 'Blefaritis, Hemangioma, Iritasi, Gangguan Pembuluh Darah, Konjungtivitis Alergi atau Konjungtivitis Kronis' ||
@@ -694,7 +697,7 @@ export default function InferenceMachine () {
                     reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
                     Belum bisa ditentukan hasil skrining penyakit mata dengan gejala-gejala yang kamu jawab <strong>ya</strong>. 
                     Silahkan ulangi skrining atau konsultasikan gejala-gejala tersebut dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
-                    setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                    setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore('');
                   } 
                 }
                 // if ruleBase[i+1][j-1] === undefined || 
@@ -704,7 +707,7 @@ export default function InferenceMachine () {
                   reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
                   Belum bisa ditentukan hasil skrining penyakit mata dengan gejala-gejala yang kamu jawab <strong>ya</strong>. 
                   Silahkan ulangi skrining atau konsultasikan gejala-gejala tersebut dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
-                  setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                  setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore('');
                 }
               }
               else if (j === 4) { // worked
@@ -784,7 +787,7 @@ export default function InferenceMachine () {
                     reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
                     Belum bisa ditentukan hasil skrining penyakit mata dengan gejala-gejala yang kamu jawab <strong>ya</strong>. 
                     Silahkan ulangi skrining atau konsultasikan gejala-gejala tersebut dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
-                    setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                    setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore('');
                   }
                 }
                 // if ruleBase[i+1][j-1] === undefined || 
@@ -795,7 +798,7 @@ export default function InferenceMachine () {
                   reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
                   Belum bisa ditentukan hasil skrining penyakit mata dengan gejala-gejala yang kamu jawab <strong>ya</strong>. 
                   Silahkan ulangi skrining atau konsultasikan gejala-gejala tersebut dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
-                  setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                  setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore('');
                 }
               }
               else if (j === 5) {
@@ -877,7 +880,7 @@ export default function InferenceMachine () {
                     reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
                     Belum bisa ditentukan hasil skrining penyakit mata dengan gejala-gejala yang kamu jawab <strong>ya</strong>. 
                     Silahkan ulangi skrining atau konsultasikan gejala-gejala tersebut dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
-                    setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                    setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore('');
                   }
                 }
                 // if ruleBase[i+1][j-1] === undefined || 
@@ -889,7 +892,7 @@ export default function InferenceMachine () {
                   reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
                   Belum bisa ditentukan hasil skrining penyakit mata dengan gejala-gejala yang kamu jawab <strong>ya</strong>. 
                   Silahkan ulangi skrining atau konsultasikan gejala-gejala tersebut dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
-                  setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                  setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore('');
                 }
               }
               else if (j === 6) {
@@ -973,7 +976,7 @@ export default function InferenceMachine () {
                     reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
                     Belum bisa ditentukan hasil skrining penyakit mata dengan gejala-gejala yang kamu jawab <strong>ya</strong>. 
                     Silahkan ulangi skrining atau konsultasikan gejala-gejala tersebut dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
-                    setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                    setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore('');
                   }
                 }
                 // if ruleBase[i+1][j-1] === undefined || 
@@ -986,7 +989,7 @@ export default function InferenceMachine () {
                   reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
                   Belum bisa ditentukan hasil skrining penyakit mata dengan gejala-gejala yang kamu jawab <strong>ya</strong>. 
                   Silahkan ulangi skrining atau konsultasikan gejala-gejala tersebut dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
-                  setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                  setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore('');
                 }
               }
               // for j > 6 
@@ -1035,7 +1038,7 @@ export default function InferenceMachine () {
                   reply = `Kamu menjawab <strong>ya</strong> untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
                   Belum bisa ditentukan hasil skrining penyakit mata dengan gejala-gejala yang kamu jawab <strong>ya</strong>. 
                   Silahkan ulangi skrining atau konsultasikan gejala-gejala tersebut dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
-                  setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore(ruleBase[i+1][j]);
+                  setDiagnoseResult(reply); setReplyBefore(''); setRuleBaseBefore('');
                 }
               }
           }
