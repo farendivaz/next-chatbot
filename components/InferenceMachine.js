@@ -274,7 +274,7 @@ export default function InferenceMachine () {
           reply = ruleBase[25][0]; setI(25); setJ(0); 
           setDiagnoseResult('');
         }
-        else {
+        if (lastValueInRuleBase === '') {
           reply = diagnoseResult;
         }
       }
