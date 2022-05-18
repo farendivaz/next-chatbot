@@ -2,11 +2,11 @@ import {Accordion} from 'react-bootstrap';
 import HeadElement from '../components/Head';
 import Navbar from '../components/NavbarChatbot';
 
-const AccordionBootstrap = ({eventKey,Title,Text}) => {
+const AccordionBootstrap = ({eventKey,Title,Content}) => {
   return (
     <Accordion.Item eventKey={eventKey}>
       <Accordion.Header>{Title}</Accordion.Header>
-      <Accordion.Body>{Text}</Accordion.Body>
+      <Accordion.Body>{Content}</Accordion.Body>
     </Accordion.Item>
   )
 }
@@ -36,7 +36,7 @@ export default function Guide () {
             <AccordionBootstrap 
               eventKey={"0"}
               Title = {(<p className='font-bold m-0'>Panduan Umum</p>)}
-              Text = {(
+              Content = {(
                 <div>
                   <p className='my-1'>
                     <span className='font-bold text-primary'>Ketikkan : </span>
@@ -53,46 +53,40 @@ export default function Guide () {
                   </p>
                 </div>
               )}
-            />
+            />  
             <AccordionBootstrap 
               eventKey={"1"}
-              Title = {(<p className='font-bold m-0'>Daftar Penyakit Mata yang Bisa di Skrining</p>)}
-              Text = {(
-                <div className='font-bold text-black'>
-                  <p className='my-1'>1.) Ulkus Kornea</p>
-                  <p className='my-1'>2.) Keratokonus</p>
-                  <p className='my-1'>3.) Kalazion</p>
-                  <p className='my-1'>4.) Blefaritis</p>
-                  <p className='my-1'>5.) Hordeolum (Stye)</p>
-                  <p className='my-1'>6.) Konjungtivitis</p>
-                  <p className='my-1'>7.) Trakoma</p>
-                  <p className='my-1'>8.) Abalso Retina</p>
-                  <p className='my-1'>9.) Retinopati Diabetikum</p>
-                  <p className='my-1'>10.) Glaukoma</p>
-                  <p className='my-1'>11.) Katarak</p>
-                  <p className='my-1'>12.) Uveitis</p>
-                  <p className='my-1'>13.) Selulitis Orbitalis</p>
-                  <p className='my-1'>14.) Eksoftalmus</p>
-                  <p className='my-1'>15.) Keratitis Pungtata Superfisialis</p>
-                  <p className='my-1'>16.) Alergi Mata Merah</p>
-                  <p className='my-1'>17.) Endoftalmitis</p>
-                  <p className='my-1'>18.) Trombosis Sinus Kavernosus</p>
-                  <p className='my-1'>19.) Optic Neuritis</p>
-                  <p className='my-1'>20.) Dakrioritis</p>
-                  <p className='my-1'>21.) Degenerasi Makula</p>
-                  <p className='my-1'>22.) Episkleritis</p>
-                  <p className='my-1'>23.) Infeksi Herpes Simpleks Kornea</p>
-                  <p className='my-1'>24.) Infeksi Herpes Zoster Kornea</p>
-                  <p className='my-1'>25.) Keratitis Ulserativa Perifer</p>
-                  <p className='my-1'>26.) Degenerasi Makula</p>
-                  <p className='my-1'>27.) Skleritis</p>
+              Title = {(<p className='fw-bold m-0'>Pembimbing dan Validator</p>)}
+              Content= {(
+                <div>
+                  <p className='my-1'>Chatbot sistem pakar ini merupakan riset tugas akhir di bawah bimbingan :</p>
+                  <p>1. <span className='fw-bold text-blue-600'>Bapak Ir. Nazrul Effendy, S. T, M. Eng, Ph.D., IPM</span> (Pembimbing Utama)</p>
+                  <p>2. <span className='fw-bold text-blue-600'>Bapak Nopriadi, S.T., M.Sc., Ph.D.</span> (Pembimbing Pendamping)</p>
+                  <p>3. <span className='fw-bold text-blue-600'>dr. Indra Tri Mahayana, Ph.D., Sp.M</span> (Validator Data Penyakit Mata dan Algoritma Sistem Pakar)</p>
                 </div>
               )}
             />
             <AccordionBootstrap 
               eventKey={"2"}
+              Title = {(<p className='font-bold m-0'>Daftar Penyakit Mata yang Bisa di Skrining</p>)}
+              Content = {(
+                <div>
+                  <p>Untuk skrining pertama akan mengerucut ke salah satu kesimpulan penyakit mata di bawah ini :</p>
+                  <p>Kelompok penyakit mata 1 : <span className='fw-bold text-blue-600 my-1'>Endoftalmitis, Keraritis, Panofthalmitis, Trombosis Sinus Cavernosus, Uveitis Akut atau Glaukoma Sekunder/Akut</span></p>
+                  <p>Kelompok penyakit mata 2 : <span className='fw-bold text-blue-600 my-1'>Blefaritis, Hemangioma, Iritasi, Gangguan Pembuluh Darah, Konjungtivitis Alergi atau Konjungtivitis Kronis</span></p>
+                  <p>Kelompok penyakit mata 3 : <span className='fw-bold text-blue-600 my-1'>Episkelritis, Hordeolum, Keratokonjungtivitis Flikte Nularis, Konjungtivitis Akut atau Pinguekulitis</span></p>
+                  <p>Kelompok penyakit mata 4 : <span className='fw-bold text-blue-600 my-1'>Abalsi Retina, Perdarahan Vitreus, Neuritis Optik, Kelainan Vaskular Retina, Hifema Spontan, Keracunan Metanol, Stroke Oksipitalis atau Malingering dan Histeria</span></p>
+                  <p>Kelompok penyakit mata 5 : <span className='fw-bold text-blue-600 my-1'>Sikatrik Kornea, Kelainan Refraksi, Katarak, Uveitis Posterior, Glaukoma Sudut Terbuka Primer, Retinopati Diabetika & Hipertensi, Penyakit Macula, Papil Udema, Amblyopia, Neuropati Optik atau Retinisi Pigmentosa</span></p>
+                  <p>Kelompok penyakit mata 6 : <span className='fw-bold text-blue-600 my-1'>Tumor, Strabismus atau Ophthalmopathy Thyroid</span></p>
+                  <p>Kelompok penyakit mata 7 : <span className='fw-bold text-blue-600 my-1'>Sindroma Mata Kering atau Uveitis Kronis</span></p>
+                  <p>atau penyakit mata <span className='fw-bold text-blue-600 my-1'>Perdarahan Subkonjungtiva</span> yang tidak termasuk kelompok penyakit mata manapun</p>
+                </div>
+              )}
+            />
+            <AccordionBootstrap 
+              eventKey={"3"}
               Title = {(<p className='font-bold m-0'>Catatan</p>)}
-              Text = {(
+              Content = {(
                 <div>
                   <p className='my-1'>
                     Hasil skrining dari sistem pakar ini <span className='font-bold text-blue-500'>tidak bisa </span>
