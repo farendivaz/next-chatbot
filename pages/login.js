@@ -23,7 +23,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [send, setSend] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   // validation
   const [emailEmpty, setEmailEmpty] = useState(false);
   const [passwordEmpty, setPasswordEmpty] = useState(false);
@@ -31,8 +31,8 @@ export default function Login() {
 
   const loginHandler = async (e) => {
     e.preventDefault();
-    setSend(true);
-    // send data to server
+    setIsLoading(true);
+    // isLoading data to server
     await axios.post(`https://express-mongoose-validator.herokuapp.com/api/login`, ({ email, password }) )
     .then((response) => {
       // set token on local storage
@@ -42,7 +42,7 @@ export default function Login() {
       // redirect to dashboard
       router.push(`/dashboard/${response.data.user.id}`);
     }).catch((error) => {
-      setSend(false);
+      setIsLoading(false);
       setErrorMessage(error.message);
     })
   }
@@ -70,7 +70,7 @@ export default function Login() {
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
-                setSend(false);
+                setIsLoading(false);
                 setErrorMessage('');
                 if (e.target.value === '') { setEmailEmpty(true); }
                 if (e.target.value !== '') { setEmailEmpty(false); }
@@ -93,7 +93,7 @@ export default function Login() {
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
-                setSend(false);
+                setIsLoading(false);
                 setErrorMessage('');
                 if (e.target.value === '') { 
                   setPasswordEmpty(true);
@@ -130,7 +130,7 @@ export default function Login() {
             MASUK
           </button>
           {/* Validation */}
-          {send === true && (
+          {isLoading === true && (
             <div className="border-2 border-blue-300 bg-blue-100 my-2 p-3 rounded my-2">
               <Spinner
                 as="span"

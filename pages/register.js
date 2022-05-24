@@ -28,8 +28,7 @@ export default function Register() {
   const [passwordConfirmation, setPasswordConfirmation] = useState(null);
   const [gender, setGender] = useState('male');
   const [role, setRole] = useState('member');
-  // sending and error sending
-  const [send, setSend] = useState(false);
+  const [isLoading, setSend] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   // validation
   const [nameEmpty, setNameEmpty] = useState(false);
@@ -43,7 +42,7 @@ export default function Register() {
   const registerHandler = async (e) => {
     if (nameEmpty === false && emailEmpty === false && passwordEmpty === false) {
       e.preventDefault();
-      setSend(true);
+      setIsLoading(true);
       await axios.post('https://express-mongoose-validator.herokuapp.com/api/register', 
         ({ name: name, email: email, password: password, gender: gender, role: role })
       ).then((response) => {
@@ -54,7 +53,7 @@ export default function Register() {
         // redirect to dashboard (auto sign in after register)
         router.push(`/dashboard/${response.data.user.id}`);
       }).catch((error) => {
-        setSend(false);
+        setIsLoading(false);
         setErrorMessage(error.message);
       })
     }
@@ -85,7 +84,7 @@ export default function Register() {
               value={name} 
               onChange={(e) => {
                 setName(e.target.value);
-                setSend(false);
+                setIsLoading(false);
                 setErrorMessage('');
                 if (e.target.value === '') { setNameEmpty(true); }
                 if (e.target.value !== '') { setNameEmpty(false); }
@@ -108,7 +107,7 @@ export default function Register() {
               value={email} 
               onChange={(e) => {
                 setEmail(e.target.value);
-                setSend(false);
+                setIsLoading(false);
                 setErrorMessage('');
                 if (e.target.value === '') { setEmailEmpty(true); }
                 if (e.target.value !== '') { setEmailEmpty(false); }
@@ -131,7 +130,7 @@ export default function Register() {
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
-                setSend(false);
+                setIsLoading(false);
                 setErrorMessage('');
                 if (e.target.value === '') { 
                   setPasswordEmpty(true);
@@ -169,7 +168,7 @@ export default function Register() {
               value={passwordConfirmation}
               onChange={(e) => {
                 setPasswordConfirmation(e.target.value);
-                setSend(false);
+                setIsLoading(false);
                 setErrorMessage('');
                 if (e.target.value === '') {
                   setPasswordConfirmationEmpty(true);
@@ -206,7 +205,7 @@ export default function Register() {
               value={gender}
               onChange={(e) => {
                 setGender(e.target.value);
-                setSend(false);
+                setIsLoading(false);
                 setErrorMessage('');
               }}
             >
@@ -223,7 +222,7 @@ export default function Register() {
               defaultChecked={isCheck}
               onChange={() => {
                 setIsCheck(!isCheck);
-                setSend(false);
+                setIsLoading(false);
                 setErrorMessage('');
                 if (isCheck === true) {setRole('')}
                 if (isCheck === false) {setRole('member')}
@@ -246,7 +245,7 @@ export default function Register() {
             DAFTAR
           </button>
           {/* Validation */}
-          {send === true && (
+          {isLoading === true && (
             <div className="border-2 border-blue-300 bg-blue-100 my-2 p-3 rounded my-2">
               <Spinner
                 as="span"
