@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import AddChat from './AddChat';
-import AddChat2 from './AddChat2';
 import Compare from './Compare';
 import ChatbotInterface from './ChatbotInterface';
 import {prompts,replies,alternative,coronavirus,} from '../data/PromptsAndReplies';

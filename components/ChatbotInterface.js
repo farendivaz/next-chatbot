@@ -37,7 +37,7 @@ export default function ChatbotInterface({
   return (
     <div className='border-2 mb-2 max-w-3xl p-0 rounded-xl hover:border-blue-500 shadow-lg w-full'>
       <div className='mx-0 mb-0 w-100 rounded shadow-hover-primary'>
-        <h4 className='bg-blue-600 mb-0 p-1 w-100 opensans rounded-top text-center text-light text-xl'>
+        <h4 className='bg-blue-600 mb-0 p-1 w-100 rounded-top text-center text-light text-xl'>
           Chat Bot Sistem Pakar
         </h4>
         <div 
