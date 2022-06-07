@@ -49,9 +49,8 @@ export default function Login() {
       .then((response) => {
         setIsLoading(false);
         setIsSend(true);
-        // set token on local storage
+        // set token and user id on local storage
         localStorage.setItem('token', response.data.token);
-        // set user id on local storage
         localStorage.setItem('user_id', response.data.user.id);
         // redirect to dashboard
         router.push(`/dashboard/${response.data.user.id}`);
