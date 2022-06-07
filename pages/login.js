@@ -30,7 +30,9 @@ export default function Login() {
   const [passwordIsTooShort, setPasswordIsTooShort] = useState(false);
 
   const loginHandler = async (e) => {
+    // to avoid reload after button was clicked
     e.preventDefault();
+
     setIsLoading(true);
     // isLoading data to server
     await axios.post(`https://express-mongoose-validator.herokuapp.com/api/login`, ({ email, password }) )
@@ -144,7 +146,12 @@ export default function Login() {
           )}
           {errorMessage === 'Request failed with status code 404' && (
             <div className="border-2 border-red-300 bg-red-100 p-3 rounded my-2">
-              Email tidak terdaftar, silahkan daftar terlebih dahulu.
+              Email tidak terdaftar, silahkan daftar{' '}
+              <Link href='/register'>
+                <a className='no-underline'>
+                  di sini.
+                </a>
+              </Link>..
             </div>
           )}
           {errorMessage === 'Request failed with status code 401' && (

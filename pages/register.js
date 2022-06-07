@@ -28,7 +28,7 @@ export default function Register() {
   const [passwordConfirmation, setPasswordConfirmation] = useState(null);
   const [gender, setGender] = useState('male');
   const [role, setRole] = useState('member');
-  const [isLoading, setSend] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   // validation
   const [nameEmpty, setNameEmpty] = useState(false);
@@ -40,30 +40,33 @@ export default function Register() {
   const [isCheck, setIsCheck] = useState(true);
 
   const registerHandler = async (e) => {
-    if (nameEmpty === false && emailEmpty === false && passwordEmpty === false) {
-      e.preventDefault();
-      setIsLoading(true);
-      await axios.post('https://express-mongoose-validator.herokuapp.com/api/register', 
-        ({ name: name, email: email, password: password, gender: gender, role: role })
-      ).then((response) => {
-        // set token on local storage
-        localStorage.setItem('token', response.data.token);
-        // set user id on local storage
-        localStorage.setItem('user_id', response.data.user.id);
-        // redirect to dashboard (auto sign in after register)
-        router.push(`/dashboard/${response.data.user.id}`);
-      }).catch((error) => {
-        setIsLoading(false);
-        setErrorMessage(error.message);
+    // to avoid reload after button was clicked
+    e.preventDefault();
+    
+    setIsLoading(true);
+    await axios.post('https://express-mongoose-validator.herokuapp.com/api/register', 
+      ({ 
+        name: name, 
+        email: email, 
+        password: password, 
+        gender: gender, 
+        role: role 
       })
-    }
+    ).then((response) => {
+      // set token on local storage
+      localStorage.setItem('token', response.data.token);
+      // set user id on local storage
+      localStorage.setItem('user_id', response.data.user.id);
+      // redirect to dashboard (auto sign in after register)
+      router.push(`/dashboard/${response.data.user.id}`);
+    }).catch((error) => {
+      setIsLoading(false);
+      setErrorMessage(error.message);
+    })
   }
   
   return (
     <div className="lg:h-full md:h-screen h-screen bg-blue-300 pb-9 poppins" >
-
-      <style jsx>{`
-      `}</style>
 
       <HeadElement text={`Register - Page`} />
 
