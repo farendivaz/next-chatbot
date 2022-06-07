@@ -29,6 +29,7 @@ export default function Register() {
   const [gender, setGender] = useState('male');
   const [role, setRole] = useState('member');
   const [isLoading, setIsLoading] = useState(false);
+  const [isSend, setIsSend] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   // validation
   const [nameEmpty, setNameEmpty] = useState(false);
@@ -42,27 +43,53 @@ export default function Register() {
   const registerHandler = async (e) => {
     // to avoid reload after button was clicked
     e.preventDefault();
-    
-    setIsLoading(true);
-    await axios.post('https://express-mongoose-validator.herokuapp.com/api/register', 
-      ({ 
-        name: name, 
-        email: email, 
-        password: password, 
-        gender: gender, 
-        role: role 
+
+    if (!name) {
+      setNameEmpty(true)
+    } if (!email) {
+      setEmailEmpty(true)
+    } if (!password) {
+      setPasswordEmpty(true)
+    } if (!name && !password) {
+      setNameEmpty(true)
+      setPasswordEmpty(true)
+    } if (!email && !password) {
+      setEmailEmpty(true)
+      setPasswordEmpty(true)
+    } if (!email && !password) {
+      setEmailEmpty(true)
+      setPasswordEmpty(true)
+    } if (!name && !email && !password) {
+      setNameEmpty(true)
+      setEmailEmpty(true)
+      setPasswordEmpty(true)
+    } 
+    if (name && email && password) {
+      setIsSend(false);
+      setIsLoading(true);
+
+      await axios.post('https://express-mongoose-validator.herokuapp.com/api/register', 
+        ({ 
+          name: name, 
+          email: email, 
+          password: password, 
+          gender: gender, 
+          role: role 
+        })
+      ).then((response) => {
+        setIsLoading(false);
+        setIsSend(true);
+        // set token on local storage
+        localStorage.setItem('token', response.data.token);
+        // set user id on local storage
+        localStorage.setItem('user_id', response.data.user.id);
+        // redirect to dashboard (auto sign in after register)
+        router.push(`/dashboard/${response.data.user.id}`);
+      }).catch((error) => {
+        setIsLoading(false);
+        setErrorMessage(error.message);
       })
-    ).then((response) => {
-      // set token on local storage
-      localStorage.setItem('token', response.data.token);
-      // set user id on local storage
-      localStorage.setItem('user_id', response.data.user.id);
-      // redirect to dashboard (auto sign in after register)
-      router.push(`/dashboard/${response.data.user.id}`);
-    }).catch((error) => {
-      setIsLoading(false);
-      setErrorMessage(error.message);
-    })
+    }
   }
   
   return (
@@ -88,6 +115,7 @@ export default function Register() {
               onChange={(e) => {
                 setName(e.target.value);
                 setIsLoading(false);
+                setIsSend(false);
                 setErrorMessage('');
                 if (e.target.value === '') { setNameEmpty(true); }
                 if (e.target.value !== '') { setNameEmpty(false); }
@@ -111,6 +139,7 @@ export default function Register() {
               onChange={(e) => {
                 setEmail(e.target.value);
                 setIsLoading(false);
+                setIsSend(false);
                 setErrorMessage('');
                 if (e.target.value === '') { setEmailEmpty(true); }
                 if (e.target.value !== '') { setEmailEmpty(false); }
@@ -134,6 +163,7 @@ export default function Register() {
               onChange={(e) => {
                 setPassword(e.target.value);
                 setIsLoading(false);
+                setIsSend(false);
                 setErrorMessage('');
                 if (e.target.value === '') { 
                   setPasswordEmpty(true);
@@ -172,6 +202,7 @@ export default function Register() {
               onChange={(e) => {
                 setPasswordConfirmation(e.target.value);
                 setIsLoading(false);
+                setIsSend(false);
                 setErrorMessage('');
                 if (e.target.value === '') {
                   setPasswordConfirmationEmpty(true);
@@ -209,6 +240,7 @@ export default function Register() {
               onChange={(e) => {
                 setGender(e.target.value);
                 setIsLoading(false);
+                setIsSend(false);
                 setErrorMessage('');
               }}
             >
@@ -226,6 +258,7 @@ export default function Register() {
               onChange={() => {
                 setIsCheck(!isCheck);
                 setIsLoading(false);
+                setIsSend(false);
                 setErrorMessage('');
                 if (isCheck === true) {setRole('')}
                 if (isCheck === false) {setRole('member')}
@@ -258,6 +291,18 @@ export default function Register() {
                 aria-hidden="true"
                 variant="primary"
               /> Tunggu sebentar...
+            </div>
+          )}
+          {isSend === true && (
+            <div className="border-2 border-blue-300 bg-blue-100 my-2 p-3 rounded my-2">
+              <Spinner
+                as="span"
+                animation="grow"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+                variant="primary"
+              /> Sedang mengirim data...
             </div>
           )}
           {errorMessage === 'Request failed with status code 409' && (
