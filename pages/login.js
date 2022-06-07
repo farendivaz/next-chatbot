@@ -24,6 +24,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isSend, setIsSend] = useState(false);
   // validation
   const [emailEmpty, setEmailEmpty] = useState(false);
   const [passwordEmpty, setPasswordEmpty] = useState(false);
@@ -32,21 +33,33 @@ export default function Login() {
   const loginHandler = async (e) => {
     // to avoid reload after button was clicked
     e.preventDefault();
-
-    setIsLoading(true);
-    // isLoading data to server
-    await axios.post(`https://express-mongoose-validator.herokuapp.com/api/login`, ({ email, password }) )
-    .then((response) => {
-      // set token on local storage
-      localStorage.setItem('token', response.data.token);
-      // set user id on local storage
-      localStorage.setItem('user_id', response.data.user.id);
-      // redirect to dashboard
-      router.push(`/dashboard/${response.data.user.id}`);
-    }).catch((error) => {
-      setIsLoading(false);
-      setErrorMessage(error.message);
-    })
+  
+    if (!email) {
+      setEmailEmpty(true)
+    } if (!password) {
+      setPasswordEmpty(true)
+    } if (!email && !password) {
+      setEmailEmpty(true)
+      setPasswordEmpty(true)
+    } if (email && password) {
+      setIsSend(false);
+      setIsLoading(true);
+      // send data to server
+      await axios.post(`https://express-mongoose-validator.herokuapp.com/api/login`, ({ email, password }) )
+      .then((response) => {
+        setIsLoading(false);
+        setIsSend(true);
+        // set token on local storage
+        localStorage.setItem('token', response.data.token);
+        // set user id on local storage
+        localStorage.setItem('user_id', response.data.user.id);
+        // redirect to dashboard
+        router.push(`/dashboard/${response.data.user.id}`);
+      }).catch((error) => {
+        setIsLoading(false);
+        setErrorMessage(error.message);
+      })
+    }
   }
   
   return (
@@ -142,6 +155,18 @@ export default function Login() {
                 aria-hidden="true"
                 variant="primary"
               /> Tunggu sebentar...
+            </div>
+          )}
+          {isSend === true && (
+            <div className="border-2 border-blue-300 bg-blue-100 my-2 p-3 rounded my-2">
+              <Spinner
+                as="span"
+                animation="grow"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+                variant="primary"
+              /> Sedang mengirim data...
             </div>
           )}
           {errorMessage === 'Request failed with status code 404' && (
