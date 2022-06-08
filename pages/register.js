@@ -18,15 +18,15 @@ export default function Register() {
   }, []);
 
   // initial state
-  const [name, setName] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
-  const [passwordConfirmation, setPasswordConfirmation] = useState(null);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [gender, setGender] = useState('male');
   const [role, setRole] = useState('member');
   const [isLoading, setIsLoading] = useState(false);
   const [isSend, setIsSend] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
   // validation
   const [nameEmpty, setNameEmpty] = useState(false);
   const [emailEmpty, setEmailEmpty] = useState(false);
