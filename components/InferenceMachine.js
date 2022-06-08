@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+
 import Compare from './Compare';
 import ChatbotInterface from './ChatbotInterface';
-import {prompts,replies,alternative,coronavirus,} from '../data/PromptsAndReplies';
+import { prompts, replies, alternative } from '../data/PromptsAndReplies';
 
 const question = `Apa kamu mengalami gejala`;
 const yesOrNo = `? ya/tidak`;
@@ -144,15 +145,6 @@ const ruleBase = [
 ];
 
 export default function InferenceMachine () {
-
-  // message log
-  const [messageLog, setMessageLog] = useState([
-    {
-      sender:'bot',
-      message:`Halo, ini adalah bot skrining penyakit mata.`
-    }
-  ])
-
   // opening chat message will be appear when browser reload
   useEffect(() => {
     setTimeout(() => {
@@ -164,90 +156,11 @@ export default function InferenceMachine () {
       ]);
     },1000);
   },[])
-
-  // chat input
+  // initialize all state
   const [chatInput, setChatInput] = useState('')
-  // handle when form input was change or type by user and also get user input with setInput
-  const handleChange = (event) => {
-    setChatInput(event.target.value)
-  }
-  // get bot reply after user input chat and button was clicked
-  const handleSubmit = () => {
-    Output(chatInput)
-    setChatInput('')    // return empty form after user press the button
-  }
-  // get bot reply after user input chat and enter was pressed
-  const handleEnter = (event) => {
-    if (event.key === 'Enter') {
-      Output(chatInput)
-      setChatInput('')  // return empty form after user press enter
-    }
-  }
-  const handleStartScreening = () => {
-    Output('skrining') // input = 'mulai'
-    setChatInput('')       // return empty form after user press button
-  }
-  const handleNextScreening = () => {
-    Output('lanjut') // input = 'lanjut'
-    setChatInput('')     // return empty form after user press the button
-    setInputNow('lanjut')
-    setinputBefore(inputNow)
-  }
-  const handleYes = () => {
-    Output('ya')    // input = 'ya'
-    setChatInput('')    // return empty form after user press button
-    setInputNow('ya')
-    setinputBefore(inputNow)
-  }
-  const handleNo = () => {
-    Output('tidak') // input = 'tidak'
-    setChatInput('')    // return empty form after user press button
-    setInputNow('tidak')
-    setinputBefore(inputNow)
-  }
-  
-  function Output(input) {
-    input = input
-      .toLowerCase()            // replace all input text to lower case
-      .replace(/[^\w\s]/gi, '') // replace unneccessary input from user
-      .replace(/[\d]/gi, '')
-      .replace(/ a /g, ' ')     // example : 'tell me a story' -> 'tell me story'
-      .replace(/i feel /g, '')
-      .replace(/whats/g, 'what is')
-      .replace(/please /g, '')
-      .replace(/ please/g, '')
-      .replace(/r u/g, 'are you')
-      .replace(/'/g, '')
-      .trim();                  // remove whitespace from both sides of a string
-    
-    let reply;
-    if (Compare(prompts, replies, input)) { 
-      // Search for exact match in `prompts`
-      reply = Compare(prompts, replies, input);
-      setMessageLog([...messageLog, {sender:'bot', message:reply}])
-    } 
-    else if (input.match(/terima kasih/gi)) {
-      reply = 'Sama-sama'
-      setMessageLog([...messageLog, {sender:'bot', message:reply}])
-    }
-    // Screening Eye Disease
-    else if (input.match(/(y|ya|t|tidak|mulai|tes|test|skrining|lanjut)/gi)) {
-      reply = Screening(input)[0];
-      setMessageLog([...messageLog,
-        {sender:'user', message:input},
-        {sender:'bot', message:reply}
-      ])
-    }
-    // If all else fails: random alternative
-    else {
-      reply = alternative[Math.floor(Math.random() * alternative.length)];
-      setMessageLog([...messageLog, {sender:'bot', message:reply}])
-    }
-    // Add chat
-    // AddChat(input, reply);
-  }
-
-  // initialize state for screening system
+  const [messageLog, setMessageLog] = useState([
+    { sender:'bot', message:`Halo, ini adalah bot skrining penyakit mata.`}
+  ])
   let [i,setI] = useState(0);
   let [j,setJ] = useState(0);
   let [inputNow, setInputNow] = useState('');
@@ -261,18 +174,115 @@ export default function InferenceMachine () {
   let [diagnoseResult, setDiagnoseResult] = useState('');
   let [lastValueInRuleBase, setLastValueInRuleBase] = useState('');
 
-  function Screening(input) {
-    // auto update screening result when screening result come up
-    function UpdateScreeningResult() {
-      // get user id and screening result from local storage
-      const userId = localStorage.getItem("user_id");
-      const screening_result = localStorage.getItem("screening_result");
-      axios.put(`https://express-mongoose-validator.herokuapp.com/api/users/${userId}`,
-        ({
-          updatedScreeningResult: screening_result
-        })
-      )
+  const handleChange = (event) => {
+    setChatInput(event.target.value)
+  }
+  const handleSubmit = () => {
+    Output(chatInput)
+    setChatInput('')    // return empty form after user press the button
+  }
+  const handleEnter = (event) => {
+    if (event.key === 'Enter') {
+      Output(chatInput)
+      setChatInput('')   // return empty form after user press enter
     }
+  }
+  const handleStartScreening = () => {
+    Output('skrining')
+    setChatInput('')     // return empty form after user press button
+  }
+  const handleNextScreening = () => {
+    Output('lanjut')
+    setChatInput('')     // return empty form after user press the button
+    setInputNow('lanjut')
+    setinputBefore(inputNow)
+  }
+  const handleYes = () => {
+    Output('ya')
+    setChatInput('')     // return empty form after user press button
+    setInputNow('ya')
+    setinputBefore(inputNow)
+  }
+  const handleNo = () => {
+    Output('tidak')
+    setChatInput('')    // return empty form after user press button
+    setInputNow('tidak')
+    setinputBefore(inputNow)
+  }
+  // process respobse bot
+  const [savedMessageHistory, setSavedMessageHistory] = useState([]);
+  function Output(input) {
+    let messageHistory;
+    let reply;
+
+    input = input
+      .toLowerCase()            // replace all input text to lower case
+      .replace(/[^\w\s]/gi, '') // replace unneccessary input from user
+      .replace(/[\d]/gi, '')
+      .replace(/ a /g, ' ')     // example : 'tell me a story' -> 'tell me story'
+      .replace(/i feel /g, '')
+      .replace(/whats/g, 'what is')
+      .replace(/please /g, '')
+      .replace(/ please/g, '')
+      .replace(/r u/g, 'are you')
+      .replace(/'/g, '')
+      .trim();                  // remove whitespace from both sides of a string
+
+    if (Compare(prompts, replies, input)) { 
+      // Search for exact match in `prompts`
+      reply = Compare(prompts, replies, input);
+      setMessageLog([...messageLog, {sender:'bot', message:reply}])
+    } 
+    else if (input.match(/terima kasih/gi)) {
+      reply = 'Sama-sama'
+      setMessageLog([...messageLog, {sender:'bot', message:reply}])
+    }
+    // Screening Eye Disease
+    else if (input.match(/(y|ya|t|tidak|mulai|tes|test|skrining|lanjut)/gi)) {
+      reply = Screening(input)[0];
+      // chat reply
+      setMessageLog([
+        ...messageLog,
+        {sender:'user', message:input},
+        {sender:'bot', message:reply}
+      ])
+      // auto save message history to database using API
+      const userId = localStorage.getItem("user_id");
+      if (userId) {
+        if (input === 'mulai' || input === 'tes' || input === 'test' || input === 'skrining') {
+          // empty message histroy in database when user click/type those input button
+          localStorage.setItem('message_history', '');
+          axios.put(`https://express-mongoose-validator.herokuapp.com/api/users/${userId}`,
+            ({
+              updatedScreeningResult:['empty']
+            })
+          )
+        } else {
+          // update message history in database
+          messageHistory = savedMessageHistory
+          messageHistory.push(
+            {sender:'user', message:input},
+            {sender:'bot', message:reply}
+          )
+          setSavedMessageHistory(messageHistory)
+          localStorage.setItem('message_history', JSON.stringify(messageHistory));
+          axios.put(`https://express-mongoose-validator.herokuapp.com/api/users/${userId}`,
+            ({
+              updatedScreeningResult: localStorage.getItem("message_history") 
+            })
+          )
+        }
+      }
+    }
+    // If all else fails: random alternative
+    else {
+      reply = alternative[Math.floor(Math.random() * alternative.length)];
+      setMessageLog([...messageLog, {sender:'bot', message:reply}])
+    }
+  }
+
+  function Screening(input) {
+    
     let reply;
     if (input === 'mulai' || input === 'tes'|| input === 'test'  || input === 'skrining') {
       // re-empty
@@ -385,11 +395,6 @@ export default function InferenceMachine () {
                   Ketik atau tekan lanjut untuk melanjutkan skrining kedua.`
                   setDiagnoseResult(reply); setI(i); setJ(j);
                   setLastValueInRuleBase(ruleBase[i][j+1]); setReplyBefore('');
-                  // set screening result on local storage
-                  localStorage.setItem('screening_result', reply);
-                  if(localStorage.getItem('token')) {
-                    UpdateScreeningResult()
-                  }
                 }
                 // 2nd screening
                 else {
@@ -397,23 +402,13 @@ export default function InferenceMachine () {
                     reply = `Kamu menjawab ya untuk ${allYesReply.length+1} pertanyaan yang ditanyakan oleh bot.
                     Melalui skrining dicurigai kamu mengalami 1 gejala dari penyakit mata ${lastValueWhenUserResponYes}. 
                     Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
-                    setDiagnoseResult(reply); setI(i); setJ(j); setReplyBefore('');
-                    // set screening result on local storage
-                    localStorage.setItem('screening_result', reply);
-                    if(localStorage.getItem('token')) {
-                      UpdateScreeningResult()
-                    }
+                    setDiagnoseResult(reply); setI(i); setJ(j); setReplyBefore('');                    
                   }
                   else {
                     reply = `Kamu menjawab ya untuk ${allYesReply.length+1} pertanyaan yang ditanyakan oleh bot.
                     Melalui skrining dicurigai kamu mengalami ${totalSympthomWhenUserResponYes[totalSympthomWhenUserResponYes.length-1]} gejala dari penyakit mata ${lastValueWhenUserResponYes}. 
                     Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                     setDiagnoseResult(reply); setI(i); setJ(j); setReplyBefore('');
-                    // set screening result on local storage
-                    localStorage.setItem('screening_result', reply);
-                    if(localStorage.getItem('token')) {
-                      UpdateScreeningResult()
-                    }
                   }
                 }
               }
@@ -434,11 +429,6 @@ export default function InferenceMachine () {
                   Ketik atau tekan lanjut untuk melanjutkan skrining kedua.`
                   setDiagnoseResult(reply); setI(i); setJ(j);
                   setLastValueInRuleBase(ruleBase[i][j+1]); setReplyBefore('');
-                  // set screening result on local storage
-                  localStorage.setItem('screening_result', reply);
-                  if(localStorage.getItem('token')) {
-                    UpdateScreeningResult()
-                  }
                 }
                 // 2nd screening
                 else {
@@ -447,22 +437,12 @@ export default function InferenceMachine () {
                     Melalui skrining dicurigai kamu mengalami 1 gejala dari penyakit mata ${lastValueWhenUserResponNo}. 
                     Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                     setDiagnoseResult(reply); setI(i); setJ(j); setReplyBefore('');
-                    // set screening result on local storage
-                    localStorage.setItem('screening_result', reply);
-                    if(localStorage.getItem('token')) {
-                      UpdateScreeningResult()
-                    }
                   }
                   else {
                     reply = `Kamu menjawab ya untuk ${allYesReply.length} pertanyaan yang ditanyakan oleh bot.
                     Melalui skrining dicurigai kamu mengalami ${totalSympthomWhenUserResponNo[totalSympthomWhenUserResponNo.length-1]} gejala dari penyakit mata ${lastValueWhenUserResponNo}.
                     Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                     setDiagnoseResult(reply); setI(i); setJ(j); setReplyBefore('');
-                    // set screening result on local storage
-                    localStorage.setItem('screening_result', reply);
-                    if(localStorage.getItem('token')) {
-                      UpdateScreeningResult()
-                    }
                   }
                 }
               }
@@ -547,11 +527,6 @@ export default function InferenceMachine () {
                         Melalui skrining dicurigai kamu mengalami ${allYesReply.length} gejala dari penyakit mata antara ${ruleBase[i+1][ruleBase[i+1].length-1]}.
                         Ketik atau tekan lanjut untuk melanjutkan skrining kedua.`
                         setDiagnoseResult(reply); setReplyBefore(''); setLastValueInRuleBase(ruleBase[i+1][j]);
-                        // set screening result on local storage
-                        localStorage.setItem('screening_result', reply);
-                        if(localStorage.getItem('token')) {
-                          UpdateScreeningResult()
-                        }
                       }
                       // 2nd screening
                       else {
@@ -559,11 +534,6 @@ export default function InferenceMachine () {
                         Melalui skrining dicurigai kamu mengalami ${allYesReply.length} gejala dari penyakit mata antara ${ruleBase[i+1][ruleBase[i+1].length-1]}. 
                         Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                         setDiagnoseResult(reply); setReplyBefore(''); setLastValueInRuleBase(ruleBase[i+1][j]);
-                        // set screening result on local storage
-                        localStorage.setItem('screening_result', reply);
-                        if(localStorage.getItem('token')) {
-                          UpdateScreeningResult()
-                        }
                       }
                     }
                     // if ruleBase[i+1][j] is not the last value
@@ -632,11 +602,6 @@ export default function InferenceMachine () {
                         Melalui skrining dicurigai kamu mengalami ${allYesReply.length} gejala dari penyakit mata antara ${ruleBase[i+1][ruleBase[i+1].length-1]}.
                         Ketik atau tekan lanjut untuk melanjutkan skrining kedua.`
                         setDiagnoseResult(reply); setReplyBefore(''); setLastValueInRuleBase(ruleBase[i+1][j]);
-                        // set screening result on local storage
-                        localStorage.setItem('screening_result', reply);
-                        if(localStorage.getItem('token')) {
-                          UpdateScreeningResult()
-                        }
                       }
                       // 2nd screening
                       else {
@@ -644,11 +609,6 @@ export default function InferenceMachine () {
                         Melalui skrining dicurigai kamu mengalami ${allYesReply.length} gejala dari penyakit mata antara ${ruleBase[i+1][ruleBase[i+1].length-1]}. 
                         Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                         setDiagnoseResult(reply); setReplyBefore(''); setLastValueInRuleBase(ruleBase[i+1][j]);
-                        // set screening result on local storage
-                        localStorage.setItem('screening_result', reply);
-                        if(localStorage.getItem('token')) {
-                          UpdateScreeningResult()
-                        }
                       }
                     }
                     // if ruleBase[i+1][j] is not the last value of ruleBase[i]
@@ -718,11 +678,6 @@ export default function InferenceMachine () {
                         Melalui skrining dicurigai kamu mengalami ${allYesReply.length} gejala dari penyakit mata antara ${ruleBase[i+1][ruleBase[i+1].length-1]}.
                         Ketik atau tekan lanjut untuk melanjutkan skrining kedua.`
                         setDiagnoseResult(reply); setReplyBefore(''); setLastValueInRuleBase(ruleBase[i+1][j]);
-                        // set screening result on local storage
-                        localStorage.setItem('screening_result', reply);
-                        if(localStorage.getItem('token')) {
-                          UpdateScreeningResult()
-                        }
                       }
                       // 2nd screening
                       else {
@@ -730,11 +685,6 @@ export default function InferenceMachine () {
                         Melalui skrining dicurigai kamu mengalami ${allYesReply.length} gejala dari penyakit mata antara ${ruleBase[i+1][ruleBase[i+1].length-1]}. 
                         Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                         setDiagnoseResult(reply); setReplyBefore(''); setLastValueInRuleBase(ruleBase[i+1][j]);
-                        // set screening result on local storage
-                        localStorage.setItem('screening_result', reply);
-                        if(localStorage.getItem('token')) {
-                          UpdateScreeningResult()
-                        }
                       }
                     }
                     // if ruleBase[i+1][j] is not the last value of ruleBase[i]
@@ -808,11 +758,6 @@ export default function InferenceMachine () {
                         Melalui skrining dicurigai kamu mengalami ${allYesReply.length} gejala dari penyakit mata antara ${ruleBase[i+1][ruleBase[i+1].length-1]}.
                         Ketik atau tekan lanjut untuk melanjutkan skrining kedua.`
                         setDiagnoseResult(reply); setReplyBefore(''); setLastValueInRuleBase(ruleBase[i+1][j]);
-                        // set screening result on local storage
-                        localStorage.setItem('screening_result', reply);
-                        if(localStorage.getItem('token')) {
-                          UpdateScreeningResult()
-                        }
                       }
                       // 2nd screening
                       else {
@@ -820,11 +765,6 @@ export default function InferenceMachine () {
                         Melalui skrining dicurigai kamu mengalami ${allYesReply.length} gejala dari penyakit mata antara ${ruleBase[i+1][ruleBase[i+1].length-1]}. 
                         Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                         setDiagnoseResult(reply); setReplyBefore(''); setLastValueInRuleBase(ruleBase[i+1][j]);
-                        // set screening result on local storage
-                        localStorage.setItem('screening_result', reply);
-                        if(localStorage.getItem('token')) {
-                          UpdateScreeningResult()
-                        }
                       }
                     }
                     // if ruleBase[i+1][j] is not the last value of ruleBase[i]
@@ -901,11 +841,6 @@ export default function InferenceMachine () {
                         Melalui skrining dicurigai kamu mengalami ${allYesReply.length} gejala dari penyakit mata antara ${ruleBase[i+1][ruleBase[i+1].length-1]}.
                         Ketik atau tekan lanjut untuk melanjutkan skrining kedua.`
                         setDiagnoseResult(reply); setReplyBefore(''); setLastValueInRuleBase(ruleBase[i+1][j]);
-                        // set screening result on local storage
-                        localStorage.setItem('screening_result', reply);
-                        if(localStorage.getItem('token')) {
-                          UpdateScreeningResult()
-                        }
                       }
                       // 2nd screening
                       else {
@@ -913,11 +848,6 @@ export default function InferenceMachine () {
                         Melalui skrining dicurigai kamu mengalami ${allYesReply.length} gejala dari penyakit mata antara ${ruleBase[i+1][ruleBase[i+1].length-1]}. 
                         Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                         setDiagnoseResult(reply); setReplyBefore(''); setLastValueInRuleBase(ruleBase[i+1][j]);
-                        // set screening result on local storage
-                        localStorage.setItem('screening_result', reply);
-                        if(localStorage.getItem('token')) {
-                          UpdateScreeningResult()
-                        }
                       }
                     }
                     // if ruleBase[i+1][j] is not the last value of ruleBase[i]
@@ -997,11 +927,6 @@ export default function InferenceMachine () {
                         Melalui skrining dicurigai kamu mengalami ${allYesReply.length} gejala dari penyakit mata antara ${ruleBase[i+1][ruleBase[i+1].length-1]}.
                         Ketik atau tekan lanjut untuk melanjutkan skrining kedua.`
                         setDiagnoseResult(reply); setReplyBefore(''); setLastValueInRuleBase(ruleBase[i+1][j]);
-                        // set screening result on local storage
-                        localStorage.setItem('screening_result', reply);
-                        if(localStorage.getItem('token')) {
-                          UpdateScreeningResult()
-                        }
                       }
                       // 2nd screening
                       else {
@@ -1009,11 +934,6 @@ export default function InferenceMachine () {
                         Melalui skrining dicurigai kamu mengalami ${allYesReply.length} gejala dari penyakit mata antara ${ruleBase[i+1][ruleBase[i+1].length-1]}. 
                         Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                         setDiagnoseResult(reply); setReplyBefore(''); setLastValueInRuleBase(ruleBase[i+1][j]);
-                        // set screening result on local storage
-                        localStorage.setItem('screening_result', reply);
-                        if(localStorage.getItem('token')) {
-                          UpdateScreeningResult()
-                        }
                       }
                     }
                     // if ruleBase[i+1][j] is not the last value of ruleBase[i]
@@ -1071,11 +991,6 @@ export default function InferenceMachine () {
                     Melalui skrining dicurigai kamu mengalami ${allYesReply.length} gejala dari penyakit mata antara ${ruleBase[i+1][ruleBase[i+1].length-1]}. 
                     Silahkan konsultasikan hasil skrining ini dengan dokter spesialis mata terdekat untuk informasi lebih lanjut.`
                     setDiagnoseResult(reply); setReplyBefore(''); setLastValueInRuleBase(ruleBase[i+1][j]);
-                    // set screening result on local storage
-                    localStorage.setItem('screening_result', reply);
-                    if(localStorage.getItem('token')) {
-                      UpdateScreeningResult()
-                    }
                   }
                   // if ruleBase[i+1][j] is not the last value of ruleBase[i]
                   if (arr[findIndexInArray+1] !== ruleBase[i+1][ruleBase[i+1].length-1]) {
@@ -1106,7 +1021,7 @@ export default function InferenceMachine () {
         // but not press 'mulai' / 'tes' / 'test' / 'skrining' / 'lanjut' before
         else {
           if (input === 'y' || input === 'ya' || input === 't' || input === 'tidak') {
-            reply = `Ketik atau tekan mulai untuk skrining penyakit mata`
+            reply = `Ketik atau tekan skrining untuk skrining penyakit mata`
           }
         }
       }

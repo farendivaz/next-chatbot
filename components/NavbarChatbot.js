@@ -11,8 +11,7 @@ export default function Navbar() {
     const token = localStorage.getItem('token');
     if(!token) { 
       setTokenEmpty(true);
-    }
-    else {
+    } else {
       setTokenEmpty(false);
     }
   }, []);

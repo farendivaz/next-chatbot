@@ -6,20 +6,15 @@ import '../styles/Home.module.css';
 
 export default function Home() {
   return (
-    <div className='lg:h-full md:h-screen h-full bg-blue-300 m-0 poppins'>
-
+    <div className='bg-blue-300 h-full m-0 poppins'>
       <HeadElement text={`EyeScreening - Chatbot`}/>
-      
       <div className='bg-blue-500 roboto text-center text-white w-full'>
         Chatbot Expert System
       </div>
-      
       <Navbar/>
-
-      <main className='flex flex-row justify-center mt-3 mb-3'>
+      <main className='flex flex-row justify-center mt-2 mb-2'>
         <InferenceMachine/>
       </main>
-
       <Footer/>
     </div>
   )

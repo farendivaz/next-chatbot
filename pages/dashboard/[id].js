@@ -65,19 +65,14 @@ export default function Crud() {
 
   return (
     <div className='lg:h-full md:h-screen h-full bg-blue-300 m-0 opensans'>
-
       <HeadElement text={`EyeScreening - Dashboard`}/>
-      
       <div className='bg-blue-500 roboto text-center text-white w-full'>
         Hallo, {user.name}
       </div>
-      
       <Navbar/>
-
       <main className='flex flex-row justify-center mt-3 mb-3'>
         <InferenceMachine/>
       </main>
-
       <Footer/>
     </div>
   )

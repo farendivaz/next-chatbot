@@ -7,10 +7,8 @@ import Navbar from '../components/NavbarChatbot';
 import Link from 'next/link';
 
 export default function Login() {
-  // use router
   const router = useRouter();
   useEffect(() => {
-    //get token and user id from local storage when browser reload
     const token = localStorage.getItem('token');
     const userId = localStorage.getItem('user_id');
     // if user already login, this login page can not be accessed

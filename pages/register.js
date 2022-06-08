@@ -7,17 +7,13 @@ import Navbar from '../components/NavbarChatbot';
 import Link from 'next/link';
 
 export default function Register() {
-  // use router
   const router = useRouter();
   useEffect(() => {
-    //get token and user id from local storage when browser reload
     const token = localStorage.getItem('token');
     const userId = localStorage.getItem('user_id');
     // if user already login, this register page can not be accessed
     if(token && userId) {
       router.push(`/dashboard/${userId}`);
-      // set alert on local storage and show it on dashboard page
-      localStorage.setItem('alert',true)
     }
   }, []);
 
@@ -92,7 +88,7 @@ export default function Register() {
   }
   
   return (
-    <div className="lg:h-full md:h-screen h-screen bg-blue-300 pb-9 poppins" >
+    <div className="lg:h-full md:h-screen h-screen bg-blue-300 pb-3 poppins" >
 
       <HeadElement text={`Register - Page`} />
 
