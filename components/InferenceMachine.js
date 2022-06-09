@@ -62,7 +62,7 @@ const g  = [
   [`${question} sel batang retina sulit berdaptasi diruang yang remang-remang ${yesOrNo}`],
   [`${question} tidak dapat melihat pada lingkungan yang kurang bercahaya ${yesOrNo}`],
   [`${question} gangguan penglihatan pada salah satu mata ${yesOrNo}`],
-  [`${question} garis mata lurus terlihat bergelombang ${yesOrNo}`],
+  [`${question} garis mata (eyelid) yang umumnya lurus terlihat bergelombang ${yesOrNo}`],
   // question 46 - 50
   [`${question} mata tegang ${yesOrNo}`],
   [`${question} air mata berlebihan ${yesOrNo}`],
@@ -391,7 +391,7 @@ export default function InferenceMachine () {
                   ruleBase[i][j+1] === 'Sikatrik Kornea, Kelainan Refraksi, Katarak, Uveitis Posterior, Glaukoma Sudut Terbuka Primer, Retinopati Diabetika & Hipertensi, Penyakit Macula, Papil Udema, Amblyopia, Neuropati Optik atau Retinisi Pigmentosa'
                 ) {
                   reply = `Kamu menjawab ya untuk ${allYesReply.length + 1} pertanyaan yang ditanyakan oleh bot.
-                  Melalui skrining dicurigai kamu mengalami ${totalSympthomWhenUserResponYes[totalSympthomWhenUserResponYes.length-1]} gejala dari penyakit mata ${lastValueWhenUserResponYes}. 
+                  Melalui skrining dicurigai kamu mengalami ${totalSympthomWhenUserResponYes[totalSympthomWhenUserResponYes.length-1]} gejala dari penyakit mata antara ${lastValueWhenUserResponYes}. 
                   Ketik atau tekan lanjut untuk melanjutkan skrining kedua.`
                   setDiagnoseResult(reply); setI(i); setJ(j);
                   setLastValueInRuleBase(ruleBase[i][j+1]); setReplyBefore('');
@@ -425,7 +425,7 @@ export default function InferenceMachine () {
                   ruleBase[i][j+1] === 'Sikatrik Kornea, Kelainan Refraksi, Katarak, Uveitis Posterior, Glaukoma Sudut Terbuka Primer, Retinopati Diabetika & Hipertensi, Penyakit Macula, Papil Udema, Amblyopia, Neuropati Optik atau Retinisi Pigmentosa'
                 ) {
                   reply = `Kamu menjawab ya untuk ${allYesReply.length+1} pertanyaan yang ditanyakan oleh bot.
-                  Melalui skrining dicurigai kamu mengalami ${totalSympthomWhenUserResponNo[totalSympthomWhenUserResponNo.length-1]} gejala dari penyakit mata ${lastValueWhenUserResponNo}. 
+                  Melalui skrining dicurigai kamu mengalami ${totalSympthomWhenUserResponNo[totalSympthomWhenUserResponNo.length-1]} gejala dari penyakit mata antara ${lastValueWhenUserResponNo}. 
                   Ketik atau tekan lanjut untuk melanjutkan skrining kedua.`
                   setDiagnoseResult(reply); setI(i); setJ(j);
                   setLastValueInRuleBase(ruleBase[i][j+1]); setReplyBefore('');
