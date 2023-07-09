@@ -5,7 +5,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        Monomaniac: ["Monomaniac one", "sans-serif"],
+      },
     },
   },
   plugins: [],
-}
+};

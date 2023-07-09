@@ -3,7 +3,7 @@ import axios from "axios";
 
 import Compare from "./Compare";
 import ChatbotInterface from "./ChatbotInterface";
-import { prompts, replies, alternative } from "../data/PromptsAndReplies";
+import { prompts, replies, alternative } from "../../data/PromptsAndReplies";
 
 const question = `Apa kamu mengalami gejala`;
 const yesOrNo = `? ya/tidak`;

@@ -6,8 +6,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Monomaniac One", sans-serif;
 }
 
 a {
@@ -21,14 +20,18 @@ a {
 
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Monomaniac+One&display=swap");
 
 .opensans {
   font-family: "Open Sans", Arial, sans-serif;
 }
+.monomaniac {
+  font-family: "Monomaniac One", sans-serif;
+}
 .poppins {
-  font-family: Poppins, Arial, Helvetica, sans-serif !important;
+  font-family: Poppins, Arial, Helvetica, sans-serif;
 }
 .quicksand {
   font-family: Quicksand, Arial, sans-serif;
